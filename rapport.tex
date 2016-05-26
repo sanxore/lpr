@@ -24,6 +24,16 @@
 \usepackage{epigraph}
 \usepackage{float}
 \usepackage{pdflscape}
+\usepackage{tikz}
+\usetikzlibrary{arrows,shapes,positioning,shadows,trees}
+\tikzset{
+  basic/.style  = {draw, text width=4cm, drop shadow, font=\sffamily, rectangle},
+  root/.style   = {basic, rounded corners=2pt, thin, align=center,
+                   fill=green!30},
+  level 2/.style = {basic, rounded corners=6pt, thin,align=center, fill=green!60,
+                   text width=8em},
+  level 3/.style = {basic, thin, align=left, fill=pink!60, text width=6.5em}
+}
 \renewcommand{\epigraphsize}{\scriptsize}
 \onehalfspacing
 \definecolor{rltred}{rgb}{0.85,0.15,0.15}
