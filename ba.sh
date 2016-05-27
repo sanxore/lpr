@@ -11,6 +11,7 @@ wget http://web.mit.edu/jhawk/mnt/spo/tex/share/texmf/tex/latex/misc/moreverb.st
 wget http://mirrors.ctan.org/macros/latex/contrib/titlesec/titlesec.sty
 wget http://mirrors.ctan.org/biblio/bibtex/contrib/bib-fr/plain-fr.bst
 wget http://mirrors.ctan.org/macros/latex/contrib/enumitem/enumitem.sty
+wget http://mirrors.ctan.org/macros/latex/contrib/wrapfig/wrapfig.sty
 wget http://mirrors.ctan.org/macros/latex/contrib/epigraph.zip
 mkdir outpp
 unzip -x epigraph.zip -d outpp
