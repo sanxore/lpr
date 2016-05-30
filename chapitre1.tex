@@ -161,6 +161,7 @@ Au fil des années, la direction commerciale-marketing où nous avons effectué 
 
 	\begin{landscape}
 	\subsection{Le planning du projet}
+	\subsubsection{Diagramme de GANTT}
 		\begin{figure}[H]
     			\centering
     			\includegraphics[width=26cm,height=12cm]{gantt.pdf}
@@ -172,29 +173,38 @@ Au fil des années, la direction commerciale-marketing où nous avons effectué 
 	\subsubsection{Démarche suivie dans notre projet :}
 	Le projet est décomposé en plusieurs lots :
 	\begin{description}[align=left]
-		\item[Lot I :] Compréhension du problème :
+		\item[Lot I :] Compréhension du problème.
 						\begin{itemize}
 							\item Comprendre le métier de la cellule Business intelligence de la direction commerciale au sein du groupe OCP.
-							\item Détermiation des objectives du Data Mining.
-							\item Détermination des metrics pour l'evaluation de la reussite du projet.
+							\item Détermination des objectives du projet Data Mining.
+							\item Détermination des métriques pour l'évaluation de la réussite du projet.
 					   	\end{itemize}
-		\item[Lot II :] Compréhension des données
+		\item[Lot II :] Compréhension des données.
 						\begin{itemize}
-							\item Analyse des différentes sources de données au sein de l'OCP.
-							\item Parsing des données non structurer concernant les imports et exports des différents produits phosphates.
-							\item Analyse exploratoire de la qualité des données extraite.
+							\item Description et familiarisation avec les différentes sources de données au sein de l'OCP.
+							\item Parsing\footnote{Anglais pour "Analyse syntaxique": processus d'analyse d'une chaîne de symboles soit en langage naturel ou machine suivant les règles d'une grammaire formelle.} des données non structurées concernant les imports et exports des différents produits phosphatés.
+							\item Audit de la qualité du résultat du Parsing et analyse préliminaire.
 						\end{itemize}		 % Parsing donnees non structure developement ETL + qualites
-		\item[Lot III :] Enrichissement de l'étude par des données extairne
+		\item[Lot III :] Extension des données aux banques externes.
 						\begin{itemize}
-							\item Recherche et enumeration des différents banks de données sur internet.
-							\item Extraction et formatage des données extraite du site Word-bank.
+							\item Recherche et énumeration des différents banques de données Web.
+							\item Extraction et formatage des données d'extension.
+							\item Jointure et enrichissement des données.
 						\end{itemize} %external data world-bank
-		\item[Lot IV :] Analyse causale concernant la demande en engrais
+		\item[Lot IV :] Analyse causale de la demande en engrais.
 						\begin{itemize}
-							\item L'analyse en composantes principales des différentes données extraite dans le lot II et III.
-							\item Degagement des axes factorial des different variables.
-							\item Interpretation des resultats ACP.
+							\item L'analyse en composantes principales des différentes données enrichies du lot III.
+							\item Sélection des premières composantes principales les plus représentatives.
+							\item Regression sur les composantes retenues et interpretation.
 						\end{itemize} % analyse causale (ACP + degagement des axes factoriel + Interpretation)
-		\item[Lot V :] Analyse en series chrono
-		\item[Lot VI :] Realisation
+		\item[Lot V :] Analyse en series chronologiques et projections.
+						\begin{itemize}
+							\item Visualisation exemplaire des séries des demandes de fertilisants.
+							\item Etude de la tendance.
+							\item Etude de la saisonnalite.
+							\item Etude des résidus.
+							\item Modélisations SARIMA.
+							\item Résultats et conclusions.
+						\end{itemize}
+		\item[Lot VI :] Réalisation
 	\end{description}
