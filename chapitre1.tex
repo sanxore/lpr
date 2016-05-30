@@ -135,7 +135,7 @@ Au fil des années, la direction commerciale-marketing où nous avons effectué 
 \section{Planification du projet}
 	\subsection{Les étapes CRISP-DM d'un projet Data Mining}
 	CRISP-DM, qui signifie Cross-Industry Standard Process for Data Mining\footnote{Standard inter-entreprises du processus de fouille de données.}, est un modèle de processus d'exploration de données qui décrit les approches couramment utilisées par les experts pour résoudre des problèmes d'exploration de données \cite{CRISP-DM}.\par 
-	Des sondages effectués en 2002, 2004,2007 et 2014 montrent qu'il s'agit de la méthode principale utilisée par les data miners \cite{KDN}.\par
+	Des sondages effectués en 2002, 2004, 2007 et 2014 montrent qu'il s'agit de la méthode principale utilisée par les data miners \cite{KDN}.\par
 	
 	CRISP-DM découpe le processus de data mining en six phases principales. La séquence des phases n'est pas stricte et un va et vient entre les différentes phases est toujours nécessaire. Les flèches dans le diagramme du processus indiquent les dépendances les plus importantes et fréquentes entre les phases. Le cercle extérieur dans le diagramme symbolise la nature cyclique de l'exploration de données. Un projet de fouille de données se poursuit après qu'une solution ait été déployée. Les leçons apprises au cours du processus peuvent déclencher de nouvelles questions métier, souvent plus ciblées et font bénéficier les processus d'extraction de données ultérieures de l'expérience des précédents. Les six phases sont résumés dans la figure \ref{fig:crisp}.
 	\newpage
@@ -161,6 +161,7 @@ Au fil des années, la direction commerciale-marketing où nous avons effectué 
 
 	\begin{landscape}
 	\subsection{Le planning du projet}
+	\subsubsection{Diagramme de GANTT}
 		\begin{figure}[H]
     			\centering
     			\includegraphics[width=26cm,height=12cm]{gantt.pdf}
@@ -172,29 +173,38 @@ Au fil des années, la direction commerciale-marketing où nous avons effectué 
 	\subsubsection{Démarche suivie dans notre projet :}
 	Le projet est décomposé en plusieurs lots :
 	\begin{description}[align=left]
-		\item[Lot I :] Compréhension du problème :
+		\item[Lot I :] Compréhension du problème.
 						\begin{itemize}
 							\item Comprendre le métier de la cellule Business intelligence de la direction commerciale au sein du groupe OCP.
-							\item Détermiation des objectives du Data Mining.
-							\item Détermination des metrics pour l'evaluation de la reussite du projet.
+							\item Détermination des objectives du projet Data Mining.
+							\item Détermination des métriques pour l'évaluation de la réussite du projet.
 					   	\end{itemize}
-		\item[Lot II :] Compréhension des données
+		\item[Lot II :] Compréhension des données.
 						\begin{itemize}
-							\item Analyse des différentes sources de données au sein de l'OCP.
-							\item Parsing des données non structurer concernant les imports et exports des différents produits phosphates.
-							\item Analyse exploratoire de la qualité des données extraite.
+							\item Description et familiarisation avec les différentes sources de données au sein de l'OCP.
+							\item Parsing\footnote{Anglais pour "Analyse syntaxique": processus d'analyse d'une chaîne de symboles soit en langage naturel ou machine suivant les règles d'une grammaire formelle.} des données non structurées concernant les imports et exports des différents produits phosphatés.
+							\item Audit de la qualité du résultat du Parsing et analyse préliminaire.
 						\end{itemize}		 % Parsing donnees non structure developement ETL + qualites
-		\item[Lot III :] Enrichissement de l'étude par des données extairne
+		\item[Lot III :] Extension des données aux banques externes.
 						\begin{itemize}
-							\item Recherche et enumeration des différents banks de données sur internet.
-							\item Extraction et formatage des données extraite du site World-bank.
+							\item Recherche et énumeration des différents banques de données Web.
+							\item Extraction et formatage des données d'extension.
+							\item Jointure et enrichissement des données.
 						\end{itemize} %external data world-bank
-		\item[Lot IV :] Analyse causale concernant la demande en engrais
+		\item[Lot IV :] Analyse causale de la demande en engrais.
 						\begin{itemize}
-							\item L'analyse en composantes principales des différentes données extraite dans le lot II et III.
-							\item Degagement des axes factorial des different variables.
-							\item Interpretation des resultats ACP.
+							\item L'analyse en composantes principales des différentes données enrichies du lot III.
+							\item Sélection des premières composantes principales les plus représentatives.
+							\item Regression sur les composantes retenues et interpretation.
 						\end{itemize} % analyse causale (ACP + degagement des axes factoriel + Interpretation)
-		\item[Lot V :] Analyse en series chrono
-		\item[Lot VI :] Realisation
+		\item[Lot V :] Analyse en series chronologiques et projections.
+						\begin{itemize}
+							\item Visualisation exemplaire des séries des demandes de fertilisants.
+							\item Etude de la tendance.
+							\item Etude de la saisonnalite.
+							\item Etude des résidus.
+							\item Modélisations SARIMA.
+							\item Résultats et conclusions.
+						\end{itemize}
+		\item[Lot VI :] Réalisation
 	\end{description}
