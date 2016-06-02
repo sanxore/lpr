@@ -14,14 +14,14 @@ Socolow}
 	\begin{Huge}{ Worfklow du Parsing IFA }
 	\end{Huge}
 	\subsection{Extension des données aux banques externes}
-	Comme rappellé dans la section \ref{CGP}. Les travaux de nos prédécesseurs dans leurs efforts de moderniser le système d'information se sont arrêtés à automatiser l'archivage des données se rapportant aux historiques de ventes en terme de prix et volumes en un premier lieu\cite{CHEMLAL} avant de concevoir le socle OLAP\footnote{le traitement analytique en ligne (OnLine Analytical Processing, OLAP) est un type d'application informatique orienté vers l'analyse sur-le-champ d'informations selon plusieurs axes, dans le but d'obtenir des rapports de synthèse} dans la vue de générer des rapports synthétiques concernant les historiques des échanges du marché des phosphates.
+	Comme rappellé dans la section \ref{CGP}. Les travaux de nos prédécesseurs dans leurs efforts de moderniser le système d'information se sont arrêtés à automatiser l'archivage des données se rapportant aux historiques de ventes en terme de prix et volumes en un premier lieu\cite{CHEMLAL} avant de concevoir le socle OLAP\footnote{le traitement analytique en ligne (OnLine Analytical Processing, OLAP) est un type d'application informatique orienté vers l'analyse sur-le-champ d'informations selon plusieurs axes, dans le but d'obtenir des rapports de synthèse} dans la vue de générer des rapports synthétiques concernant les historiques des échanges du marché des phosphates ensuite\cite{NACER}.
 	\par
 	L'étendue des données disponibles au sein du système d'information de l'OCP ne pouvant donner qu'une vue réduite de la situation du marché et ne peuvent de par leur définition réveler les structures socioéconomiques,  et de politiques agraires sous-jacentes aux demandes en produits phosphatés, nous nous attellerons à la tâche d'enrichir cette base de données historiques par des données quantitatives concernant les pays du monde.
 	\par
 	Nous décrivons dans ce qui suit ce processus. 
 	\subsubsection{Énumération, recherche et extraction des données depuis des banques WEB}
-	\paragraph{Énumération et défintions des variables souhaitées \newline }
-	Guidés par nos lectures bibliographiques résumées dans les sections \ref{read1} et \ref{read2}, nous nous fixons l'objectif de récolleter les indicateurs de politiques agraires et socioéconomiques suivants:
+		Guidés par nos lectures bibliographiques résumées dans les sections \ref{read1} et \ref{read2}, nous nous fixons l'objectif de récolleter les indicateurs de politiques agraires et socioéconomiques suivants:
+	\paragraph{Énumération et défintions des variables souhaitées }
 	\begin{itemize}
 		\item \textbf{ Access to electricity, rural (\% of rural population):} Fraction de paysans ayant accès à l'électricité.
 		\item \textbf{ Access to non-solid fuel, rural (\% of rural population):} Fraction de paysans ayant accès aux fuels non solides.
@@ -76,14 +76,25 @@ Socolow}
 	Cette section s'interesse à l'application des forêts de décisions aléatoires à des fins de sélection de variables. Le but ici est double : d'abord introduire le comportement de l'indexation de l'importance des variables en utilisant les forêts aléatoires et l'utiliser pour proposer un algorithme à deux phases pour la séléction de variables à la base de leur importance.\par
 	La stratégie générale se résume en un classement des variables exogènes\footnote{à savoir les variables externes "crawlées" dans la section \ref{crawl}.} en utilisant le score d'importance de ces variables introduit par les forêts aléatoires puis une sélection ascendante itérative des variables.
 	\paragraph{Introduction aux forêts de décision aléatoires\newline}
-	Les FA\footnote{Forêts aléatoires} est un algorithme populaire et très efficient basé sur les idées d'aggrégation pour les problèmes de regression et de classification, introduit par Breiman\cite{BREI01}. Il appartient au familles des méthodes d'Ensemble et apparait dans les application de 'Machine Learning'\footnote{L'apprentissage automatique ou apprentissage statistique (machine learning en anglais), champ d'étude de l'intelligence artificielle, concerne la conception, l'analyse, le développement et l'implémentation de méthodes permettant à une machine (au sens large) d'évoluer par un processus systématique, et ainsi de remplir des tâches difficiles ou impossibles à remplir par des moyens algorithmiques plus classiques.} à la fin du dernier millénaire\cite{DITRI99}.
+	Les FA\footnote{Forêts aléatoires} est un algorithme populaire et très efficient basé appartenant aux méthodes d'aggrégation pour les problèmes de regression et de classification, introduit par Breiman\cite{BREI01}. Il appartient au familles des méthodes d'Ensemble et apparait dans les application de 'Machine Learning'\footnote{L'apprentissage automatique ou apprentissage statistique (machine learning en anglais), champ d'étude de l'intelligence artificielle, concerne la conception, l'analyse, le développement et l'implémentation de méthodes permettant à une machine (au sens large) d'évoluer par un processus systématique, et ainsi de remplir des tâches difficiles ou impossibles à remplir par des moyens algorithmiques plus classiques.} à la fin du dernier millénaire\cite{DITRI99}.
 	\par
 	\newcommand{\reels}{\mathbb{R}}
 	Considérons un ensemble d'apprentissage L = \{($X_1, Y_1$) i.i.d.\footnote{indépendantes identiquement distribuées} d'un vecteur aléatoire (X,Y). Le vecteur X = ($X^1,...,X^p$) contient les variables exogènes. X $\in \reels^p $ et Y une réponse numérique $\in \reels $.
 	\par
 	Pour les problèmes de regression, nous supposons que Y=S(X)+$\varepsilon$ où E[$\varepsilon$|X] = 0 et \textbf{S} est appellée fonction de regression. Les FA est une stratégie de construction de modèle estimant la fonction de regression.
 	\par
-	Le principe des FA est de combiner plusieurs arbres de décision binaires en utilisant plusieurs échantillons de l'ensemble d'apprentissage \textbf{L} et de choisir aléatoirement à chaque noeud un sous-ensemble de variables exogènes X. En comparaisant avec le modèle CART\cite{BREI84} qui lui procède à une phase de construction de l'arbre suivie d'une phase d'élagage, deux différences sont à relever. D'abord, à chaque noeud, un nombre paramètre (dénoté \textit{mtry}\footnote{L'autre paramètre des FA étant \textit{ntree}, le nombre d'arbres dont la forêt.}) de variables exogènes sont choisies aléatoirement et la meilleure variable pour la subdivision du noeud est choisie parmi celles-ci seulement. Ensuite, aucun élagage n'est introduit: tous les arbres de la forêt sont maximaux.\par
+	Le principe des FA est de combiner plusieurs arbres de décision binaires en utilisant plusieurs échantillons bootstrap\footnote{Ré-échantillonnage} de l'ensemble d'apprentissage \textbf{L} et de choisir aléatoirement à chaque noeud un sous-ensemble de variables exogènes X. En comparaisant avec le modèle CART\cite{BREI84} qui lui procède à une phase de construction de l'arbre suivie d'une phase d'élagage, deux différences sont à relever. D'abord, à chaque noeud, un nombre paramètre (dénoté \textit{mtry}\footnote{L'autre paramètre des FA étant \textit{ntree}, le nombre d'arbres dont la forêt.}) de variables exogènes sont choisies aléatoirement et la meilleure variable pour la subdivision du noeud est choisie parmi celles-ci seulement. Ensuite, aucun élagage n'est introduit: tous les arbres de la forêt sont maximaux.\par
+	Le principe de CART est de partitionner récursivement l’espace engendré par les variables explicatives (ici $\reels^p$) de façon dyadique. Plus précisément, à
+	chaque étape du partitionnement, on découpe une partie de l’espace en deux sous parties selon une variable $X_j$ comme le montre la figure \ref{fig:CART}.
+	\begin{figure}[h]
+	    		\centering
+	    		\includegraphics[scale=0.35]{Cart}
+	    		\caption{Arbre CART}
+	    		\label{fig:CART}
+	\end{figure}
+	\par
+	Les coupures sont choisies de manière à minimiser une fonction de coût particulière. A chaque étape, on cherche la variable $X_j$ et le réel \textit{d} qui minimisent la variance des nœuds fils dans les problèmes de régression. Les arbres sont ainsi construits jusqu’à atteindre une règle d’arrêt. Par exemple, on ne découpe pas un nœud qui contient moins de 5 observations.
+	\par
 	Les FA deviennent de plus en plus populaires et semblent être très robustes dans beaucoup d'applications bien qu'ils ne soient pas clairement théorisés mathématiquement\cite{BIA08}. Néanmoins, Breiman\cite{BREI01} donne un semblant d'explication des bonnes performances des FA en les liant à la faible corrélation entre les arbres de la forêt qui est définie par la corrélation de Pearson entre les prédictions de ceux-ci sur l'échantillon OOB\footnote{Out-of-Bag sample : échan }. et aux bonnes qualités de chaque arbre (du point de vue du biais) puisque lors de la construction de celui-ci, la variable élue est choisie
 	
 
