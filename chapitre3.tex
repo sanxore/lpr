@@ -17,45 +17,45 @@ Socolow}
 	\subsubsection{Analyse des PDFs contenant les trades Matrix}
 	\begin{figure}[h]
 	    		\centering
-    		\includegraphics[scale=0.6]{IFA_EX}
+%    		\includegraphics[scale=0.6]{IFA_EX}
 	    		\caption{Example d'une trade Matrix dans le rapport Trimestriel de l'IFA}
 	    		\label{fig:IFA}
 	\end{figure}
 	\paragraph{Contraintes:}
 	\begin{itemize}
 		\item Il faut distinguer et localiser les Trades Matrix des autres formes de données contenues dans ce document.
-		\item L'extraction manuelle des structures de table d'un fichier PDF consomme enormement de temps et d'energie.
-		\item Apres l'extraction, Il faut transformer ces trades Matrix En des trades table pour faciliter le requetage.
+		\item L'extraction manuelle des structures de table d'un fichier PDF consomme énormément de temps et d'energie.
+		\item Après l'extraction, Il faut transformer ces trades Matrix En des trades table pour faciliter le requettage.
 	\end{itemize}
 	\subsubsection{Conception de la solution}
 	\subsection{Extension des données aux banques externes}
-	Comme rappellé dans la section \ref{CGP}. Les travaux de nos prédécesseurs dans leurs efforts de moderniser le système d'information se sont arrêtés à automatiser l'archivage des données se rapportant aux historiques de ventes en terme de prix et volumes en un premier lieu\cite{CHEMLAL} avant de concevoir le socle OLAP\footnote{le traitement analytique en ligne (OnLine Analytical Processing, OLAP) est un type d'application informatique orienté vers l'analyse sur-le-champ d'informations selon plusieurs axes, dans le but d'obtenir des rapports de synthèse} dans la vue de générer des rapports synthétiques concernant les historiques des échanges du marché des phosphates ensuite\cite{NACER}.
+	Comme rappelé dans la section \ref{CGP}. Les travaux de nos prédécesseurs dans leurs efforts de moderniser le système d'information se sont arrêtés à automatiser l'archivage des données se rapportant aux historiques de ventes en terme de prix et volumes en un premier lieu\cite{CHEMLAL} avant de concevoir le socle OLAP\footnote{le traitement analytique en ligne (OnLine Analytical Processing, OLAP) est un type d'application informatique orienté vers l'analyse sur-le-champ d'informations selon plusieurs axes, dans le but d'obtenir des rapports de synthèse} dans la vue de générer des rapports synthétiques concernant les historiques des échanges du marché des phosphates ensuite\cite{NACER}.
 	\par
-	L'étendue des données disponibles au sein du système d'information de l'OCP ne pouvant donner qu'une vue réduite de la situation du marché et ne peuvent de par leur définition réveler les structures socioéconomiques,  et de politiques agraires sous-jacentes aux demandes en produits phosphatés, nous nous attellerons à la tâche d'enrichir cette base de données historiques par des données quantitatives concernant les pays du monde.
+	L'étendue des données disponibles au sein du système d'information de l'OCP ne pouvant donner qu'une vue réduite de la situation du marché et ne peuvent de par leur définition révéler les structures socio-économiques,  et de politiques agraires sous-jacentes aux demandes en produits phosphatés, nous nous attellerons à la tâche d'enrichir cette base de données historiques par des données quantitatives concernant les pays du monde.
 	\par
 	Nous décrivons dans ce qui suit ce processus. 
 	\subsubsection{Énumération, recherche et extraction des données depuis des banques WEB}
-		Guidés par nos lectures bibliographiques résumées dans les sections \ref{read1} et \ref{read2}, nous nous fixons l'objectif de récolleter les indicateurs de politiques agraires et socioéconomiques suivants:
-	\paragraph{Énumération et défintions des variables souhaitées }
+		Guidés par nos lectures bibliographiques résumées dans les sections \ref{read1} et \ref{read2}, nous nous fixons l'objectif de récolter les indicateurs de politiques agraires et socioéconomiques suivants:
+	\paragraph{Énumération et définitions des variables souhaitées }
 	\begin{itemize}
 		\item \textbf{ Access to electricity, rural (\% of rural population):} Fraction de paysans ayant accès à l'électricité.
 		\item \textbf{ Access to non-solid fuel, rural (\% of rural population):} Fraction de paysans ayant accès aux fuels non solides.
-		\item \textbf{ Account at a financial institution (\% age 15+):} Fraction de personnes agées de +15 ans ayant un compte chez une institution banquaire.
+		\item \textbf{ Account at a financial institution (\% age 15+):} Fraction de personnes âgées de +15 ans ayant un compte chez une institution bancaire.
 		\item \textbf{ Net enrollment rate, primary (\% of primary school age children):} Fraction d'enfants scolarisés.
 		\item \textbf{ Net national income per capita (constant 2005 US\$):} PIB\footnote{Produit intérieur brut, un des agrégats majeurs des comptes nationaux, il vise à quantifier — pour un pays et une année donnés — la valeur totale de la « production de richesse » effectuée par les agents économiques résidant à l’intérieur de ce territoire (ménages, entreprises, administrations publiques).} par habitant, inflation ajustée au dollar US fin 2005.
-		\item \textbf{ Literacy rate, adult total (\% of people ages 15 and above):} Fraction de personnes alphabétisées agées de +15ans.
+		\item \textbf{ Literacy rate, adult total (\% of people ages 15 and above):} Fraction de personnes alphabétisées âgées de +15ans.
 		\item \textbf{ Agricultural irrigated land (\% of total agricultural land):} Fraction de terres irriguées parmi les terres exploitées pour l'agriculture.
 		\item \textbf{ Agricultural land (\% of land area):} Fraction des terres agricoles de la surface totale du pays.
 		\item \textbf{ Agricultural tractors per 100 sq. km of arable land:} Nombre de tracteurs par 100 km² de terres arables.
 		\item \textbf{ Agriculture, value added (\% of GDP):} Fraction de la valeur ajoutée agricole du PIB.
 		\item \textbf{ Agriculture value added per worker (constant 2005 US\$):} Valeur ajoutée agricole par ouvrier agricol, inflation ajustée au dollar US fin 2005.
-		\item \textbf{ All education staff compensation, total (\% of total expenditure in public institutions):} Fraction des dépenses en éducation des depenses en institutions publiques.
-		\item \textbf{ Annual freshwater withdrawals, agriculture (\% of total freshwater withdrawal):} Fraction du volume d'eau utilsée à des fins agricoles de la totalité de l'eau consomée.
+		\item \textbf{ All education staff compensation, total (\% of total expenditure in public institutions):} Fraction des dépenses en éducation des dépenses en institutions publiques.
+		\item \textbf{ Annual freshwater withdrawals, agriculture (\% of total freshwater withdrawal):} Fraction du volume d'eau utilsée à des fins agricoles de la totalité de l'eau consommée.
 		\item \textbf{ Arable land (\% of land area):} Fraction de terres arables de la surface totale du pays.
 		\item \textbf{ Arable land (hectares per person):} Nombre d'hectares de terres arables par personne.
 		\item \textbf{ Birth rate, crude (per 1,000 people):} Nombre de naissances par 1000 personnes.
 		\item \textbf{ Cereal yield (kg per hectare):} Rendement des céréales en kilogramme par hectare.
-		\item \textbf{ Commercial bank branches (per 100,000 adults):} Nombre d'agences banquaires par 100,000 adultes.
+		\item \textbf{ Commercial bank branches (per 100,000 adults):} Nombre d'agences bancaires par 100,000 adultes.
 		\item \textbf{ Consumer price index (2010 = 100):} L'indice des prix à la consommation (IPC) mesure l'évolution du niveau moyen des prix des biens et services consommés par les ménages, pondérés par leur part dans la consommation moyenne des ménages. Harmonisé pour permettre une comparaison entre les pays à fin 2010.
 		\item \textbf{ Cost to export (US\$ per container):} Coût en Dollars US de l'export d'un conteneur de marchandises.
 		\item \textbf{ Cost to import (US\$ per container):} Coût en Dollars US de l'import d'un conteneur de marchandises.
@@ -88,10 +88,10 @@ Socolow}
 	 \begin{Huge}{ Workflow du  Crawling }
 	 		\end{Huge}
 	\subsubsection{Élagage des données externes}
-	Cette section s'interesse à l'application des forêts de décisions aléatoires à des fins de sélection de variables. Le but ici est double : d'abord introduire le comportement de l'indexation de l'importance des variables en utilisant les forêts aléatoires et l'utiliser pour proposer un algorithme à deux phases pour la séléction de variables à la base de leur importance.\par
+	Cette section s’intéresse à l'application des forêts de décisions aléatoires à des fins de sélection de variables. Le but ici est double : d'abord introduire le comportement de l'indexation de l'importance des variables en utilisant les forêts aléatoires et l'utiliser pour proposer un algorithme à deux phases pour la sélection de variables à la base de leur importance.\par
 	La stratégie générale se résume en un classement des variables exogènes\footnote{à savoir les variables externes "crawlées" dans la section \ref{crawl}.} en utilisant le score d'importance de ces variables introduit par les forêts aléatoires puis une sélection ascendante itérative des variables.
 	\paragraph{Introduction aux forêts de décision aléatoires\newline}
-	Les FA\footnote{Forêts aléatoires} est un algorithme populaire et très efficient basé appartenant aux méthodes d'agrégation pour les problèmes de regression et de classification, introduit par Breiman\cite{BREI01}, et apparait dans les application de 'Machine Learning'\footnote{L'apprentissage automatique ou apprentissage statistique (machine learning en anglais), champ d'étude de l'intelligence artificielle, concerne la conception, l'analyse, le développement et l'implémentation de méthodes permettant à une machine (au sens large) d'évoluer par un processus systématique, et ainsi de remplir des tâches difficiles ou impossibles à remplir par des moyens algorithmiques plus classiques.} à la fin du dernier millénaire\cite{DITRI99}.
+	Les FA\footnote{Forêts aléatoires} est un algorithme populaire et très efficient basé appartenant aux méthodes d'agrégation pour les problèmes de régression et de classification, introduit par Breiman\cite{BREI01}, et apparaît dans les application de 'Machine Learning'\footnote{L'apprentissage automatique ou apprentissage statistique (machine learning en anglais), champ d'étude de l'intelligence artificielle, concerne la conception, l'analyse, le développement et l'implémentation de méthodes permettant à une machine (au sens large) d'évoluer par un processus systématique, et ainsi de remplir des tâches difficiles ou impossibles à remplir par des moyens algorithmiques plus classiques.} à la fin du dernier millénaire\cite{DITRI99}.
 	\par
 	Considérons un ensemble d'apprentissage ${L_n = \{(X_1, Y_1),...,X_n, Y_n)\}}$ de \textit{n} observations i.i.d.\footnote{indépendantes identiquement distribuées} d'un vecteur aléatoire (X,Y). Le vecteur ${X_i = (X_i^1,...,X_i^p)}$ contient les variables exogènes, $X_i \in \reels^p $ et $Y_i \in \reels $, une réponse numérique. Pour les problèmes de regression, nous supposons que $ \exists$ S $\forall$ i $ Y_i=S(X_i)+\varepsilon$ où E[$\varepsilon$|X] = 0 et \textbf{S} est appellée fonction de regression. Les FA est une stratégie de construction d'un modèle \textit{ê(x)} estimant la fonction de regression.
 	\par
@@ -109,10 +109,10 @@ Socolow}
 	tenter d’atténuer la dépendance entre les estimateurs que l’on agrège en les construisant sur des
 	échantillons bootstrap\footnote{Ré-échantillonnage}. Nous référerons le lecteur à l'annexe A, pour une démonstration.
 	\par
-	Le principe des FA est de combiner plusieurs arbres ($ê_i$) de décision binaires CART\cite{BREI84} en utilisant plusieurs échantillons bootstrap de l'ensemble d'apprentissage \textbf{$L_n$} et de choisir aléatoirement à chaque noeud un sous-ensemble de \textit{k} variables exogènes $X_i$.
+	Le principe des FA est de combiner plusieurs arbres ($ê_i$) de décision binaires CART\cite{BREI84} en utilisant plusieurs échantillons bootstrap de l'ensemble d'apprentissage \textbf{$L_n$} et de choisir aléatoirement à chaque nœud un sous-ensemble de \textit{k} variables exogènes $X_i$.
 	
 	\par
-	 En comparaisant avec le modèle CART qui lui procède à une phase de construction de l'arbre suivie d'une phase d'élagage, deux différences sont à relever. D'abord, à chaque noeud, un nombre paramètre (dénoté \textit{k}\footnote{L'autre paramètre des FA étant \textit{B}, le nombre d'arbres dont la forêt.}) de variables exogènes sont choisies aléatoirement et la meilleure variable pour la subdivision du noeud est choisie parmi celles-ci seulement. Ensuite, aucun élagage n'est introduit: tous les arbres de la forêt sont maximaux.\par
+	 En comparaison avec le modèle CART qui lui procède à une phase de construction de l'arbre suivie d'une phase d'élagage, deux différences sont à relever. D'abord, à chaque nœud, un nombre paramètre (dénoté \textit{k}\footnote{L'autre paramètre des FA étant \textit{B}, le nombre d'arbres dont la forêt.}) de variables exogènes sont choisies aléatoirement et la meilleure variable pour la subdivision du nœud est choisie parmi celles-ci seulement. Ensuite, aucun élagage n'est introduit: tous les arbres de la forêt sont maximaux.\par
 	Le principe de CART est de partitionner récursivement l’espace engendré par les variables explicatives (ici $\reels^p$) de façon dyadique. Plus précisément, à
 	chaque étape du partitionnement, on découpe une partie de l’espace en deux sous parties selon une variable $X_j$ comme le montre la figure \ref{fig:CART}.
 	\begin{figure}[h]
@@ -134,7 +134,7 @@ Socolow}
 	
 
 	\paragraph{Classement de l'importance des variables extraites via forêts aléatoires}
-	\section{Audit de la qualité des données recolletées}
+	\section{Audit de la qualité des données récoltées}
 	\subsection{Données locales}
 	\subsection{Données externes}
 	\section{Analyse causale}
