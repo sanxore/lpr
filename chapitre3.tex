@@ -11,8 +11,23 @@ Socolow}
 
 	\section{Collecte des données}
 	\subsection{Compréhension des données locales\protect\footnote{Données disponibles au sein du portail Business Intelligence de l'OCP}}
-	\begin{Huge}{ Worfklow du Parsing IFA }
-	\end{Huge}
+	Au sein du portail Business intelligente de l'OCP on constate deux différentes formes de données, la première est structurée dans des data-Mart, la seconde a une forme non structurée en exemple : des fichiers word, PDF, images...
+	\par
+	Dans notre cas on est intéressé par les données d'imports et exports des produits phosphatés, cette donnée existante dans le portail est non structuré, cette dernière est sous format PDF.
+	\subsubsection{Analyse des PDFs contenant les trades Matrix}
+	\begin{figure}[h]
+	    		\centering
+	    		\includegraphics[scale=0.6]{IFA_EX}
+	    		\caption{Example d'une trade Matrix dans le rapport Trimestriel de l'IFA}
+	    		\label{fig:IFA}
+	\end{figure}
+	\paragraph{Contraintes:}
+	\begin{itemize}
+		\item Ces Document ne Contient pas que des Trades Matrix, il faut les localiser.
+		\item C'est difficile d'extraire la structure de table d'un fichier PDF.
+		\item Il faut transformer ces trades Matrix En des trades table pour faciliter le requetage.
+	\end{itemize}
+	\subsubsection{Conception de la solution}
 	\subsection{Extension des données aux banques externes}
 	Comme rappellé dans la section \ref{CGP}. Les travaux de nos prédécesseurs dans leurs efforts de moderniser le système d'information se sont arrêtés à automatiser l'archivage des données se rapportant aux historiques de ventes en terme de prix et volumes en un premier lieu\cite{CHEMLAL} avant de concevoir le socle OLAP\footnote{le traitement analytique en ligne (OnLine Analytical Processing, OLAP) est un type d'application informatique orienté vers l'analyse sur-le-champ d'informations selon plusieurs axes, dans le but d'obtenir des rapports de synthèse} dans la vue de générer des rapports synthétiques concernant les historiques des échanges du marché des phosphates ensuite\cite{NACER}.
 	\par
