@@ -1,6 +1,6 @@
-\chapter{Annexe A\cite{ESL}}
-	\begin{footnotesize}
-
+\titleformat{\chapter}[display]{\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{5pt}{\Huge}
+\chapter*{Annexe A\cite{ESL}}
+	\begin{small}
 	Comparons le biais et la variance de l’estimateur agrégé à ceux des estimateurs que l’on agrège.
 	Le fait de considérer des échantillons bootstrap introduit un aléa supplémentaire dans l’estimateur. Afin de prendre en compte cette nouvelle source d’aléatoire, on note $\theta_k = \theta_k(L_n)$ l’échantillon bootstrap de \textit{k} variables exogènes à l’étape \textit{i} et ê($\theta_k$) l’estimateur construit. On écrira l'estimateur final ${ê_B(x) =  \frac{1}{B} \sum_{i=1}^{B} ê_i(x,\theta_k)}$
 	\par
@@ -26,4 +26,4 @@
 
 	Ainsi, si $\rho(x)$ < 1, l’estimateur agrégé a une variance plus petite que celle des estimateurs que l’on
 	agrège (pour \textit{B} suffisamment grand). On déduit que c’est la corrélation $\rho(x)$ entre les estimateurs que l’on agrège qui quantifie le gain de la procédure d’agrégation : la variance diminuera d’autant plus que les estimateurs que l’on agrège seront décorrélés. Le fait de construire les estimateurs sur des échantillons bootstrap va dans ce sens.
-		\end{footnotesize}
+		\end{small}
