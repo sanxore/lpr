@@ -1,16 +1,29 @@
 \chapter{Annexe A\cite{ESL}}
+	\begin{footnotesize}
+
 	Comparons le biais et la variance de l’estimateur agrégé à ceux des estimateurs que l’on agrège.
-	Le fait de considérer des échantillons bootstrap introduit un aléa supplémentaire dans l’estimateur. Afin de prendre en compte cette nouvelle source d’aléatoire, on note $\theta_k = \theta_k(L_n)$ l’échantillon bootstrap de k variables exogènes à l’étape i et ê($\theta_k$) l’estimateur construit. On écrira l'estimateur final ${ê_B(x) =  \frac{1}{B} \sum_{i=1}^{B} ê_i(x,\theta_k)}$
+	Le fait de considérer des échantillons bootstrap introduit un aléa supplémentaire dans l’estimateur. Afin de prendre en compte cette nouvelle source d’aléatoire, on note $\theta_k = \theta_k(L_n)$ l’échantillon bootstrap de \textit{k} variables exogènes à l’étape \textit{i} et ê($\theta_k$) l’estimateur construit. On écrira l'estimateur final ${ê_B(x) =  \frac{1}{B} \sum_{i=1}^{B} ê_i(x,\theta_k)}$
 	\par
 	Les tirages bootstrap sont effectués de la même manière et indépendamment les uns des autres.
 	Ainsi, conditionnellement à $L_n$ , les variables $\theta_1,..., \theta_B$ sont i.i.d. et de même loi que $\theta$ (qui représentera la loi de la variable de tirage de l’échantillon bootstrap. Ainsi, d’après la loi des grands nombres :
 	\begin{center}
 		${ê(x) = \lim_{B \to \infty} ê_B(x) = \lim_{B \to \infty} \frac{1}{B} \sum_{i=1}^{B} ê_i(x,\theta_k) = E_\theta[ê(x,\theta) | L_n]  }$
 	\end{center}
-	L’espérance est ici calculée par rapport à la loi de $\theta$. Prendre B trop grand ne va pas sur-ajuster l’échantillon, autrement dit prendre la limite en B revient à considérer un estimateur “moyen” calculé sur tous les échantillons bootstrap. Le choix de B n’est donc pas crucial pour la performance de l’estimateur, il est recommandé de le prendre le plus grand possible. On note :
+	L’espérance est ici calculée par rapport à la loi de $\theta$. Prendre \textit{B} trop grand ne va pas sur-ajuster l’échantillon, autrement dit prendre la limite en \textit{B} revient à considérer un estimateur “moyen” calculé sur tous les échantillons bootstrap. Le choix de \textit{B} n’est donc pas crucial pour la performance de l’estimateur, il est recommandé de le prendre le plus grand possible. On note :
 	\begin{itemize}
-	\item 
-	
-	\item 
-	\item
+	\item ${T_k=ê(x,\theta_k)}$, les estimateurs que l'on agrège, ceux ci étant identiquement distribués.
+	\item ${\sigma^2(x) = Var (T_k)}$, la variance des estimateurs que l'on agrège.
+	\item ${\rho(x) = corr[T_1,T_2]}$, le coefficient de corrélation entre deux estimateurs que l’on agrège (calculés sur deux échantillons bootstrap).
 	\end{itemize}
+	La variance ${\sigma^2(x)}$ et la corrélation ${\rho(x)}$ sont calculées par rapport aux lois de \textit{$L_n$} et de $\theta$. On suppose que les estimateurs sont identiquement distribués. Il est alors facile de voir que le biais
+	de l’estimateur agrégé est le même que le biais des estimateurs que l’on agrège. Par conséquent,
+	agréger ne modifie pas le biais. Pour la variance, on a le résultat suivant:
+	\begin{equation*}
+	\begin{split}	
+	Var(ê_B(x)) = Var [ \frac{1}{B} \sum_{i=1}^{B} T_i] = \frac{1}{B^2} [\sum_{i=1}^{B} Var(T_i) + \sum_{1 \leq i \neq i' \leq B} cov(T_i,T_{i'}) ] \\ = \frac{1}{B}\sigma^2(x) + \frac{1}{B^2}[B^2-B]\rho(x)\sigma^2(x) = \rho(x)\sigma^2(x) + \frac{1-\rho(x)}{B}\sigma^2(x)
+	\end{split}
+	\end{equation*}
+
+	Ainsi, si $\rho(x)$ < 1, l’estimateur agrégé a une variance plus petite que celle des estimateurs que l’on
+	agrège (pour \textit{B} suffisamment grand). On déduit que c’est la corrélation $\rho(x)$ entre les estimateurs que l’on agrège qui quantifie le gain de la procédure d’agrégation : la variance diminuera d’autant plus que les estimateurs que l’on agrège seront décorrélés. Le fait de construire les estimateurs sur des échantillons bootstrap va dans ce sens.
+		\end{footnotesize}
