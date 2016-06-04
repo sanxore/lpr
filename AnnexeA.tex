@@ -1,0 +1,16 @@
+\chapter{Annexe A\cite{ESL}}
+	Comparons le biais et la variance de l’estimateur agrégé à ceux des estimateurs que l’on agrège.
+	Le fait de considérer des échantillons bootstrap introduit un aléa supplémentaire dans l’estimateur. Afin de prendre en compte cette nouvelle source d’aléatoire, on note $\theta_k = \theta_k(L_n)$ l’échantillon bootstrap de k variables éxogènes à l’étape i et ê($\theta_k$) l’estimateur construit. On écrira l'estimateur final ${ê_B(x) =  \frac{1}{B} \sum_{i=1}^{B} ê_i(x,\theta_k)}$
+	\par
+	Les tirages bootstrap sont effectués de la même manière et indépendamment les uns des autres.
+	Ainsi, conditionnellement à $L_n$ , les variables $\theta_1,..., \theta_B$ sont i.i.d. et de même loi que $\theta$ (qui représentera la loi de la variable de tirage de l’échantillon bootstrap. Ainsi, d’après la loi des grands nombres :
+	\begin{center}
+		${ê(x) = \lim_{B \to \infty} ê_B(x) = \lim_{B \to \infty} \frac{1}{B} \sum_{i=1}^{B} ê_i(x,\theta_k) = E_\theta[ê(x,\theta) | L_n]  }$
+	\end{center}
+	L’espérance est ici calculée par rapport à la loi de $\theta$. Prendre B trop grand ne va pas sur-ajuster l’échantillon, autrement dit prendre la limite en B revient à considérer un estimateur “moyen” calculé sur tous les échantillons bootstrap. Le choix de B n’est donc pas crucial pour la performance de l’estimateur, il est recommandé de le prendre le plus grand possible. On note :
+	\begin{itemize}
+	\item 
+	
+	\item 
+	\item
+	\end{itemize}
