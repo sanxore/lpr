@@ -91,7 +91,7 @@ Socolow}
 	Cette section s’intéresse à l'application des forêts de décisions aléatoires à des fins de sélection de variables. Le but ici est double : d'abord introduire le comportement de l'indexation de l'importance des variables en utilisant les forêts aléatoires et l'utiliser pour proposer un algorithme à deux phases pour la sélection de variables à la base de leur importance.\par
 	La stratégie générale se résume en un classement des variables exogènes\footnote{à savoir les variables externes "crawlées" dans la section \ref{crawl}.} en utilisant le score d'importance de ces variables introduit par les forêts aléatoires puis une sélection ascendante itérative des variables.
 	\paragraph{Introduction aux forêts de décision aléatoires\newline}
-	Les FA\footnote{Forêts aléatoires} est un algorithme populaire et très efficient basé appartenant aux méthodes d'agrégation pour les problèmes de régression et de classification, introduit par Breiman\cite{BREI01}, et apparaît dans les application de 'Machine Learning'\footnote{L'apprentissage automatique ou apprentissage statistique (machine learning en anglais), champ d'étude de l'intelligence artificielle, concerne la conception, l'analyse, le développement et l'implémentation de méthodes permettant à une machine (au sens large) d'évoluer par un processus systématique, et ainsi de remplir des tâches difficiles ou impossibles à remplir par des moyens algorithmiques plus classiques.} à la fin du dernier millénaire\cite{DITRI99}.
+	Les FA\footnote{Forêts aléatoires} est un algorithme populaire et très efficient basé appartenant aux méthodes d'agrégation pour les problèmes de régression et de classification, introduit par Breiman\cite{BREI01}, et apparaît dans les application de 'Machine Learning'\footnote{L'apprentissage automatique ou apprentissage statistique (machine learning en anglais), champ d'étude de l'intelligence artificielle, concerne la conception, l'analyse, le développement et l'implémentation de méthodes permettant à une machine (au sens large) d'évoluer par un processus systématique, et ainsi de remplir des tâches difficiles ou impossibles à remplir par des moyens algorithmiques plus classiques.} à la fin du dernier millénaire\cite{DITRI99}. Les FA deviennent de plus en plus populaires et semblent être très robustes dans beaucoup d'applications bien qu'ils ne soient pas clairement théorisés mathématiquement\cite{BIA08}.
 	\par
 	Considérons un ensemble d'apprentissage ${L_n = \{(X_1, Y_1),...,X_n, Y_n)\}}$ de \textit{n} observations i.i.d.\footnote{indépendantes identiquement distribuées} d'un vecteur aléatoire (X,Y). Le vecteur ${X_i = (X_i^1,...,X_i^p)}$ contient les variables exogènes, $X_i \in \reels^p $ et $Y_i \in \reels $, une réponse numérique. Pour les problèmes de regression, nous supposons que $ \exists$ S $\forall$ i $ Y_i=S(X_i)+\varepsilon$ où E[$\varepsilon$|X] = 0 et \textbf{S} est appellée fonction de regression. Les FA est une stratégie de construction d'un modèle \textit{ê(x)} estimant la fonction de regression.
 	\par
@@ -109,7 +109,7 @@ Socolow}
 	tenter d’atténuer la dépendance entre les estimateurs que l’on agrège en les construisant sur des
 	échantillons bootstrap\footnote{Ré-échantillonnage}. Nous référerons le lecteur à l'annexe A, pour une démonstration.
 	\par
-	Le principe des FA est de combiner plusieurs arbres ($ê_i$) de décision binaires CART\cite{BREI84} en utilisant plusieurs échantillons bootstrap de l'ensemble d'apprentissage \textbf{$L_n$} et de choisir aléatoirement à chaque nœud un sous-ensemble de \textit{k} variables exogènes $X_i$.
+	Le principe des FA est de combiner plusieurs arbres ($ê_i$) de décision CART\cite{BREI84} en utilisant plusieurs échantillons bootstrap de l'ensemble d'apprentissage \textbf{$L_n$} et de choisir aléatoirement à chaque nœud un sous-ensemble de \textit{k} variables exogènes $X_i$.
 	
 	\par
 	 En comparaison avec le modèle CART qui lui procède à une phase de construction de l'arbre suivie d'une phase d'élagage, deux différences sont à relever. D'abord, à chaque nœud, un nombre paramètre (dénoté \textit{k}\footnote{L'autre paramètre des FA étant \textit{B}, le nombre d'arbres dont la forêt.}) de variables exogènes sont choisies aléatoirement et la meilleure variable pour la subdivision du nœud est choisie parmi celles-ci seulement. Ensuite, aucun élagage n'est introduit: tous les arbres de la forêt sont maximaux.\par
@@ -122,18 +122,49 @@ Socolow}
 	    		\label{fig:CART}
 	\end{figure}
 	\par
-	Les coupures sont choisies de manière à minimiser une fonction de coût particulière. A chaque étape, on cherche la variable $X_j$ et le réel \textit{d} qui minimisent la variance des nœuds fils dans les problèmes de régression. Les arbres sont ainsi construits jusqu’à atteindre une règle d’arrêt. Par exemple, on ne découpe pas un nœud qui contient moins de 5 observations.
-	
-	
-	
-	
-	
-	
+	Les coupures sont choisies de manière à minimiser une fonction de coût particulière. A chaque étape, on cherche la variable $X_j$ et le réel \textit{d} qui minimisent la variance des nœuds fils dans les problèmes de régression. Les arbres sont ainsi construits jusqu’à atteindre une règle d’arrêt. Par exemple, on ne découpe pas un nœud qui contient moins de 5 observations comme y procède le package \textbf{\textit{randomForest}} du langage \textbf{R}.
 	\par
-	Les FA deviennent de plus en plus populaires et semblent être très robustes dans beaucoup d'applications bien qu'ils ne soient pas clairement théorisés mathématiquement\cite{BIA08}. Néanmoins, Breiman\cite{BREI01} donne un semblant d'explication des bonnes performances des FA en les liant à la faible corrélation entre les arbres de la forêt qui est définie par la corrélation de Pearson entre les prédictions de ceux-ci sur l'échantillon OOB\footnote{Out-of-Bag sample : échan }. et aux bonnes qualités de chaque arbre (du point de vue du biais) puisque lors de la construction de celui-ci, la variable élue est choisie
-	
-
-	\paragraph{Classement de l'importance des variables extraites via forêts aléatoires}
+	Nous avons vu dans la section précédente que l'agrégation à laquelle procèdent les FA est d’autant plus performante que la corrélation entre les prédicteurs agrégés  (arbres CART) est faible. Afin de diminuer cette corrélation, Breiman\cite{BREI01} propose de rajouter une couche d’aléa dans la construction des
+	prédicteurs. Plus précisément, à chaque étape de CART, \textit{k} variables sont sélectionnées aléatoirement parmi les \textit{p} et la meilleure coupure est sélectionnée uniquement sur ces \textit{k} variables : \par
+	\textbf{Algorithme Forêts aléatoires}
+	\begin{itemize}
+	\item[\textbf{Entrées:}]
+	\item x, une nouvelle observation à prévoir.
+	\item \textit{$L_n$}, l'échantillon.
+	\item \textit{B}, le nombre d'arbres.
+	\item \textit{k} $\in \mathbb{N}^* $, le nombre de variables candidates pour découper un nœud.
+	\end{itemize}
+	Pour i = 1,...,\textit{B}:
+	\begin{itemize}
+	\item Tirer un échantillon bootstrap dans \textit{$L_n$}.
+	\item Construire un arbre CART sur cet échantillon bootstrap, chaque coupure est sélectionnée
+	en minimisant la fonction de coût de CART sur un ensemble de \textit{k} variables choisies au
+	hasard parmi les \textit{p}. On note $ê(.,\theta_i)$ l’arbre construit.
+	\item[\textbf{Sortie:}]L’estimateur ${ê(x) =  \frac{1}{B} \sum_{i=1}^{B} ê_i(x,\theta_i)}$
+	\end{itemize}	
+	On retrouve un compromis biais-variance dans le choix de m :
+	\begin{itemize}
+	\item lorsque \textit{k} diminue, la tendance est à se rapprocher d’un choix aléatoire des variables
+	de découpe des arbres. Dans le cas extrême où \textit{k} = 1, les axes de la partition des arbres
+	sont choisies au hasard, seuls les points de coupure utiliseront l’échantillon. Ainsi, si \textit{k}
+	diminue, la corrélation entre les arbres va avoir tendance à diminuer également, ce qui
+	entraînera une baisse de la variance de l’estimateur agrégé. En revanche, choisir les axes
+	de découpe des arbres de manière aléatoire va se traduire par une moins bonne
+	qualité d’ajustement des arbres sur l’échantillon d’apprentissage, d’où une augmentation
+	du biais pour chaque arbre ainsi que pour l’estimateur agrégé.
+	\item lorsque \textit{k} augmente, les phénomènes inverses se produisent.
+	\end{itemize}
+	On déduit de cette remarque que le choix de \textit{k} est lié aux choix des paramètres de l’arbre,
+	notamment au choix du nombre d’observations dans ses nœuds terminaux. En effet, si ce
+	nombre est petit, chaque arbre aura un biais faible mais une forte variance. Il faudra dans ce cas là s’attacher à diminuer cette variance et on aura donc plutôt tendance à choisir une
+	valeur de \textit{k} relativement faible. A l’inverse, si les arbres ont un grand nombre d’observations
+	dans leurs nœuds terminaux, ils posséderont moins de variance mais un biais plus élevé. Dans
+	ce cas, la procédure d’agrégation se révélera moins efficace. C’est pourquoi, en pratique, le
+	nombre maximum d’observations dans les nœuds est par défaut pris relativement petit (5). Concernant le choix de \textit{k}, \textit{\textbf{randomForest}} propose par
+	défaut \textit{k = $\frac{p}{3}$} en régression. Ce paramètre peut également
+	être sélectionné via des procédures apprentissage-validation ou validation croisée.
+	\paragraph{Erreur Out-Of-Bag et importance des variables}
+	\paragraph{Sélection des variables et élagage des données extraites}
 	\section{Audit de la qualité des données récoltées}
 	\subsection{Données locales}
 	\subsection{Données externes}
