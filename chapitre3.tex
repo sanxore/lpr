@@ -11,9 +11,10 @@ Socolow}
 \newcommand{\reels}{\mathbb{R}}
 	\section{Collecte des données}
 	\subsection{Compréhension des données locales\protect\footnote{Données disponibles au sein du portail Business Intelligence de l'OCP}}
-					\begin{wrapfigure}{r}{4.5cm}
+					\begin{wrapfigure}[10]{r}{5 cm}
 						\raggedleft
-						\includegraphics[scale=0.6]{IFA_txt}
+						\fbox{\includegraphics[scale=0.5]{IFA-txt}}
+						\raggedleft
 						\caption{Lecture "machine" du .pdf}
 						\label{fig:IFA-TXT}
 					\end{wrapfigure}
@@ -24,19 +25,14 @@ Socolow}
 		\item L’inconvénient d’être flexible pour la lecture humaine mais ne présentant pas une grammaire machine formelle rendant possible une analyse syntaxique, comme en témoigne la figure \ref{fig:IFA-TXT}.
 			\begin{figure}[H]
 			    		\raggedright
-		    			\includegraphics[scale=0.4]{IFA_EX}
+		    			\includegraphics[scale=0.3]{IFA_EX}
 			    		\caption{Example d'une trade Matrix dans le rapport Trimestriel de l'IFA}
 			    		\label{fig:IFA-PDF}
 			\end{figure}	
-		\end{itemize}la seconde est structurée dans des Data-Mart dont une sortie de requête est présentée dans la figure \ref{fig:DMOCP}.
-	 	\begin{figure}
-	    		\centering
-    			\includegraphics[scale=0.35]{Table}
-	    		\caption{Example d'une sortie de requête sur le Data-Mart}
-	    		\label{fig:DMOCP}
-	\end{figure}
-	\par
-
+		\end{itemize}
+		
+		\paragraph{}
+		La seconde est structurée dans des Data-Mart dont une sortie de requête est présentée dans la figure \ref{fig:DMOCP}.
 	Ceci est notre format de données cible 
 	et présente:
 	\begin{itemize}
@@ -44,10 +40,13 @@ Socolow}
 	\item L’inconvénient d'être prohibitif en temps et en ressources humaines.
 	 En effet, nous avons constaté un retard data de fin décembre 2013 par rapport aux derniers .pdf reçus par l'OCP.
 	\end{itemize}
-	
-	\par
-
-	\par
+		 	\begin{figure}
+		    		\centering
+	    			\includegraphics[scale=0.35]{Table}
+		    		\caption{Example d'une sortie de requête sur le Data-Mart}
+		    		\label{fig:DMOCP}
+		\end{figure}
+		\par
 	Dans notre cas mous sommes intéressés par les données d'import et export des produits phosphatés, cette donnée existante dans le portail est non structuré, elle est sous format PDF.
 	\subsubsection{Analyse des PDFs contenant les trades Matrix}
 		
