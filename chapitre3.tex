@@ -1,32 +1,28 @@
 \chapter{Collecte, compréhension et préparation des données.}
-\epigraph{Economists and agronomists are locked in debate about likely
-future yields. Since the method of the economists is to predict
-future outcomes from past performance, economists expect
-success to continue. And since for the scientists future success
-depends on discoveries they will have to make and do not now
-know how to make, the scientists are doubtful. At its core, this is
-a disagreement about the pace of technical change.}{Robert
-Socolow}	
+\epigraph{“Data! Data! Data!” he cried impatiently. “I can’t make bricks without clay.”}{Sherlock Holmes}	
 \cleardoublepage
 \newcommand{\reels}{\mathbb{R}}
 	\section{Compréhension et préparation des données locales\protect\footnote{Données disponibles au sein du portail Business Intelligence de l'OCP}}
 	\subsection{Compréhension des données locales}
-					\begin{wrapfigure}[10]{r}{5 cm}
+	Comme rappelé dans la section \ref{CGP}. Les travaux de nos prédécesseurs dans leurs efforts de moderniser le portail \textit{Business Intelligence} de l'OCP se sont arrêtés à automatiser l'archivage des données se rapportant aux historiques de ventes en terme de prix et volumes en un premier lieu\cite{CHEMLAL} avant de concevoir le socle OLAP\footnote{le traitement analytique en ligne (OnLine Analytical Processing, OLAP) est un type d'application informatique orienté vers l'analyse sur-le-champ d'informations selon plusieurs axes, dans le but d'obtenir des rapports de synthèse} dans la vue de générer des rapports synthétiques concernant les historiques des échanges du marché des phosphates ensuite\cite{NACER}. Seules sont ainsi présentes les données concernant les échanges internationaux en terme de produits phosphatés et ceux-ci sont présents sous deux différentes formes de données.
+					\begin{wrapfigure}[9]{r}{5 cm}
 						\raggedleft
 						\fbox{\includegraphics[scale=0.5]{IFA-txt}}
 						\raggedleft
-						\caption{Lecture "machine" du .pdf}
+						\caption{Lecture "machine" du .pdf de la "Trade Matrix" de la figure \ref{fig:IFA-PDF}}
 						\label{fig:IFA-TXT}
 					\end{wrapfigure}
-	Au sein du portail Business intelligente de l'OCP on constate deux différentes formes de données.
-	La première est notre format de fichier source. Des fichiers .pdf  non structurés vis-à-vis de notre besoin (figure \ref{fig:IFA-PDF}), et qui présente:
+	La première est notre format de fichier source: des fichiers .pdf  non structurés vis-à-vis de notre besoin (figure \ref{fig:IFA-PDF}), et qui présentent:
 		\begin{itemize}
-		\item L'avantage d’être a jour, exhaustive et certifie par un organisme international (IFA\footnote{International Fertilizer industry Association: Association Internationale de l'industrie des Fertilisants})
+		\item L'avantage d’être à jour, exhaustifs et dont la véracité est certifiée par un organisme international (IFA\footnote{International Fertilizer industry Association: Association Internationale de l'industrie des Fertilisants})
 		\item L’inconvénient d’être flexible pour la lecture humaine mais ne présentant pas une grammaire machine formelle rendant possible une analyse syntaxique, comme en témoigne la figure \ref{fig:IFA-TXT}.
 			\begin{figure}[H]
 			    		\raggedright
 		    			\fbox{\includegraphics[scale=0.3]{IFA_EX}}
-			    		\caption{Example d'une trade Matrix dans le rapport Trimestriel de l'IFA}
+		    			\captionsetup{justification=raggedright,
+		    			singlelinecheck=false
+		    			}
+			    		\caption{Exemple d'une "Trade Matrix"\protect\footnote{Matrice des imports/exports entre les pays du monde, deux-à-deux, des phosphates et produits dérivés} dans le rapport\\trimestriel de l'IFA}
 			    		\label{fig:IFA-PDF}
 			\end{figure}	
 		\end{itemize}
@@ -36,21 +32,19 @@ Socolow}
 	Ceci est notre format de données cible 
 	et présente:
 	\begin{itemize}
-	\item L'avantage d’offrir le maximum de flexibilité pour le requêtage, et d'être de grande qualité en terme de disponibilité et de véracité, puisque celui-ci a été soigneusement introduit à la main\footnote{À travers une lecture "humaine" des .pdf présentés plus bas}.
+	\item L'avantage d’offrir le maximum de flexibilité pour le requêtage, et d'être de grande qualité en terme de disponibilité et de véracité, puisque celui-ci a été soigneusement introduit à la main\footnote{À travers une lecture "humaine" des .pdf présentés par la figure \ref{fig:IFA-PDF}}.
 	\item L’inconvénient d'être prohibitif en temps et en ressources humaines.
 	 En effet, nous avons constaté un retard data de fin décembre 2013 par rapport aux derniers .pdf reçus par l'OCP.
 	\end{itemize}
-		 	\begin{figure}
+	\begin{figure}[H]
 		    		\centering
 	    			\includegraphics[scale=0.35]{Table}
-		    		\caption{Example d'une sortie de requête sur le Data-Mart}
+		    		\caption{Exemple d'une sortie de requête sur le Data-Mart}
 		    		\label{fig:DMOCP}
-		\end{figure}
+	\end{figure}
 	\subsection{Consolidation des données locales}
 	\subsection{Audit et description des données locales consolidées}
 	\section{Collecte et préparation des données externes}
-	Comme rappelé dans la section \ref{CGP}. Les travaux de nos prédécesseurs dans leurs efforts de moderniser le système d'information se sont arrêtés à automatiser l'archivage des données se rapportant aux historiques de ventes en terme de prix et volumes en un premier lieu\cite{CHEMLAL} avant de concevoir le socle OLAP\footnote{le traitement analytique en ligne (OnLine Analytical Processing, OLAP) est un type d'application informatique orienté vers l'analyse sur-le-champ d'informations selon plusieurs axes, dans le but d'obtenir des rapports de synthèse} dans la vue de générer des rapports synthétiques concernant les historiques des échanges du marché des phosphates ensuite\cite{NACER}.
-	\par
 	L'étendue des données disponibles au sein du système d'information de l'OCP ne pouvant donner qu'une vue réduite de la situation du marché et ne peuvent de par leur définition révéler les structures socio-économiques,  et de politiques agraires sous-jacentes aux demandes en produits phosphatés, nous nous attellerons à la tâche d'enrichir cette base de données historiques par des données quantitatives concernant les pays du monde.
 	\par
 	Nous décrivons dans ce qui suit ce processus. 
