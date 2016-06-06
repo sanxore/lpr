@@ -1,4 +1,4 @@
-\chapter{Collecte et étude statistique}
+\chapter{Collecte, compréhension et préparation des données.}
 \epigraph{Economists and agronomists are locked in debate about likely
 future yields. Since the method of the economists is to predict
 future outcomes from past performance, economists expect
@@ -9,8 +9,8 @@ a disagreement about the pace of technical change.}{Robert
 Socolow}	
 \cleardoublepage
 \newcommand{\reels}{\mathbb{R}}
-	\section{Collecte des données}
-	\subsection{Compréhension des données locales\protect\footnote{Données disponibles au sein du portail Business Intelligence de l'OCP}}
+	\section{Compréhension et préparation des données locales\protect\footnote{Données disponibles au sein du portail Business Intelligence de l'OCP}}
+	\subsection{Compréhension des données locales}
 					\begin{wrapfigure}[10]{r}{5 cm}
 						\raggedleft
 						\fbox{\includegraphics[scale=0.5]{IFA-txt}}
@@ -36,7 +36,7 @@ Socolow}
 	Ceci est notre format de données cible 
 	et présente:
 	\begin{itemize}
-	\item L'avantage d’offrir le maximum de flexibilité pour le requêtage, et d'être de grande qualité en terme de disponibilité et de veracité, puisque celui-ci a été soigneusement introduit à la main\footnote{À travers une lecture "humaine" des .pdf présentés plus bas}.
+	\item L'avantage d’offrir le maximum de flexibilité pour le requêtage, et d'être de grande qualité en terme de disponibilité et de véracité, puisque celui-ci a été soigneusement introduit à la main\footnote{À travers une lecture "humaine" des .pdf présentés plus bas}.
 	\item L’inconvénient d'être prohibitif en temps et en ressources humaines.
 	 En effet, nous avons constaté un retard data de fin décembre 2013 par rapport aux derniers .pdf reçus par l'OCP.
 	\end{itemize}
@@ -46,26 +46,17 @@ Socolow}
 		    		\caption{Example d'une sortie de requête sur le Data-Mart}
 		    		\label{fig:DMOCP}
 		\end{figure}
-		\par
-	Dans notre cas mous sommes intéressés par les données d'import et export des produits phosphatés, cette donnée existante dans le portail est non structuré, elle est sous format PDF.
-	\subsubsection{Analyse des PDFs contenant les trades Matrix}
-		
-	\paragraph{Contraintes:}
-	\begin{itemize}
-		\item Il faut distinguer et localiser les Trades Matrix des autres formes de données contenues dans ce document.
-		\item L'extraction manuelle des structures de table d'un fichier PDF consomme énormément de temps et d'energie.
-		\item Après l'extraction, Il faut transformer ces trades Matrix En des trades table pour faciliter le requettage.
-	\end{itemize}
-	\subsubsection{Conception de la solution}
-	\subsection{Extension des données aux banques externes}
+	\subsection{Consolidation des données locales}
+	\subsection{Audit et description des données locales consolidées}
+	\section{Collecte et préparation des données externes}
 	Comme rappelé dans la section \ref{CGP}. Les travaux de nos prédécesseurs dans leurs efforts de moderniser le système d'information se sont arrêtés à automatiser l'archivage des données se rapportant aux historiques de ventes en terme de prix et volumes en un premier lieu\cite{CHEMLAL} avant de concevoir le socle OLAP\footnote{le traitement analytique en ligne (OnLine Analytical Processing, OLAP) est un type d'application informatique orienté vers l'analyse sur-le-champ d'informations selon plusieurs axes, dans le but d'obtenir des rapports de synthèse} dans la vue de générer des rapports synthétiques concernant les historiques des échanges du marché des phosphates ensuite\cite{NACER}.
 	\par
 	L'étendue des données disponibles au sein du système d'information de l'OCP ne pouvant donner qu'une vue réduite de la situation du marché et ne peuvent de par leur définition révéler les structures socio-économiques,  et de politiques agraires sous-jacentes aux demandes en produits phosphatés, nous nous attellerons à la tâche d'enrichir cette base de données historiques par des données quantitatives concernant les pays du monde.
 	\par
 	Nous décrivons dans ce qui suit ce processus. 
-	\subsubsection{Énumération, recherche et extraction des données depuis des banques WEB}
-		Guidés par nos lectures bibliographiques résumées dans les sections \ref{read1} et \ref{read2}, nous nous fixons l'objectif de récolter les indicateurs de politiques agraires et socioéconomiques suivants:
-	\paragraph{Énumération et définitions des variables souhaitées }
+	\subsection{Collecte des données externes}
+	\subsubsection{Énumération et définitions des variables souhaitées }
+			Guidés par nos lectures bibliographiques résumées dans les sections \ref{read1} et \ref{read2}, nous nous fixons l'objectif de récolter les indicateurs de politiques agraires et socioéconomiques suivants:
 	\begin{itemize}
 		\item \textbf{ Access to electricity, rural (\% of rural population):} Fraction de paysans ayant accès à l'électricité.
 		\item \textbf{ Access to non-solid fuel, rural (\% of rural population):} Fraction de paysans ayant accès aux fuels non solides.
@@ -108,18 +99,19 @@ Socolow}
 		\item \textbf{ Rural poverty gap at national poverty lines (\%):} L'écart de pauvreté par rapport au seuil national de la pauvreté en milieu rural est le manque à gagner pour remonter au-dessus du seuil de la pauvreté (en considérant que les non pauvres ont un manque à gagner de zéro) exprimé en pourcentage du seuil national de la pauvreté en milieu urbain.Cette mesure témoigne à la fois de l'ampleur de la pauvreté et de sa fréquence.
 		\item \textbf{ Unemployment, total (\% of total labor force):} Fraction de la population active qui est sans emploi mais qui est disponible pour et à la recherche d'un emploi.
 		\end{itemize}
-	\paragraph{Recherche des sources WEB des variables souhaitées \newline}
+	\subsubsection{Recherche des sources WEB des variables souhaitées}
 	\par
 	\begin{Huge}{ Liste des cibles (sites web et bases de données publiques) du Crawling }
 		\end{Huge}
-	\paragraph{Extraction et formatage des variables souhaitées \newline}\label{crawl}
+	\subsubsection{Extraction et formatage des variables souhaitées}\label{crawl}
 	\par
 	 \begin{Huge}{ Workflow du  Crawling }
 	 		\end{Huge}
-	\subsubsection{Élagage des données externes}
+	
+	\subsection{Préparation des données externes}
 	Cette section s’intéresse à l'application des forêts de décisions aléatoires à des fins de sélection de variables. Le but ici est double : d'abord introduire le comportement de l'indexation de l'importance des variables en utilisant les forêts aléatoires et l'utiliser pour proposer un algorithme à deux phases pour la sélection de variables à la base de leur importance.\par
 	La stratégie générale se résume en un classement des variables exogènes\footnote{à savoir les variables externes "crawlées" dans la section \ref{crawl}.} en utilisant le score d'importance de ces variables introduit par les forêts aléatoires puis une sélection ascendante itérative des variables.
-	\paragraph{Introduction aux forêts de décision aléatoires\newline}
+	\subsubsection{Introduction aux forêts de décision aléatoires}
 	Les FA\footnote{Forêts aléatoires} est un algorithme populaire et très efficient basé appartenant aux méthodes d'agrégation pour les problèmes de régression et de classification, introduit par Breiman\cite{BREI01}, et apparaît dans les application de 'Machine Learning'\footnote{L'apprentissage automatique ou apprentissage statistique (machine learning en anglais), champ d'étude de l'intelligence artificielle, concerne la conception, l'analyse, le développement et l'implémentation de méthodes permettant à une machine (au sens large) d'évoluer par un processus systématique, et ainsi de remplir des tâches difficiles ou impossibles à remplir par des moyens algorithmiques plus classiques.} à la fin du dernier millénaire\cite{DITRI99}. Les FA deviennent de plus en plus populaires et semblent être très robustes dans beaucoup d'applications bien qu'ils ne soient pas clairement théorisés mathématiquement\cite{BIA08}.
 	\par
 	Considérons un ensemble d'apprentissage ${L_n = \{(X_1, Y_1),...,X_n, Y_n)\}}$ de \textit{n} observations i.i.d.\footnote{indépendantes identiquement distribuées} d'un vecteur aléatoire (X,Y). Le vecteur ${X_i = (X_i^1,...,X_i^p)}$ contient les variables exogènes, $X_i \in \reels^p $ et $Y_i \in \reels $, une réponse numérique. Pour les problèmes de regression, nous supposons que $ \exists$ S $\forall$ i $ Y_i=S(X_i)+\varepsilon$ où E[$\varepsilon$|X] = 0 et \textbf{S} est appellée fonction de regression. Les FA est une stratégie de construction d'un modèle \textit{ê(x)} estimant la fonction de regression.
@@ -192,10 +184,5 @@ Socolow}
 	nombre maximum d’observations dans les nœuds est par défaut pris relativement petit (5). Concernant le choix de \textit{k}, \textit{\textbf{randomForest}} propose par
 	défaut \textit{k = $\frac{p}{3}$} en régression. Ce paramètre peut également
 	être sélectionné via des procédures apprentissage-validation ou validation croisée.
-	\paragraph{Erreur Out-Of-Bag et importance des variables}
-	\paragraph{Sélection des variables et élagage des données extraites}
-	\section{Audit de la qualité des données récoltées}
-	\subsection{Données locales}
-	\subsection{Données externes}
-	\section{Analyse causale}
-	\section{Analyse en séries chronologiques et projections}
+	\subsubsection{Erreur Out-Of-Bag et importance des variables}
+	\subsubsection{Sélection des variables et élagage des données extraites}
