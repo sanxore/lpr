@@ -12,44 +12,26 @@ if [ "$#" -ne 1 ]; then
 
     "
 else
-
 for full in $1/*
 do
 filename="${full##*/}"
-CAS=$(echo $filename | cut -d '_' -f 1)
-if [[ "$CAS" == "PROCESSED" ]]; then
-
 year=$(echo $filename| cut -d'_' -f 4)
 quart=$(echo $filename| cut -d'_' -f 5)
 typ=$(echo $filename| cut -d '_' -f 6)
 typ=$(echo $typ| cut -d '.' -f 1)
-
 typ='_'$typ
 mkdir 2>/dev/null DEST 2>/dev/null 
 annee=$year
 year="DEST/"$year
 mkdir 2>/dev/null $year 2>/dev/null 
 mkdir 2>/dev/null $year/$quart
-mkdir 2>/dev/null $year/$quart/MGA$typ
-mkdir 2>/dev/null $year/$quart/MGA$typ/PROD
-mkdir 2>/dev/null $year/$quart/MGA$typ/EXPORTS
-mkdir 2>/dev/null $year/$quart/MGA$typ/PROD/Dones_PDF
-mkdir 2>/dev/null $year/$quart/MGA$typ/EXPORTS/Dones_PDF
-mkdir 2>/dev/null $year/$quart/MAP$typ
-mkdir 2>/dev/null $year/$quart/MAP$typ/PROD
-mkdir 2>/dev/null $year/$quart/MAP$typ/EXPORTS
-mkdir 2>/dev/null $year/$quart/MAP$typ/PROD/Dones_PDF
-mkdir 2>/dev/null $year/$quart/MAP$typ/EXPORTS/Dones_PDF
-mkdir 2>/dev/null $year/$quart/DAP$typ
-mkdir 2>/dev/null $year/$quart/DAP$typ/PROD
-mkdir 2>/dev/null $year/$quart/DAP$typ/EXPORTS
-mkdir 2>/dev/null $year/$quart/DAP$typ/PROD/Dones_PDF
-mkdir 2>/dev/null $year/$quart/DAP$typ/EXPORTS/Dones_PDF
-mkdir 2>/dev/null $year/$quart/TSP$typ
-mkdir 2>/dev/null $year/$quart/TSP$typ/PROD
-mkdir 2>/dev/null $year/$quart/TSP$typ/EXPORTS
-mkdir 2>/dev/null $year/$quart/TSP$typ/PROD/Dones_PDF
-mkdir 2>/dev/null $year/$quart/TSP$typ/EXPORTS/Dones_PDF
+mkdir 2>/dev/null $year/$quart/ROCK
+mkdir 2>/dev/null $year/$quart/ROCK/ALL$typ
+mkdir 2>/dev/null $year/$quart/ROCK/ALL$typ/EXPORTS
+mkdir 2>/dev/null $year/$quart/ROCK/ALL$typ/EXPORTS/Dones_PDF
+
+
+
 echo "
 ###########################################################################
 ########################~~Parsing $annee -- $quart$typ~~#########################
@@ -57,325 +39,147 @@ echo "
 Npage=$(pdftk $full dump_data 2>/dev/null | grep NumberOfPages | cut -d ' ' -f 2 )
 page=1
 flag=0
+typ=$typ"/EXPORTS"
 while [ $page -le $Npage ]
 do
-
-	while [[ $flag == 0 ]]; do
-		pdftotext -f $page -l $page -x 0 -y 0 -W 700 -H 50 $full tmp2.txt
-		out=$(cat tmp2.txt)
-		if [[ "$out" == *Deliveries* ]]; then
-		flag=1
-		else
-		page=$((page+1))
-		fi
-	done
-	pdftotext -f $page -l $page -x 0 -y 0 -W 700 -H 50 $full tmp2.txt
-	out=$(cat tmp2.txt)
-	if [[ "$out" == *Acid* ]]; then
-			if [[ "$out" == *Deliveries* ]]
-			then
-				pdfseparate -f $page -l $page $full $year/$quart/MGA$typ/PROD/%d.pdf
-				#python /opt/table_detector/TableDetector.py $year/$quart/MGA$typ/PROD/$page.pdf $year/$quart/MGA$typ/PROD/$page.csv
-				#mv $year/$quart/MGA$typ/PROD/$page.pdf $year/$quart/MGA$typ/PROD/Dones_PDF
-				echo "Pars_Sucess "$page"MGA$typ_PROD"
-			else
-				pdfseparate -f $page -l $page $full $year/$quart/MGA$typ/EXPORTS/%d.pdf
-				python /opt/table_detector/TableDetector.py $year/$quart/MGA$typ/EXPORTS/$page.pdf $year/$quart/MGA$typ/EXPORTS/$page.csv
-				mv $year/$quart/MGA$typ/EXPORTS/$page.pdf $year/$quart/MGA$typ/EXPORTS/Dones_PDF
-
-				echo "Pars_Sucess "$page"MGA$typ_EXPORT"	
-			fi
-
-	elif [[ "$out" == *MAP* ]]; then
-			if [[ "$out" == *Deliveries* ]]
-			then
-				pdfseparate -f $page -l $page $full $year/$quart/MAP$typ/PROD/%d.pdf
-				#python /opt/table_detector/TableDetector.py $year/$quart/MAP$typ/PROD/$page.pdf $year/$quart/MAP$typ/PROD/$page.csv
-				#mv $year/$quart/MAP$typ/PROD/$page.pdf $year/$quart/MAP$typ/PROD/Dones_PDF
-				echo "Pars_Sucess "$page"MAP$typ_PROD"
-			else
-				pdfseparate -f $page -l $page $full $year/$quart/MAP$typ/EXPORTS/%d.pdf
-				python /opt/table_detector/TableDetector.py $year/$quart/MAP$typ/EXPORTS/$page.pdf $year/$quart/MAP$typ/EXPORTS/$page.csv
-				mv $year/$quart/MAP$typ/EXPORTS/$page.pdf $year/$quart/MAP$typ/EXPORTS/Dones_PDF
-				echo "Pars_Sucess "$page"MAP$typ_EXPORT"	
-			fi
-
-
-	elif [[ "$out" == *DAP* ]]; then
-			if [[ "$out" == *Deliveries* ]]
-			then
-				pdfseparate -f $page -l $page $full $year/$quart/DAP$typ/PROD/%d.pdf
-				#python /opt/table_detector/TableDetector.py $year/$quart/DAP$typ/PROD/$page.pdf $year/$quart/DAP$typ/PROD/$page.csv
-				#mv $year/$quart/DAP$typ/PROD/$page.pdf $year/$quart/DAP$typ/PROD/Dones_PDF
-				echo "Pars_Sucess "$page"DAP$typ_PROD"
-			else
-				pdfseparate -f $page -l $page $full $year/$quart/DAP$typ/EXPORTS/%d.pdf
-				python /opt/table_detector/TableDetector.py $year/$quart/DAP$typ/EXPORTS/$page.pdf $year/$quart/DAP$typ/EXPORTS/$page.csv
-				mv $year/$quart/DAP$typ/EXPORTS/$page.pdf $year/$quart/DAP$typ/EXPORTS/Dones_PDF
-				echo "Pars_Sucess "$page"DAP$typ_EXPORT"	
-			fi
-
-
-	elif [[ "$out" == *TSP* ]]; then
-			if [[ "$out" == *Deliveries* ]]
-			then
-				pdfseparate -f $page -l $page $full $year/$quart/TSP$typ/PROD/%d.pdf
-				#python /opt/table_detector/TableDetector.py $year/$quart/TSP$typ/PROD/$page.pdf $year/$quart/TSP$typ/PROD/$page.csv
-				#mv $year/$quart/TSP$typ/PROD/$page.pdf $year/$quart/TSP$typ/PROD/Dones_PDF
-				echo "Pars_Sucess "$page"TSP$typ_PROD"
-			else
-				pdfseparate -f $page -l $page $full $year/$quart/TSP$typ/EXPORTS/%d.pdf
-				python /opt/table_detector/TableDetector.py $year/$quart/TSP$typ/EXPORTS/$page.pdf $year/$quart/TSP$typ/EXPORTS/$page.csv
-				mv $year/$quart/TSP$typ/EXPORTS/$page.pdf $year/$quart/TSP$typ/EXPORTS/Dones_PDF
-				echo "Pars_Sucess "$page"TSP$typ_EXPORT"	
-			fi
-	else
-		page=$((Npage+1))
-	fi	
-	page=$((page+1))
-done
-rm tmp2.txt
-done
-
-
-for year in DEST/*
-do
-	yy="${year##*/}"
-yy_1=$((yy-1))
-yy_2=$((yy-2))
-for quart in $year/*
-do
-	DIR=$quart"/MAP_DET"
-	DIR2=$quart"/MAP_AGG"
-	if [[ -d "$DIR" || -d "$DIR2" ]]; then
-	for prod in $quart/*
-	do
-		if [[ "$prod" != *ROCK* ]]; then
-		prodname="${prod##*/}"
-		typx=$(echo $prodname| cut -d '_' -f 2)
-		typx=$(echo $typx| cut -d '.' -f 1)
-		typx='_'$typx
-		mkdir 2>/dev/null $prod/EXPORTS/Dones_CSV
-		target=$(ls -1v $prod/EXPORTS/ | head -1 | head -c -1)
-		if [[ $prod == *MGA* ]]
-		then
-			echo "Please Enter Acid$typx Exporting Countries for "$quart". Seperated with ',' followed by [ENTER]"
-			read mga
-			sed -i "1 i\Countries,$mga,T$yy,T$yy_1,T$yy_2" $prod/EXPORTS/$target
-		elif [[ $prod == *MAP* ]]
-		then
-			echo "Please Enter MAP$typx Exporting Countries for "$quart". Seperated with ',' followed by [ENTER]"
-			read map
-			sed -i "1 i\Countries,$map,T$yy,T$yy_1,T$yy_2" $prod/EXPORTS/$target
-		elif [[ $prod == *DAP* ]]
-		then
-			echo "Please Enter DAP$typx Exporting Countries for "$quart". Seperated with ',' followed by [ENTER]"
-			read dap
-			sed -i "1 i\Countries,$dap,T$yy,T$yy_1,T$yy_2" $prod/EXPORTS/$target
-		else
-			echo "Please Enter TSP$typx Exporting Countries for "$quart". Seperated with ',' followed by [ENTER]"
-			read tsp
-			sed -i "1 i\Countries,$tsp,T$yy,T$yy_1,T$yy_2" $prod/EXPORTS/$target
-		fi
-		var=$(ls -l $prod/EXPORTS | wc -l)
-		while [ "$var" -ge  "5" ]
-		do
-		next=$(ls -1v $prod/EXPORTS | head -2 | tail -1)
-		cat $prod/EXPORTS/$next >> $prod/EXPORTS/$target
-		mv $prod/EXPORTS/$next $prod/EXPORTS/Dones_CSV
-		#echo "done $next"
-		var=$(ls -l $prod/EXPORTS | wc -l)
-		done
-	mv $prod/EXPORTS/$target $prod/EXPORTS/data.csv
-	echo "done $prod"
-fi
-	done
-fi
-done
-done
-echo "
-###########################################################################
-###########################################################################
-########################~~OCP IFA PDF PARSER~~#############################
-###########################################################################
-###########################################################################
-"
-	#statements
+drap=0
+while [[ $flag == 0 ]]; do
+pdftotext -f $page -l $page -x 0 -y 0 -W 700 -H 50 $full tmp.txt
+out=$(cat tmp.txt)
+if [[ "$out" == *Destination* ]]; then
+flag=1
 else
-for full in $1/*
-do
-filename="${full##*/}"
-year=$(echo $filename| cut -d'_' -f 4)
-quart=$(echo $filename| cut -d'_' -f 5)
-typ=$(echo $filename| cut -d '_' -f 6)
-typ=$(echo $typ| cut -d '.' -f 1)
-
-typ='_'$typ
-mkdir 2>/dev/null DEST 2>/dev/null 
-annee=$year
-year="DEST/"$year
-mkdir 2>/dev/null $year 2>/dev/null 
-mkdir 2>/dev/null $year/$quart
-mkdir 2>/dev/null $year/$quart/MGA$typ
-mkdir 2>/dev/null $year/$quart/MGA$typ/PROD
-mkdir 2>/dev/null $year/$quart/MGA$typ/EXPORTS
-mkdir 2>/dev/null $year/$quart/MGA$typ/PROD/Dones_PDF
-mkdir 2>/dev/null $year/$quart/MGA$typ/EXPORTS/Dones_PDF
-mkdir 2>/dev/null $year/$quart/MAP$typ
-mkdir 2>/dev/null $year/$quart/MAP$typ/PROD
-mkdir 2>/dev/null $year/$quart/MAP$typ/EXPORTS
-mkdir 2>/dev/null $year/$quart/MAP$typ/PROD/Dones_PDF
-mkdir 2>/dev/null $year/$quart/MAP$typ/EXPORTS/Dones_PDF
-mkdir 2>/dev/null $year/$quart/DAP$typ
-mkdir 2>/dev/null $year/$quart/DAP$typ/PROD
-mkdir 2>/dev/null $year/$quart/DAP$typ/EXPORTS
-mkdir 2>/dev/null $year/$quart/DAP$typ/PROD/Dones_PDF
-mkdir 2>/dev/null $year/$quart/DAP$typ/EXPORTS/Dones_PDF
-mkdir 2>/dev/null $year/$quart/TSP$typ
-mkdir 2>/dev/null $year/$quart/TSP$typ/PROD
-mkdir 2>/dev/null $year/$quart/TSP$typ/EXPORTS
-mkdir 2>/dev/null $year/$quart/TSP$typ/PROD/Dones_PDF
-mkdir 2>/dev/null $year/$quart/TSP$typ/EXPORTS/Dones_PDF
-echo "
-###########################################################################
-########################~~Parsing $annee -- $quart$typ~~#########################
-###########################################################################"
-Npage=$(pdftk $full dump_data 2>/dev/null | grep NumberOfPages | cut -d ' ' -f 2 )
-page=1
-flag=0
-while [ $page -le $Npage ]
-do
-
-	while [[ $flag == 0 ]]; do
-		pdftotext -f $page -l $page -x 0 -y 0 -W 700 -H 50 $full tmp2.txt
-		out=$(cat tmp2.txt)
-		if [[ "$out" == *Deliveries* ]]; then
-		flag=1
-		else
-		page=$((page+1))
-		fi
-	done
-	pdftotext -f $page -l $page -x 0 -y 0 -W 700 -H 50 $full tmp2.txt
-	out=$(cat tmp2.txt)
-	if [[ "$out" == *Acid* ]]; then
-			if [[ "$out" == *Deliveries* ]]
-			then
-				pdfseparate -f $page -l $page $full $year/$quart/MGA$typ/PROD/%d.pdf
-				#python /opt/table_detector/TableDetector.py $year/$quart/MGA$typ/PROD/$page.pdf $year/$quart/MGA$typ/PROD/$page.csv
-				#mv $year/$quart/MGA$typ/PROD/$page.pdf $year/$quart/MGA$typ/PROD/Dones_PDF
-				echo "Pars_Sucess "$page"MGA$typ_PROD"
-			else
-				pdfseparate -f $page -l $page $full $year/$quart/MGA$typ/EXPORTS/%d.pdf
-				python /opt/table_detector/TableDetector.py $year/$quart/MGA$typ/EXPORTS/$page.pdf $year/$quart/MGA$typ/EXPORTS/$page.csv
-				mv $year/$quart/MGA$typ/EXPORTS/$page.pdf $year/$quart/MGA$typ/EXPORTS/Dones_PDF
-
-				echo "Pars_Sucess "$page"MGA$typ_EXPORT"	
-			fi
-
-	elif [[ "$out" == *MAP* ]]; then
-			if [[ "$out" == *Deliveries* ]]
-			then
-				pdfseparate -f $page -l $page $full $year/$quart/MAP$typ/PROD/%d.pdf
-				#python /opt/table_detector/TableDetector.py $year/$quart/MAP$typ/PROD/$page.pdf $year/$quart/MAP$typ/PROD/$page.csv
-				#mv $year/$quart/MAP$typ/PROD/$page.pdf $year/$quart/MAP$typ/PROD/Dones_PDF
-				echo "Pars_Sucess "$page"MAP$typ_PROD"
-			else
-				pdfseparate -f $page -l $page $full $year/$quart/MAP$typ/EXPORTS/%d.pdf
-				python /opt/table_detector/TableDetector.py $year/$quart/MAP$typ/EXPORTS/$page.pdf $year/$quart/MAP$typ/EXPORTS/$page.csv
-				mv $year/$quart/MAP$typ/EXPORTS/$page.pdf $year/$quart/MAP$typ/EXPORTS/Dones_PDF
-				echo "Pars_Sucess "$page"MAP$typ_EXPORT"	
-			fi
-
-
-	elif [[ "$out" == *DAP* ]]; then
-			if [[ "$out" == *Deliveries* ]]
-			then
-				pdfseparate -f $page -l $page $full $year/$quart/DAP$typ/PROD/%d.pdf
-				#python /opt/table_detector/TableDetector.py $year/$quart/DAP$typ/PROD/$page.pdf $year/$quart/DAP$typ/PROD/$page.csv
-				#mv $year/$quart/DAP$typ/PROD/$page.pdf $year/$quart/DAP$typ/PROD/Dones_PDF
-				echo "Pars_Sucess "$page"DAP$typ_PROD"
-			else
-				pdfseparate -f $page -l $page $full $year/$quart/DAP$typ/EXPORTS/%d.pdf
-				python /opt/table_detector/TableDetector.py $year/$quart/DAP$typ/EXPORTS/$page.pdf $year/$quart/DAP$typ/EXPORTS/$page.csv
-				mv $year/$quart/DAP$typ/EXPORTS/$page.pdf $year/$quart/DAP$typ/EXPORTS/Dones_PDF
-				echo "Pars_Sucess "$page"DAP$typ_EXPORT"	
-			fi
-
-
-	elif [[ "$out" == *TSP* ]]; then
-			if [[ "$out" == *Deliveries* ]]
-			then
-				pdfseparate -f $page -l $page $full $year/$quart/TSP$typ/PROD/%d.pdf
-				#python /opt/table_detector/TableDetector.py $year/$quart/TSP$typ/PROD/$page.pdf $year/$quart/TSP$typ/PROD/$page.csv
-				#mv $year/$quart/TSP$typ/PROD/$page.pdf $year/$quart/TSP$typ/PROD/Dones_PDF
-				echo "Pars_Sucess "$page"TSP$typ_PROD"
-			else
-				pdfseparate -f $page -l $page $full $year/$quart/TSP$typ/EXPORTS/%d.pdf
-				python /opt/table_detector/TableDetector.py $year/$quart/TSP$typ/EXPORTS/$page.pdf $year/$quart/TSP$typ/EXPORTS/$page.csv
-				mv $year/$quart/TSP$typ/EXPORTS/$page.pdf $year/$quart/TSP$typ/EXPORTS/Dones_PDF
-				echo "Pars_Sucess "$page"TSP$typ_EXPORT"	
-			fi
-	else
-		page=$((Npage+1))
-	fi	
-	page=$((page+1))
+page=$((page+1))
+fi
 done
-rm tmp2.txt
-done
+pdftotext -f $page -l $page -x 0 -y 0 -W 700 -H 50 $full tmp.txt
+out=$(cat tmp.txt)
+if [[ "$out" == *Destination* ]]; then
+if [[ "$out" == *All* ]]; then
+grade="ALL"
+drap=1
+fi
 
+if [[ $drap == 1 ]]; then
+
+grade="ROCK/"$grade
+
+pdfseparate -f $page -l $page $full $year/$quart/$grade$typ/%d.pdf
+python /opt/table_detector/TableDetector.py $year/$quart/$grade$typ/$page.pdf $year/$quart/$grade$typ/$page.csv
+mv $year/$quart/$grade$typ/$page.pdf $year/$quart/$grade$typ/Dones_PDF
+
+echo "Pars_Sucess "$page"_"$grade$typ
+#statements
+fi
+page=$((page+1))
+else
+page=$((page+1))
+fi
+
+done
+rm tmp.txt
+done
+fi
+
+
+####################################
 
 for year in DEST/*
 do
-	yy="${year##*/}"
+for quart in $year/*
+do
+DIR=$quart"/ROCK"
+if [ -d "$DIR" ]; then
+quart=$quart"/ROCK"
+for prod in $quart/*
+do
+prod=$prod"/EXPORTS"
+min=$(ls -1v $prod | head -1 | head -c -1 | cut -d '.' -f 1)
+max=$(ls -1v $prod | tail -2 | head -1 | head -c -1 | cut -d '.' -f 1)
+mkdir 2>/dev/null $prod/DONES_CSV
+echo "
+import sys
+import csv
+def main(argv):
+   with open(sys.argv[1],'rb') as f:
+      reader=csv.reader(f)
+      CARS=list(reader)
+   with open(sys.argv[2],'rb') as f2:
+         reader2=csv.reader(f2)
+         CDRS=list(reader2)
+
+   for car in CARS:
+      index = CARS.index(car)
+      for item in CDRS[index][1:]:
+      car.append(item)
+      print ','.join(car)
+if __name__ == '__main__':
+   main(sys.argv)" > $prod/tmp.py
+
+CAR=$min
+while [[ $CAR -lt $max ]]; do
+BU=$CAR
+CDR=$((CAR+1))
+CAR=$CAR".csv"
+CDR=$CDR".csv"
+python $prod/tmp.py $prod/$CAR $prod/$CDR >> $prod/tmp.csv 2>/dev/null
+mv $prod/$CAR $prod/DONES_CSV
+mv $prod/$CDR $prod/DONES_CSV
+mv $prod/tmp.csv $prod/$CAR
+CAR=$((BU+2))
+done
+rm $prod/tmp.py
+
+done
+fi
+done
+done
+
+#######################################
+#######################################
+
+for year in DEST/*
+do
+yy="${year##*/}"
 yy_1=$((yy-1))
 yy_2=$((yy-2))
 for quart in $year/*
 do
-	DIR=$quart"/MAP_DET"
-	DIR2=$quart"/MAP_AGG"
-	if [[ -d "$DIR" || -d "$DIR2" ]]; then
-	for prod in $quart/*
-	do
-		if [[ "$prod" != *ROCK* ]]; then
-		prodname="${prod##*/}"
-		typx=$(echo $prodname| cut -d '_' -f 2)
-		typx=$(echo $typx| cut -d '.' -f 1)
-		typx='_'$typx
-		mkdir 2>/dev/null $prod/EXPORTS/Dones_CSV
-		target=$(ls -1v $prod/EXPORTS/ | head -1 | head -c -1)
-		if [[ $prod == *MGA* ]]
-		then
-			echo "Please Enter Acid$typx Exporting Countries for "$quart". Seperated with ',' followed by [ENTER]"
-			read mga
-			sed -i "1 i\Countries,$mga,T$yy,T$yy_1,T$yy_2" $prod/EXPORTS/$target
-		elif [[ $prod == *MAP* ]]
-		then
-			echo "Please Enter MAP$typx Exporting Countries for "$quart". Seperated with ',' followed by [ENTER]"
-			read map
-			sed -i "1 i\Countries,$map,T$yy,T$yy_1,T$yy_2" $prod/EXPORTS/$target
-		elif [[ $prod == *DAP* ]]
-		then
-			echo "Please Enter DAP$typx Exporting Countries for "$quart". Seperated with ',' followed by [ENTER]"
-			read dap
-			sed -i "1 i\Countries,$dap,T$yy,T$yy_1,T$yy_2" $prod/EXPORTS/$target
-		else
-			echo "Please Enter TSP$typx Exporting Countries for "$quart". Seperated with ',' followed by [ENTER]"
-			read tsp
-			sed -i "1 i\Countries,$tsp,T$yy,T$yy_1,T$yy_2" $prod/EXPORTS/$target
-		fi
-		var=$(ls -l $prod/EXPORTS | wc -l)
-		while [ "$var" -ge  "5" ]
-		do
-		next=$(ls -1v $prod/EXPORTS | head -2 | tail -1)
-		cat $prod/EXPORTS/$next >> $prod/EXPORTS/$target
-		mv $prod/EXPORTS/$next $prod/EXPORTS/Dones_CSV
-		#echo "done $next"
-		var=$(ls -l $prod/EXPORTS | wc -l)
-		done
-	mv $prod/EXPORTS/$target $prod/EXPORTS/data.csv
-	echo "done $prod"
-fi
-	done
+
+DIR=$quart"/ROCK"
+if [ -d "$DIR" ]; then
+QQ=$quart
+quart=$quart"/ROCK"
+for prod in $quart/*
+do
+
+mkdir 2>/dev/null $prod/EXPORTS/DONES_CSV/COMP
+prodname="${prod##*/}"
+target=$(ls -1v $prod/EXPORTS | head -1 | head -c -1)
+echo "Please Enter $prodname BPL ROCK Exporting Countries for "$quart". Seperated with ',' followed by [ENTER]"
+read mga
+sed -i "1 i\Countries,$mga,T$yy,T$yy_1,T$yy_2" $prod/EXPORTS/$target
+var=$(ls -l $prod/EXPORTS | wc -l)
+while [ "$var" -ge  "5" ]
+do
+next=$(ls -1v $prod/EXPORTS | head -2 | tail -1)
+cat $prod/EXPORTS/$next >> $prod/EXPORTS/$target
+mv $prod/EXPORTS/$next $prod/EXPORTS/DONES_CSV/COMP
+#echo "done $next"
+var=$(ls -l $prod/EXPORTS | wc -l)
+done
+mv $prod/EXPORTS/$target $prod/EXPORTS/data.csv
+echo "done $prod"
+done
+for rr in $QQ/ROCK/*
+do
+rd="${rr##*/}"
+dyp=$(echo $rd | cut -d '_' -f 2)
+dyp="_"$dyp
+mv $rr $QQ/ROCK$dyp
+done 
+rm -rf $QQ/ROCK
+
 fi
 done
 done
@@ -386,5 +190,3 @@ echo "
 ###########################################################################
 ###########################################################################
 "
-fi
-fi
