@@ -4,7 +4,8 @@
 \newcommand{\reels}{\mathbb{R}}
 	\section{Compréhension et préparation des données locales\protect\footnote{Données disponibles au sein du portail Business Intelligence de l'OCP}}
 	\subsection{Compréhension des données locales}
-	Comme rappelé dans la section \ref{CGP}. Les travaux de nos prédécesseurs dans leurs efforts de moderniser le portail \textit{Business Intelligence} de l'OCP se sont arrêtés à automatiser l'archivage des données se rapportant aux historiques de ventes en terme de prix et volumes en un premier lieu\cite{CHEMLAL} avant de concevoir le socle OLAP\footnote{le traitement analytique en ligne (OnLine Analytical Processing, OLAP) est un type d'application informatique orienté vers l'analyse sur-le-champ d'informations selon plusieurs axes, dans le but d'obtenir des rapports de synthèse} dans la vue de générer des rapports synthétiques concernant les historiques des échanges du marché des phosphates ensuite\cite{NACER}. Seules sont ainsi présentes les données concernant les échanges internationaux en terme de produits phosphatés et ceux-ci sont présents sous deux différentes formes de données.
+	Comme rappelé dans la section \ref{CGP}. Les travaux de nos prédécesseurs dans leurs efforts de moderniser le portail \textit{Business Intelligence} de l'OCP se sont arrêtés à automatiser l'archivage des données se rapportant aux historiques de ventes en terme de prix et volumes en un premier lieu\cite{CHEMLAL} avant de concevoir le socle OLAP\footnote{le traitement analytique en ligne (OnLine Analytical Processing, OLAP) est un type d'application informatique orienté vers l'analyse sur-le-champ d'informations selon plusieurs axes, dans le but d'obtenir des rapports de synthèse} dans la vue de générer des rapports synthétiques concernant les historiques des échanges du marché des phosphates ensuite\cite{NACER}.\\
+	Seules sont ainsi présentes les données concernant les échanges internationaux en terme de produits phosphatés et ceux-ci sont présents sous deux différentes formes de données.
 					\begin{wrapfigure}[9]{r}{5 cm}
 						\raggedleft
 						\fbox{\includegraphics[scale=0.5]{IFA-txt}}
@@ -28,13 +29,13 @@
 		\end{itemize}
 		
 		\paragraph{}
-		La seconde est structurée dans des Datamart dont une sortie de requête est présentée dans la figure \ref{fig:DMOCP}.
+		La seconde est structurée dans des datamarts dont une sortie de requête est présentée dans la figure \ref{fig:DMOCP}.
 	Ceci est notre format de données cible 
 	et présente:
 	\begin{itemize}
 	\item L'avantage d’offrir le maximum de flexibilité pour le requêtage, et d'être de grande qualité en terme de disponibilité et de véracité, puisque celui-ci a été soigneusement introduit à la main\footnote{À travers une lecture "humaine" des .pdf présentés par la figure \ref{fig:IFA-PDF}}.
 	\item L’inconvénient d'être prohibitif en temps et en ressources humaines.
-	 En effet, nous avons constaté un retard data de fin décembre 2013 par rapport aux derniers .pdf reçus par l'OCP.
+	 En effet, nous avons constaté un retard datant de fin décembre 2013 par rapport aux derniers .pdf reçus par l'OCP.
 	\end{itemize}
 	\begin{figure}[H]
 		    		\centering
