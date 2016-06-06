@@ -11,33 +11,42 @@ Socolow}
 \newcommand{\reels}{\mathbb{R}}
 	\section{Collecte des données}
 	\subsection{Compréhension des données locales\protect\footnote{Données disponibles au sein du portail Business Intelligence de l'OCP}}
-	Au sein du portail Business intelligente de l'OCP on constate deux différentes formes de données, la première est structurée dans des Data-Mart dont une sortie de requête est présentée dans la figure \ref{fig:DMOCP}.
-	 	\begin{figure}[h]
+					\begin{wrapfigure}{r}{4.5cm}
+						\raggedleft
+						\includegraphics[scale=0.6]{IFA_txt}
+						\caption{Lecture "machine" du .pdf}
+						\label{fig:IFA-TXT}
+					\end{wrapfigure}
+	Au sein du portail Business intelligente de l'OCP on constate deux différentes formes de données.
+	La première est notre format de fichier source. Des fichiers .pdf  non structurés vis-à-vis de notre besoin (figure \ref{fig:IFA-PDF}), et qui présente:
+		\begin{itemize}
+		\item L'avantage d’être a jour, exhaustive et certifie par un organisme international (IFA\footnote{International Fertilizer industry Association: Association Internationale de l'industrie des Fertilisants})
+		\item L’inconvénient d’être flexible pour la lecture humaine mais ne présentant pas une grammaire machine formelle rendant possible une analyse syntaxique, comme en témoigne la figure \ref{fig:IFA-TXT}.
+			\begin{figure}[H]
+			    		\raggedright
+		    			\includegraphics[scale=0.4]{IFA_EX}
+			    		\caption{Example d'une trade Matrix dans le rapport Trimestriel de l'IFA}
+			    		\label{fig:IFA-PDF}
+			\end{figure}	
+		\end{itemize}la seconde est structurée dans des Data-Mart dont une sortie de requête est présentée dans la figure \ref{fig:DMOCP}.
+	 	\begin{figure}
 	    		\centering
     			\includegraphics[scale=0.6]{IFA_EX}
 	    		\caption{Example d'une trade Matrix dans le rapport Trimestriel de l'IFA}
 	    		\label{fig:DMOCP}
 	\end{figure}
 	\par
-	Ceci est notre format de données cible et présente:
+
+	Ceci est notre format de données cible 
+	et présente:
 	\begin{itemize}
 	\item L'avantage d’offrir le maximum de flexibilité pour le requêtage, et d'être de grande qualité en terme de disponibilité et de veracité, puisque celui-ci a été soigneusement introduit à la main\footnote{À travers une lecture "humaine" des .pdf présentés plus bas}.
-	\item L’inconvénient d'être prohibitif en temps et en ressources humaines. En effet, nous avons constaté un retard data de fin décembre 2013 par rapport aux derniers .pdf reçus par l'OCP.
+	\item L’inconvénient d'être prohibitif en temps et en ressources humaines.
+	 En effet, nous avons constaté un retard data de fin décembre 2013 par rapport aux derniers .pdf reçus par l'OCP.
 	\end{itemize}
-	La seconde a une forme non structurée vis-à-vis de notre besoin -des fichiers .pdf (figure \ref{fig:IFA-PDF})- et qui présente:
-	\begin{itemize}
-	\item L'avantage d’être a jour, exhaustive et certifie par un organisme international (IFA\footnote{International Fertilizer Association: Association Internationale des Fertilisants})
-	\item L’inconvénient d’être flexible pour la lecture humaine mais ne présentant pas une grammaire machine formelle rendant possible une analyse syntaxique, comme en  la figure \begin{huge}
-	A faire
-	\end{huge}
-	\end{itemize}
+	
 	\par
-	\begin{figure}[H]
-	    		\centering
-    			\includegraphics[scale=0.6]{IFA_EX}
-	    		\caption{Example d'une trade Matrix dans le rapport Trimestriel de l'IFA}
-	    		\label{fig:IFA-PDF}
-	\end{figure}
+
 	\par
 	Dans notre cas mous sommes intéressés par les données d'import et export des produits phosphatés, cette donnée existante dans le portail est non structuré, elle est sous format PDF.
 	\subsubsection{Analyse des PDFs contenant les trades Matrix}
