@@ -4,8 +4,9 @@
 Ce chapitre contextualise le projet dans son environnement, en présentant en premier lieu l'organisme hôte de celui-ci – L'Office Chérifien des Phosphates – avant de motiver les raisons inhérentes à son implémentation pour finir sur la planification du déroulement de l'analyse, la conception et la réalisation du projet.
 \cleardoublepage
 
-\section{Présentation de l’OCP\protect\footnote{Office Chérifien des Phosphates}}
+\section{Présentation de l’OCP}
 	\subsection{Historique}
+	\nomenclature{\textbf{OCP : }}{Office Chérifien des Phosphates}
 	En 1920, alors que partout dans le monde, les compagnies minières fouillent fébrilement le
 sous-sol à la recherche du phosphate, minerai aux précieuses vertus fertilisantes, l’Office
 Chérifien des Phosphates (OCP S.A. depuis 2008) voit le jour.
@@ -92,7 +93,7 @@ secteur, au Maroc et à l’étranger.
 		    		\caption{Le management senior de l'OCP \cite{ocp-fil}}
 		    		\label{fig:Orga}
 			\end{figure}
-		\subsubsection{La direction CM\protect\footnote{Commerciale-Marketing}: hôte de notre stage}
+		\subsubsection{La direction CM: hôte de notre stage}
 		La direction commerciale, où nous avons effectué notre stage, joue un rôle central dans le dispositif mis
 		en avant par la nouvelle stratégie de l'OCP. Elle est composée de six directions : direction des
 		ventes (découpée en quatre régions), direction des opérations, direction marketing, direction
@@ -130,11 +131,11 @@ secteur, au Maroc et à l’étranger.
 	\subsubsection{Problématique}
 	
 	\paragraph{}
-Au fil des années, la direction commerciale-marketing où nous avons effectué notre stage de fin d'études, a itérativement modernisé ses outils de traitement d'information. Dernière contribution en date de l'ENSIAS\footnote{École Nationale Supérieure d'Informatique et d'Analyse des Systèmes - Grande Ecole d'Ingénieurs, Maroc} à cet essor informationnel, celle de Mr NACER \cite{NACER}, a consisté en la mise en place d'une solution adéquate basée sur les concepts et technologies du BI\footnote{Business Intelligence} ayant permis l'automatisation de la réception, de la normalisation et l'exploitation de tableau de bord post-analyse des données recueillies. Celle-ci se définissant comme une complétion du travail précurseur de Mr CHEMLAL \cite{CHEMLAL}.  La plate-forme ainsi réalisée par nos prédécesseurs est ainsi un socle pour aider les décisionnaires CM\footnote{Commercial-Marketing} à mieux appréhender les évolution et historiques des marchés mondiaux.
+Au fil des années, la direction commerciale-marketing où nous avons effectué notre stage de fin d'études, a itérativement modernisé ses outils de traitement d'information. Dernière contribution en date de l'ENSIAS\nomenclature{\textbf{ENSIAS : }}{École Nationale Supérieure d'Informatique et d'Analyse des Systèmes - Grande Ecole d'Ingénieurs, Maroc} à cet essor informationnel, celle de Mr NACER \cite{NACER}, a consisté en la mise en place d'une solution adéquate basée sur les concepts et technologies du BI\nomenclature{\textbf{BI : }}{Business Intelligence} ayant permis l'automatisation de la réception, de la normalisation et l'exploitation de tableau de bord post-analyse des données recueillies. Celle-ci se définissant comme une complétion du travail précurseur de Mr CHEMLAL \cite{CHEMLAL}.  La plate-forme ainsi réalisée par nos prédécesseurs est ainsi un socle pour aider les décisionnaires CM\nomenclature{\textbf{CM : }}{Commercial-Marketing} à mieux appréhender les évolution et historiques des marchés mondiaux.
 \paragraph{}Nous proposons d'emmener les perspectives informationnelles du département CM au-delà du reporting \footnote{Tableaux de bord et rapports Business Intelligence} continu vers des mécanismes décisionnels et prévisionnels mettant en œuvre les techniques à l'état de l'art de fouilles de données (cf def data mining) . Nous souhaitons ainsi 'miner' des relations intéressantes régissant le marché international des phosphates qui ne sauraient être mises en relief par les techniques de la BI à savoir la segmentation en faits, dimensions et mesures. Notre problématique s'articule ainsi:\subparagraph*{}\textbf{Quelles mécanismes prévisionnels peuvent être établis à la suite d'une recherche de structure précédemment inconnue dans le marché international des phosphates ?}\subparagraph*{}Répondre d'une manière exhaustive à cette question constituerait un atout clé en faveur d'une meilleure compétitivité de l'OCP et nous nous proposons d'explorer divers piste dont le présent rapport témoigne. 
 \section{Planification du projet}
 	\subsection{Les étapes CRISP-DM d'un projet Data Mining}
-	CRISP-DM, qui signifie Cross-Industry Standard Process for Data Mining\footnote{Standard inter-entreprises du processus de fouille de données.}, est un modèle de processus d'exploration de données qui décrit les approches couramment utilisées par les experts pour résoudre des problèmes d'exploration de données \cite{CRISP-DM}.\par 
+	CRISP-DM\nomenclature{\textbf{CRISP-DM : }}{Cross-Industry Standard Process for Data Mining}, qui signifie Cross-Industry Standard Process for Data Mining\footnote{Standard inter-entreprises du processus de fouille de données.}, est un modèle de processus d'exploration de données qui décrit les approches couramment utilisées par les experts pour résoudre des problèmes d'exploration de données \cite{CRISP-DM}.\par 
 	Des sondages effectués en 2002, 2004, 2007 et 2014 montrent qu'il s'agit de la méthode principale utilisée par les data miners \cite{KDN}.\par
 	
 	CRISP-DM découpe le processus de data mining en six phases principales. La séquence des phases n'est pas stricte et un va et vient entre les différentes phases est toujours nécessaire. Les flèches dans le diagramme du processus indiquent les dépendances les plus importantes et fréquentes entre les phases. Le cercle extérieur dans le diagramme symbolise la nature cyclique de l'exploration de données. Un projet de fouille de données se poursuit après qu'une solution ait été déployée. Les leçons apprises au cours du processus peuvent déclencher de nouvelles questions métier, souvent plus ciblées et font bénéficier les processus d'extraction de données ultérieures de l'expérience des précédents. Les six phases sont résumés dans la figure \ref{fig:crisp}.
