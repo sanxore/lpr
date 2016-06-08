@@ -1,0 +1,18 @@
+\begin{thenomenclature} 
+
+ \nomgroup{A}
+
+  \item [{\textbf{BI : }}]\begingroup Business Intelligence\nomeqref {1.0}
+		\nompageref{17}
+  \item [{\textbf{CM : }}]\begingroup Commercial-Marketing\nomeqref {1.0}
+		\nompageref{18}
+  \item [{\textbf{CRISP-DM : }}]\begingroup Cross-Industry Standard Process for Data Mining\nomeqref {1.0}
+		\nompageref{18}
+  \item [{\textbf{ENSIAS : }}]\begingroup École Nationale Supérieure d'Informatique et d'Analyse des Systèmes - Grande Ecole d'Ingénieurs, Maroc\nomeqref {1.0}
+		\nompageref{17}
+  \item [{\textbf{OCP : }}]\begingroup Office Chérifien des Phosphates\nomeqref {1.0}
+		\nompageref{12}
+  \item [{\textbf{R\&D : }}]\begingroup Recherche et Développement\nomeqref {0}
+		\nompageref{10}
+
+\end{thenomenclature}
