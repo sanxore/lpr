@@ -46,6 +46,40 @@
 	\subsection{Consolidation des données locales}
 	Il est naturel d'adresser les problèmes de disponibilité de données aux premiers abords. La consolidation désigne la collection et l'intégration des données de sources multiples en une unique destination. Durant ce processus, nous unifierons les deux types de formats de données. Ceci nous permettra de présenter les données de manière plus flexible, tout en facilitant leur analyse effective. Ceci nous amène à considérer le format adopté par le datamart OCP-CM comme format cible de consolidation et les fichiers .pdf comme format source.
 	\subsubsection{Conception de la solution}
+	\paragraph{Spécification fonctionelle:\\}
+	L'OCP reçoit régulièrement des rapports trimestriels présentant la situation du marché accompagnée des mouvements observés des produits fertilisants. Ces mouvements sont reportés sur des tableaux tel que celui présenté dans la figure \ref{fig:IFA-PDF}. Notre solution doit ainsi considérer les nuances fonctionnelles suivantes :
+	\begin{enumerate}
+	\item Les rapports diffèrent par leur granularité. En effet ceux-ci peuvent être:
+		\begin{itemize}
+		\item DET : Détaillés. Présentant l'historique des mouvements de produits entre les pays du monde deux-à deux.
+		\begin{figure}[h]
+					    		\centering
+					    		\fbox{\includegraphics[scale=0.35]{det}}
+					    		\caption{Exemple d'en-tête des tables du format DET des rapports IFA.}
+					    		\label{fig:CART}
+				\end{figure}
+		\item AGG : Agrégés. Présentant l'historique des mouvements entre les pays agrégés selon la région du monde à laquelle ceux-ci appartiennent.
+		\begin{figure}[h]
+			    		\centering
+			    		\fbox{\includegraphics[scale=0.35]{agg}}
+			    		\caption{Exemple d'en-tête des tables du format  AGG des rapports IFA.}
+			    		\label{fig:CART}
+		\end{figure}
+		\end{itemize}
+	\item Les rapports diffèrent par les normes des chiffres rapportés. En effet ceux-ci peuvent être:
+		\begin{itemize}
+		\item NOT CUMULATED : Les chiffres rapportés pour le trimestre ${Q_i}$ sont bruts et représentent uniquement les ventes ayant effectivement eu lieu durant ce trimestre.
+		\item CUMULATED : Les chiffres rapportés pour le trimestre ${Q_i}$ sont cumulés, i.e ${Q_i = \sum_{j=1}^{j=i} Q_j}$
+		\item ANN : Les chiffres rapportés représentent toutes les ventes de l'année, i.e ${Q_i = \sum_{j=1}^{j=4} Q_j}$
+		\end{itemize}
+	\end{enumerate}
+	\paragraph{Spécification technique:\\}
+		\begin{figure}
+		    		\centering
+		    		\includegraphics[scale=0.35]{dataflow}
+		    		\caption{Arbre CART}
+		    		\label{fig:DF}
+		\end{figure}
 	\subsubsection{Système de fichiers de la solution}
 	\subsubsection{Structuration de la donnée}
 	\subsection{Audit et description des données locales consolidées}
