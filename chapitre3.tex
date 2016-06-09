@@ -44,6 +44,7 @@
 		    		\label{fig:DMOCP}
 	\end{figure}
 	\subsection{Consolidation des données locales}
+	Il est naturel d'adresser les problèmes de disponibilité de données aux premiers abords. La consolidation désigne la collection et l'intégration des données de sources multiples en une unique destination. Durant ce processus, nous unifierons les deux types de formats de données. Ceci nous permettra de présenter les données de manière plus flexible, tout en facilitant leur analyse effective. Ceci nous amène à considérer le format adopté par le datamart OCP-CM comme format cible de consolidation et les fichiers .pdf comme format source.
 	\subsubsection{Conception de la solution}
 	\subsubsection{Système de fichiers de la solution}
 	\subsubsection{Structuration de la donnée}
@@ -53,7 +54,7 @@
 	\par
 	Nous décrivons dans ce qui suit ce processus. 
 	\subsection{Collecte des données externes}
-	\subsubsection{Énumération et définitions des variables souhaitées }
+	\subsubsection{Énumération et définitions des variables souhaitées }\label{exoList}
 			Guidés par nos lectures bibliographiques résumées dans les sections \ref{read1} et \ref{read2}, nous nous fixons l'objectif de récolter les indicateurs de politiques agraires et socioéconomiques suivants:
 	\begin{itemize}
 		\item \textbf{ Access to electricity, rural (\% of rural population):} Fraction de paysans ayant accès à l'électricité.
@@ -133,5 +134,16 @@
 	hasard parmi les \textit{p}. On note $ê(.,\theta_i)$ l’arbre construit.
 	\item[\textbf{Sortie:}]L’estimateur ${ê(x) =  \frac{1}{B} \sum_{i=1}^{B} ê_i(x,\theta_i)}$
 	\end{itemize}	
-	\subsubsection{Erreur Out-Of-Bag et importance des variables}
-	Parmi les nombreuses sorties proposées par la fonction randomForest, deux se révèlent particulièrement intéressantes. \textbf{L'erreur Out-of-Bag} et \textbf{L'importance des variables}. Nous définissons celles-ci rigoureusement dans l'annexe A3.
+	\subsubsection{Sélection des variables et élagage des données externes}
+	Parmi les nombreuses sorties proposées par la fonction randomForest, deux se révèlent particulièrement intéressantes. \textbf{L'erreur Out-of-Bag} et \textbf{Le score FA d'importance des variables}. Nous définissons celles-ci rigoureusement dans l'annexe A3. Ces deux sorties nous permettent de proposer la procédure suivante à deux phases pour l'élimination itérative des variables les moins pertinentes:
+	\paragraph{Phase 1. Élimination initiale et classement:}\begin{itemize}
+	\item Nous modélisons par FA notre ensemble de données initial, comprenant la totalité des variables exogènes listées dans la section \ref{exoList}.
+	\item Nous calculons les score FA d'importance des variables et nous éliminons les variables d'importance triviale.
+	\item Nous classons les \textit{m} variables restantes par ordre descendant des score FA d'importance
+	\end{itemize}
+	\paragraph{Phase 2. Sélection des variables:}
+	\begin{itemize}
+	\item Nous construisons la collection itérative des modèles de FA employant les \textit{$\alpha$} premières variables selon leur classement de score d'Importance. Pour ${\alpha \in [1,\textit{m}]}$.
+	\item Nous retenons les variables du modèle ayant réussi la plus faible erreur OOB.
+	\end{itemize}
+	
