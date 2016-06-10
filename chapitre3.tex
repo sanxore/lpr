@@ -72,11 +72,33 @@
 		\item CUMULATED : Les chiffres rapportés pour le trimestre ${Q_i}$ sont cumulés, i.e ${Q_i = \sum_{j=1}^{j=i} Q_j}$
 		\item ANN : Les chiffres rapportés représentent toutes les ventes de l'année, i.e ${Q_i = \sum_{j=1}^{j=4} Q_j}$
 		\end{itemize}
+	\item Les attributs des enregistrements du datamart OCP-CM, sont des champs obligatoirement \textbf{NOT NULL} et sont les suivants:
+	\begin{itemize}
+	\item "Importing.countries" : Pays de destination de l'enregistrement-vente.
+	\item "Region..IFA." : Région à laquelle appartient le pays de destination selon le découpage IFA.
+	\item "Region..OCP." : Région à laquelle appartient le pays de destination selon le découpage OCP.
+	\item "Exporting.countries" : Pays d'origine de l'enregistrement-vente.
+	\item "Product" : Produit de l'enregistrement-vente. (MAP\footnote{Monoammonium phosphate},DAP\footnote{Diammonium phosphate},PA\footnote{Acide phosphorique},TSP\footnote{Triple superphosphate},ROCK\footnote{Minerai du phosphate brut en roche.})
+	\item "Year" : Année de l'enregistrement-vente.
+	\item "Quarter" Trimestre de l'enregistrement-vente.
+	\item "Code" : Code de Synthèse des champs précédents.
+	\item "kT" :  Poids de l'enregistrement-vente en kT\footnote{Kilotonne = $10^6$ kilogramme.} de produit.           
+	\item "P2O5.Product" : Poids équivalent du produit en P2O5\footnote{Pentoxyde de phosphore, la molécule de base des engrais phosphatés.}
+	\item "Cumulated.Not.cumulated" : Drapeau indiquant la norme trimestrielle de l'enregistrement-vente.
+	\item "AGG.DET.ANN" : Drapeau indiquant la granularité de l'enregistrement-vente
+	\end{itemize}
+		Ainsi au-delà de la lecture des données contenues au sein des documents .pdf, ceux-ci doivent être:
+		\begin{itemize}
+		\item \textbf{Décumulés:} Des enregistrement des volumes unitaires par trimestre doivent être créés.
+		\item \textbf{Convertis en P2O5:} Les données contenues dans les .pdf représentent les volumes échangés par kT qu'ils faut convertir selon la concentration du produit de l'enregistrement-vente en P2O5.
+		\item \textbf{Normés:} La nature de l'agrégation de l'enregistrement-vente doit être spécifiée.
+		\end{itemize}
 	\end{enumerate}
 	\paragraph{Spécification technique:\\}
-		\begin{figure}
+	hello
+		\begin{figure}[h]
 		    		\centering
-		    		\includegraphics[scale=0.35]{dataflow}
+		    		\includegraphics[scale=0.6]{dataflow}
 		    		\caption{Arbre CART}
 		    		\label{fig:DF}
 		\end{figure}
