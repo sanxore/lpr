@@ -98,7 +98,7 @@
 			\begin{wrapfigure}[13]{c}{8.5 cm}
 					    		
 					    		\fbox{\includegraphics[scale=0.4]{charplot}}
-					    		\caption{Représentation de l'information transportée par une page .pdf contenant un tableau pour une résolution d'image de 700x800.}
+					    		\caption{Représentation de l'information transportée par la page .pdf de la figure \ref{fig:IFA-PDF} pour une résolution d'image de 700x800.}
 					    		\label{fig:charplot}
 			\end{wrapfigure} Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée à la récolte et la préparation des données\cite{DP}. Pour des données non structurées telles que des fichiers .pdf, la tâche est d'autant plus complexe. À la question : "Comment réaliser un \textit{Parsing} de fichiers PDFs", la réponse est souvent : "avec beaucoup de difficultés".
 
@@ -117,20 +117,20 @@
 	Notre solution utilise le package \textbf{pdfminer}\cite{pdfminer} du langage \textbf{Python} qui extrait les objets	\begin{wrapfigure}[16]{c}{8.5 cm}
 			\centering			    		
 			\fbox{\includegraphics[scale=0.4]{classplot}}
-			\caption{Classification de l'information transportée par une page .pdf contenant un tableau selon ($\in$ zone de texte, $\notin$ zone de texte)}
+			\caption{Classification de l'information transportée par la page .pdf de la figure \ref{fig:IFA-PDF}\\ selon ($\in$ zone de texte, $\notin$ zone de texte)}
 			\label{fig:charclass}
 		\end{wrapfigure}
 		 non-texte et les mots de liaison en tant que blocs cohérents. Cette classification est montrée dans la figure \ref{fig:charclass} ci-contre. Les boîtes bleues indiquent où \textbf{pdfminer} a rassemblé un ensemble de caractères pour en faire des \textit{text boxes}\footnote{Zone de texte.} (cet ensemble de caractères peut être des mots ou des phrases) et les boites rouges indiquent les éléments non-texte (i.e, des lignes, des rectangles, etc.).
 	\par
 	La méthode utilisée par notre solution s'inspire des algorithmes d'analyse d'image et est similaire à la transformation Hough utilisée par \textbf{Tabula}. Une transformation Hough retrouve des segments de droites arbitrairement orientés dans une image. Notre problème,ici, est plus simple, nous nous intéressons uniquement au formes horizontales et verticales.
 	\paragraph{}
-	\begin{wrapfigure}[15]{c}{8.5 cm}
+	\begin{wrapfigure}[14]{c}{8.5 cm}
 							\centering			    		
 							\fbox{\includegraphics[scale=0.4]{projplot}}
-							\caption{Projection et décompte des éléments textuels selon leur disposition spatiale et inférence des frontières de la table.)}
+							\caption{Inférence des frontières de la table de la figure \ref{fig:IFA-PDF}.)}
 							\label{fig:projplot}
 						\end{wrapfigure}
-	Pour trouver ces lignes verticales et ces colonnes\, nous projetons les boites bleues (textuelles)sur l'axe horizontal (pour retrouver les colonnes\footnote{Nom du pays exportateur}) et sur l'axe vertical (pour retrouver les lignes\footnote{Données des enregistrements-ventes effectués par un pays importateur }). La projection consiste en l'énumération du nombre de boites bleues le long d'une ligne horizontale ou verticale. Nous concluons ainsi que les frontières entre les colonnes et les lignes sont marquées par les creux des valeurs des projections dans le graphe de projection; alors que les colonnes et les lignes en elles-même représentent les pics de la courbe. La figure \ref{fig:projplot} montre le résultat du traitement de la page de la figure \ref{fig:IFA-PDF}. Les graphes en haut et à gauche représentent le décompte des projection alors que les points noirs représentent les endroits où nous allons placer les frontières des lignes et des colonnes.
+	Pour trouver ces lignes verticales et ces colonnes\, nous projetons les boites bleues (textuelles)sur l'axe horizontal (pour retrouver les colonnes\footnote{Nom du pays exportateur}) et sur l'axe vertical (pour retrouver les lignes\footnote{Données des enregistrements-ventes effectués par un pays importateur }). La projection consiste en l'énumération du nombre de boites bleues le long d'une ligne horizontale ou verticale. Nous concluons ainsi que les frontières entre les colonnes et les lignes sont marquées par les creux des valeurs des projections dans le graphe de projection; alors que les colonnes et les lignes en elles-même représentent les pics de la courbe. La figure \ref{fig:projplot} montre le résultat du traitement de la page de la figure \ref{fig:IFA-PDF}.\\Les graphes en haut et à gauche représentent le décompte des projections alors que les points noirs représentent les endroits où nous allons placer les frontières des lignes et des colonnes.
 	
 	
 	
