@@ -46,6 +46,7 @@
 	\subsection{Consolidation des données locales}
 	Il est naturel d'adresser les problèmes de disponibilité de données aux premiers abords. La consolidation désigne la collection et l'intégration des données de sources multiples en une unique destination. Durant ce processus, nous unifierons les deux types de formats de données. Ceci nous permettra de présenter les données de manière plus flexible, tout en facilitant leur analyse effective. Ceci nous amène à considérer le format adopté par le datamart OCP-CM comme format cible de consolidation et les fichiers .pdf comme format source.
 	\subsubsection{Conception de la solution}
+	La solution que nous mettons en œuvre est disponible dans le dossier \textit{Sanxoriarty FIA Parser} du dépôt \textbf{GitHub} de notre mémoire de projet de fin d'études\cite{this}.
 	\paragraph{Spécification fonctionelle:\\}
 	L'OCP reçoit régulièrement des rapports trimestriels présentant la situation du marché accompagnée des mouvements observés des produits fertilisants. Ces mouvements sont reportés sur des tableaux tel que celui présenté dans la figure \ref{fig:IFA-PDF}. Notre solution doit ainsi considérer les nuances fonctionnelles suivantes :
 	\begin{enumerate}
@@ -94,26 +95,23 @@
 	\end{enumerate}
 	\paragraph{Spécification technique:\\}
 	\par
-	La collecte et la préparation des données est un processus extrêmement lent et complexe, traditionnellement fait à la main et dont l'automatisation est souvent très difficile.
-			\begin{wrapfigure}[13]{c}{8.5 cm}
-					    		
-					    		\fbox{\includegraphics[scale=0.4]{charplot}}
-					    		\caption{Représentation de l'information transportée par la page .pdf de la figure \ref{fig:IFA-PDF} pour une résolution d'image de 700x800.}
-					    		\label{fig:charplot}
-			\end{wrapfigure} Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée à la récolte et la préparation des données\cite{DP}. Pour des données non structurées telles que des fichiers .pdf, la tâche est d'autant plus complexe. À la question : "Comment réaliser un \textit{Parsing} de fichiers PDFs", la réponse est souvent : "avec beaucoup de difficultés".
+	La collecte et la préparation des données est un processus extrêmement lent et complexe,			\begin{wrapfigure}[15]{c}{8.5 cm}
+						    		
+						    		\fbox{\includegraphics[scale=0.4]{charplot}}
+						    		\caption{Représentation de l'information transportée par la page .pdf de la figure \ref{fig:IFA-PDF} pour une résolution d'image de 700x800.}
+						    		\label{fig:charplot}
+				\end{wrapfigure}  traditionnellement fait à la main et dont l'automatisation est souvent très difficile.
+Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée à la récolte et la préparation des données\cite{DP}. Pour des données non structurées telles que des fichiers .pdf, la tâche est d'autant plus complexe. À la question : "Comment réaliser un \textit{Parsing} de fichiers PDFs", la réponse est souvent : "avec beaucoup de difficultés".
 
 	\par
 	PDF est un format de description de page et ne contient aucune information sur la structure logique d'un document telle que:\begin{itemize}
 	\item L'emplacement du titre,
 	\item Le début d'un paragraphe,
-	\item La liste des objets(texte, figure, tableau, etc.) contenus,
-	\item La géométrie des figures contenues,
-	\item Si la page est en une seule colonne ou plusieurs, \item etc.
+	\item Si la page est en une seule colonne ou plusieurs,etc.
 	\end{itemize}
 	\par
-	Tout ce qu'un fichier .pdf indique est l'emplacement des caractères. La figure \ref{fig:charplot} ci-contre montre comment les caractères sont disposés sur la page de la figure \ref{fig:IFA-PDF}.
-	\par Une solution existe : \textbf{Tabula} de \textit{Mozilla} écrite en langage \textbf{Ruby} et précédemment utilisée par nos prédécesseurs (\cite{CHEMLAL},\cite{NACER}). Mais celle-ci présente l'inconvénient de nécessiter de l'utilisateur de dessiner des rectangles autour des tables cibles contenues dans les .pdf, ce qui n'offre aucun avantage d'automatisation.
-	\paragraph{}
+	Tout ce qu'un fichier .pdf indique est l'emplacement des caractères. La figure \ref{fig:charplot} ci-dessous montre comment les caractères sont disposés sur la page de la figure \ref{fig:IFA-PDF}.\\Une solution existe : \textbf{Tabula} de \textit{Mozilla} écrite en \textbf{Ruby} et précédemment utilisée par nos prédécesseurs (\cite{CHEMLAL},\cite{NACER}). Mais celle-ci présente l'inconvénient de nécessiter de l'utilisateur de dessiner des rectangles autour des tables cibles, ce qui n'offre aucun avantage d'automatisation.
+	\par
 	Notre solution utilise le package \textbf{pdfminer}\cite{pdfminer} du langage \textbf{Python} qui extrait les objets	\begin{wrapfigure}[16]{c}{8.5 cm}
 			\centering			    		
 			\fbox{\includegraphics[scale=0.4]{classplot}}
