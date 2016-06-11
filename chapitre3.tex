@@ -47,10 +47,10 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 	\end{figure}
 	\subsection{Consolidation des données locales}
 	Il est naturel d'adresser les problèmes de disponibilité de données aux premiers abords. La consolidation désigne la collection et l'intégration des données de sources multiples en une unique destination. Durant ce processus, nous unifierons les deux types de formats de données. Ceci nous permettra de présenter les données de manière plus flexible, tout en facilitant leur analyse effective. Ceci nous amène à considérer le format adopté par le datamart OCP-CM comme format cible de consolidation et les fichiers .pdf comme format source.
-	\subsubsection{Conception de la solution}
+	\paragraph{}
 	La solution que nous mettons en œuvre est disponible dans le dossier \textit{Sanxoriarty IFA Parser} du dépôt \textbf{GitHub} de notre mémoire de projet de fin d'études\cite{this}.
-	\paragraph{Spécification fonctionelle:\\}
-	L'OCP reçoit régulièrement des rapports trimestriels présentant la situation du marché accompagnée des mouvements observés des produits fertilisants. Ces mouvements sont reportés sur des tableaux tel que celui présenté dans la figure \ref{fig:IFA-PDF}. Notre solution doit ainsi considérer les nuances fonctionnelles suivantes :
+	\subsubsection{Conception fonctionelle}
+	L'OCP reçoit régulièrement des rapports trimestriels présentant la situation du marché accompagnée des mouvements observés des produits fertilisants. Ces mouvements sont reportés sur des tableaux tel que celui présenté dans la figure \ref{fig:IFA-PDF}. Notre solution doit ainsi considérer les nuances fonctionnelles suivantes :\newpage
 	\begin{enumerate}
 	\item Les rapports diffèrent par leur granularité. En effet ceux-ci peuvent être:
 		\begin{itemize}
@@ -95,11 +95,11 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 		\item \textbf{Normés:} La nature de l'agrégation trimestrielle de l'enregistrement-vente doit être spécifiée.
 		\end{itemize}
 	\end{enumerate}
-	\paragraph{Spécification technique:\\}
+	\subsubsection{Conception technique}
 	\par
-	La collecte et la préparation des données est un processus extrêmement lent et complexe,			\begin{wrapfigure}[15]{c}{8.5 cm}
+	La collecte et la préparation des données est un processus extrêmement lent et complexe,			\begin{wrapfigure}[14]{c}{8.4 cm}
 						    		
-						    		\fbox{\includegraphics[scale=0.4]{charplot}}
+						    		\fbox{\includegraphics[scale=0.38]{charplot}}
 						    		\caption{Représentation de l'information transportée par la page .pdf de la figure \ref{fig:IFA-PDF} pour une résolution d'image de 700x800.}
 						    		\label{fig:charplot}
 				\end{wrapfigure}  traditionnellement fait à la main et dont l'automatisation est souvent très difficile.
@@ -114,9 +114,9 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\par
 	Tout ce qu'un fichier .pdf indique est l'emplacement des caractères. La figure \ref{fig:charplot} ci-dessous montre comment les caractères sont disposés sur la page de la figure \ref{fig:IFA-PDF}.\\Une solution existe : \textbf{Tabula} de \textit{Mozilla} écrite en \textbf{Ruby} et précédemment utilisée par nos prédécesseurs (\cite{CHEMLAL},\cite{NACER}). Mais celle-ci présente l'inconvénient de nécessiter de l'utilisateur de dessiner des rectangles autour des tables cibles, ce qui n'offre aucun avantage d'automatisation.
 	\par
-	Notre solution utilise le package \textbf{pdfminer}\cite{pdfminer} du langage \textbf{Python} qui extrait les objets	\begin{wrapfigure}[16]{c}{8.5 cm}
+	Notre solution utilise le package \textbf{pdfminer}\cite{pdfminer} du langage \textbf{Python} qui extrait les objets	\begin{wrapfigure}[16]{c}{8.4 cm}
 			\centering			    		
-			\fbox{\includegraphics[scale=0.4]{classplot}}
+			\fbox{\includegraphics[scale=0.37]{classplot}}
 			\caption{Classification de l'information transportée par la page .pdf de la figure \ref{fig:IFA-PDF}\\ selon ($\in$ zone de texte, $\notin$ zone de texte)}
 			\label{fig:charclass}
 		\end{wrapfigure}
@@ -124,14 +124,14 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\par
 	La méthode utilisée par notre solution s'inspire des algorithmes d'analyse d'image et est similaire à la transformation Hough utilisée par \textbf{Tabula}. Une transformation Hough retrouve des segments de droites arbitrairement orientés dans une image. Notre problème,ici, est plus simple, nous nous intéressons uniquement au formes horizontales et verticales.
 	\paragraph{}
-	\begin{wrapfigure}[14]{c}{8.5 cm}
+	\begin{wrapfigure}[14]{c}{8.4 cm}
 							\centering			    		
-							\fbox{\includegraphics[scale=0.4]{projplot}}
+							\fbox{\includegraphics[scale=0.38]{projplot}}
 							\caption{Inférence des frontières de la table de la figure \ref{fig:IFA-PDF}.)}
 							\label{fig:projplot}
 						\end{wrapfigure}
-	Pour trouver ces lignes verticales et ces colonnes\, nous projetons les boites bleues (textuelles)sur l'axe horizontal (pour retrouver les colonnes\footnote{Nom du pays exportateur}) et sur l'axe vertical (pour retrouver les lignes\footnote{Données des enregistrements-ventes effectués par un pays importateur }). La projection consiste en l'énumération du nombre de boites bleues le long d'une ligne horizontale ou verticale. Nous concluons ainsi que les frontières entre les colonnes et les lignes sont marquées par les creux des valeurs des projections dans le graphe de projection; alors que les colonnes et les lignes en elles-même représentent les pics de la courbe. La figure \ref{fig:projplot} montre le résultat du traitement de la page de la figure \ref{fig:IFA-PDF}.\\Les graphes en haut et à gauche représentent le décompte des projections alors que les points noirs représentent les endroits où nous allons placer les frontières des lignes et des colonnes.
-	\par
+	Pour trouver ces lignes verticales et ces colonnes, nous projetons les boites bleues (textuelles)sur l'axe horizontal (pour retrouver les colonnes\footnote{Nom du pays exportateur}) et sur l'axe vertical (pour retrouver les lignes\footnote{Données des enregistrements-ventes effectués par un pays importateur }). La projection consiste en l'énumération du nombre de boites bleues le long d'une ligne horizontale ou verticale. Nous concluons ainsi que les frontières entre les colonnes et les lignes sont marquées par les creux des valeurs des projections dans le graphe de projection; alors que les colonnes et les lignes en elles-même représentent les pics de la courbe. La figure \ref{fig:projplot} montre le résultat du traitement de la page de la figure \ref{fig:IFA-PDF}.\\Les graphes en haut et à gauche représentent le décompte des projections alors que les points noirs représentent les endroits où nous allons placer les frontières des lignes et des colonnes.
+	\subsubsection{Conception du flux de données du processus de consolidation}
 	La nature des transformations à faire subir les sources de données en vue de leur consolidation, nous amène à concevoir une solution technique en 2 phases:
 	\begin{enumerate}
 	\item \textbf{Une phase de structuration des données\footnote{cf. Annexe B1 pour le code-source}:}
@@ -140,26 +140,23 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\item Nous séparons le fichier .pdf en pages individuelles.
 	\item Nous analysons les premiers caractères de la page en vue de labelliser chaque page selon si elle contient un produit, quel trimestre traite-elle, quelle normes les chiffres rapportés suivent-ils (cf. figure \ref{fig:IFA-TXT}).
 	\item Nous faisons appel à notre outil de détection des tables discuté plus haut pour transformer chaque page-produit en une matrice de données.
-	\item Nous compilons les matrices données d'un même produit en un seul fichier "data.csv" que nous confions au gestionnaire de fichier à placer dans une arborescence codifiant les données fonctionnelles de chaque fichier.
+	\item Nous compilons les matrices données d'un même produit en un seul fichier "data.csv" que nous confions au gestionnaire de fichier à placer dans une arborescence codifiant les données fonctionnelles de chaque fichier\footnote{cf. Annexe B3 pour plus de détails}.
 	\end{itemize}
 	\item \textbf{Une phase d'unification des modèles de données\footnote{cf. Annexe B2 pour le code-source}:}
 	\begin{itemize}
 	\item Nous parcourons l'arborescence générée par la phase précédente pour lire l'ensemble des "data.csv".
 	\item Nous interrogeons le systèmes de fichier lors de la récupération de "data.csv" quant aux données fonctionnelles de celui-ci.
 	\item Nous procédons si besoin aux opérations de décumulation et conversion.
-	\item Les champs sont remplis conformément au modèle datamart OCP-CM et les données sont ainsi unifiées après audit de leur qualité.
+	\item Les champs sont remplis conformément au modèle datamart OCP-CM (cf. figure \ref{fig:DMOCP}) et les données sont ainsi unifiées après audit de leur qualité.
 	\end{itemize}
 	\end{enumerate}
 	Ces étapes sont résumées par le diagramme de flux de données de la figure \ref{fig:DF}.
 		\begin{figure}[h]
 		    		\centering
-		    		\fbox{\includegraphics[scale=0.7]{dataflow}}
-		    		\caption{Flux de données de consolidation.}
+		    		\fbox{\includegraphics[scale=0.575]{dataflow}}
+		    		\caption{Flux de données du processus de consolidation.}
 		    		\label{fig:DF}
 		\end{figure}
-	\subsubsection{Système de fichiers de la solution}
-	\subsubsection{Structuration de la donnée}
-	\subsubsection{Unification des modèles de données}
 	\subsection{Audit et description des données locales consolidées}
 	\section{Collecte et préparation des données externes}
 	L'étendue des données disponibles au sein du système d'information de l'OCP ne pouvant donner qu'une vue réduite de la situation du marché et ne peuvent de par leur définition révéler les structures socio-économiques,  et de politiques agraires sous-jacentes aux demandes en produits phosphatés, nous nous attellerons à la tâche d'enrichir cette base de données historiques par des données quantitatives concernant les pays du monde.
