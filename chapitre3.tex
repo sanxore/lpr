@@ -93,7 +93,60 @@
 		\end{itemize}
 	\end{enumerate}
 	\paragraph{Spécification technique:\\}
+	\par
+	La collecte et la préparation des données est un processus extrêmement lent et complexe, traditionnellement fait à la main et dont l'automatisation est souvent très difficile.
+			\begin{wrapfigure}[13]{c}{8.5 cm}
+					    		
+					    		\fbox{\includegraphics[scale=0.4]{charplot}}
+					    		\caption{Représentation de l'information transportée par une page .pdf contenant un tableau pour une résolution d'image de 700x800.}
+					    		\label{fig:charplot}
+			\end{wrapfigure} Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée à la récolte et la préparation des données\cite{DP}. Pour des données non structurées telles que des fichiers .pdf, la tâche est d'autant plus complexe. À la question : "Comment réaliser un \textit{Parsing} de fichiers PDFs", la réponse est souvent : "avec beaucoup de difficultés".
+
+	\par
+	PDF est un format de description de page et ne contient aucune information sur la structure logique d'un document telle que:\begin{itemize}
+	\item L'emplacement du titre,
+	\item Le début d'un paragraphe,
+	\item La liste des objets(texte, figure, tableau, etc.) contenus,
+	\item La géométrie des figures contenues,
+	\item Si la page est en une seule colonne ou plusieurs, \item etc.
+	\end{itemize}
+	\par
+	Tout ce qu'un fichier .pdf indique est l'emplacement des caractères. La figure \ref{fig:charplot} ci-contre montre comment les caractères sont disposés sur la page de la figure \ref{fig:IFA-PDF}.
+	\par Une solution existe : \textbf{Tabula} de \textit{Mozilla} écrite en langage \textbf{Ruby} et précédemment utilisée par nos prédécesseurs (\cite{CHEMLAL},\cite{NACER}). Mais celle-ci présente l'inconvénient de nécessiter de l'utilisateur de dessiner des rectangles autour des tables destinations contenues dans les .pdf, ce qui n'offre aucun avantage d'automatisation.
+	\paragraph{}
+	Notre solution utilise le package \textbf{pdfminer}\cite{pdfminer} du langage \textbf{Python} qui extrait les objets	\begin{wrapfigure}[16]{c}{8.5 cm}
+			\centering			    		
+			\fbox{\includegraphics[scale=0.4]{classplot}}
+			\caption{Classification de l'information transportée par une page .pdf contenant un tableau selon ($\in$ zone de texte, $\notin$ zone de texte)}
+			\label{fig:charclass}
+		\end{wrapfigure}
+		 non-texte et les mots de liaison en tant que blocs cohérents. Cette classification est montrée dans la figure \ref{fig:charclass} ci-contre. Les boîtes bleues indiquent où \textbf{pdfminer} a rassemblé un ensemble de caractères pour en faire des \textit{text boxes}\footnote{Zone de texte.} (cet ensemble de caractères peut être des mots ou des phrases) et les boites rouges indiquent les éléments non-texte (i.e, des lignes, des rectangles, etc.).
+	\par
+	La méthode utilisée par notre solution s'inspire des algorithmes d'analyse d'image et est similaire à la transformation Hough utilisée par \textbf{Tabula}. Une transformation Hough retrouve des segments de droites arbitrairement orientés dans une image. Notre problème,ici, est plus simple, nous nous intéressons uniquement au formes horizontales et verticales.
+	\paragraph{}
+	\begin{wrapfigure}[15]{c}{8.5 cm}
+							\centering			    		
+							\fbox{\includegraphics[scale=0.4]{projplot}}
+							\caption{Projection et décompte des éléments textuels selon leur disposition spatiale et inférence des frontières de la table.)}
+							\label{fig:projplot}
+						\end{wrapfigure}
+	Pour trouver ces lignes verticales et ces colonnes\, nous projetons les boites bleues (textuelles)sur l'axe horizontal (pour retrouver les colonnes\footnote{Nom du pays exportateur}) et sur l'axe vertical (pour retrouver les lignes\footnote{Données des enregistrements-ventes effectués par un pays importateur }). La projection consiste en l'énumération du nombre de boites bleues le long d'une ligne horizontale ou verticale. Nous concluons ainsi que les frontières entre les colonnes et les lignes sont marquées par les creux des valeurs des projections dans le graphe de projection; alors que les colonnes et les lignes en elles-même représentent les pics de la courbe. La figure \ref{fig:projplot} montre le résultat du traitement de la page de la figure \ref{fig:IFA-PDF}. Les graphes en haut et à gauche représentent le décompte des projection alors que les points noirs représentent les endroits où nous allons placer les frontières des lignes et des colonnes.
 	
+	
+	
+	
+	
+	\par
+	La nature des transformations à faire subir les sources de données en vue de leur consolidation, nous amène à concevoir une solution technique en 2 phases:
+	\begin{enumerate}
+	\item \textbf{Une phase de structuration des données:
+	\begin{itemize}
+	\item Extraire 
+	\end{itemize}
+	}
+	
+	\item \textbf{Une phase d'unification des modèles de données:}
+	\end{enumerate}
 		\begin{figure}[h]
 		    		\centering
 		    		\includegraphics[scale=0.6]{dataflow}
@@ -102,6 +155,7 @@
 		\end{figure}
 	\subsubsection{Système de fichiers de la solution}
 	\subsubsection{Structuration de la donnée}
+	\subsubsection{Unification des modèles de données}
 	\subsection{Audit et description des données locales consolidées}
 	\section{Collecte et préparation des données externes}
 	L'étendue des données disponibles au sein du système d'information de l'OCP ne pouvant donner qu'une vue réduite de la situation du marché et ne peuvent de par leur définition révéler les structures socio-économiques,  et de politiques agraires sous-jacentes aux demandes en produits phosphatés, nous nous attellerons à la tâche d'enrichir cette base de données historiques par des données quantitatives concernant les pays du monde.
