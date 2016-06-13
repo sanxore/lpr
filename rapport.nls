@@ -3,32 +3,32 @@
  \nomgroup{A}
 
   \item [{\textbf {OLAP : }}]\begingroup OnLine Analytical Processing\nomeqref {3.0}
-		\nompageref{24}
+		\nompageref{25}
   \item [{\textbf{BI : }}]\begingroup Business Intelligence\nomeqref {1.0}
-		\nompageref{16}
+		\nompageref{17}
   \item [{\textbf{CM : }}]\begingroup Commercial-Marketing\nomeqref {1.0}
-		\nompageref{17}
+		\nompageref{18}
   \item [{\textbf{CRISP-DM : }}]\begingroup Cross-Industry Standard Process for Data Mining\nomeqref {1.0}
-		\nompageref{17}
+		\nompageref{18}
   \item [{\textbf{DAP : }}]\begingroup DiAmmonium Phosphate\nomeqref {1.0}
-		\nompageref{13}
+		\nompageref{14}
   \item [{\textbf{ENSIAS : }}]\begingroup École Nationale Supérieure d'Informatique et d'Analyse des Systèmes\nomeqref {1.0}
-		\nompageref{16}
+		\nompageref{17}
   \item [{\textbf{FA : }}]\begingroup Forêts aléatoires\nomeqref {3.0}
-		\nompageref{30}
+		\nompageref{38}
   \item [{\textbf{FAO : }}]\begingroup Food and Agriculture Organization of the United Nations\nomeqref {3.0}
-		\nompageref{28}
+		\nompageref{36}
   \item [{\textbf{IFA : }}]\begingroup International Fertilizer industry Association\nomeqref {3.0}
-		\nompageref{24}
+		\nompageref{25}
   \item [{\textbf{MAP : }}]\begingroup MonoAmmonium Phosphate\nomeqref {1.0}
-		\nompageref{13}
+		\nompageref{14}
   \item [{\textbf{NPK : }}]\begingroup Nitrogen-Phosphorus-Potassium\nomeqref {1.0}
-		\nompageref{13}
+		\nompageref{14}
   \item [{\textbf{OCP : }}]\begingroup Office Chérifien des Phosphates\nomeqref {1.0}
-		\nompageref{11}
+		\nompageref{12}
   \item [{\textbf{R\&D : }}]\begingroup Recherche et Développement\nomeqref {0}
-		\nompageref{9}
+		\nompageref{10}
   \item [{\textbf{TSP : }}]\begingroup Triple Super Phosphate\nomeqref {1.0}
-		\nompageref{13}
+		\nompageref{14}
 
 \end{thenomenclature}
