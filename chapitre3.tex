@@ -79,7 +79,7 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 	\item "Region..IFA." : Région à laquelle appartient le pays de destination selon le découpage IFA.
 	\item "Region..OCP." : Région à laquelle appartient le pays de destination selon le découpage OCP.
 	\item "Exporting.countries" : Pays d'origine de l'enregistrement-vente.
-	\item "Product" : Produit de l'enregistrement-vente. (MAP\footnote{Monoammonium phosphate},DAP\footnote{Diammonium phosphate},PA\footnote{Acide phosphorique},TSP\footnote{Triple superphosphate},ROCK\footnote{Minerai du phosphate brut en roche.})
+	\item "Product" : Produit de l'enregistrement-vente. (MAP, DAP,PA\nomenclature{\textbf{PA : }}{Acide phosphorique},TSP ,ROCK\footnote{Minerai du phosphate brut en roche.})
 	\item "Year" : Année de l'enregistrement-vente.
 	\item "Quarter" Trimestre de l'enregistrement-vente.
 	\item "Code" : Code de Synthèse des champs précédents.
@@ -244,7 +244,7 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 		\item \textbf{ Access to non-solid fuel, rural (\% of rural population):} Fraction de paysans ayant accès aux fuels non solides.
 		\item \textbf{ Account at a financial institution (\% age 15+):} Fraction de personnes âgées de +15 ans ayant un compte chez une institution bancaire.
 		\item \textbf{ Net enrollment rate, primary (\% of primary school age children):} Fraction d'enfants scolarisés.
-		\item \textbf{ Net national income per capita (constant 2005 US\$):} PIB\footnote{Produit intérieur brut, un des agrégats majeurs des comptes nationaux, il vise à quantifier — pour un pays et une année donnés — la valeur totale de la « production de richesse » effectuée par les agents économiques résidant à l’intérieur de ce territoire (ménages, entreprises, administrations publiques).} par habitant, inflation ajustée au dollar US fin 2005.
+		\item \textbf{ Net national income per capita (constant 2005 US\$):} PIB\footnote{Produit intérieur brut, un des agrégats majeurs des comptes nationaux, il vise à quantifier — pour un pays et une année donnés — la valeur totale de la « production de richesse » effectuée par les agents économiques résidant à l’intérieur de ce territoire (ménages, entreprises, administrations publiques).} par habitant, inflation ajustée au dollar US fin 2005.\nomenclature{\textbf{PIB : }}{Produit intérieur brut}
 		\item \textbf{ Literacy rate, adult total (\% of people ages 15 and above):} Fraction de personnes alphabétisées âgées de +15ans.
 		\item \textbf{ Agricultural irrigated land (\% of total agricultural land):} Fraction de terres irriguées parmi les terres exploitées pour l'agriculture.
 		\item \textbf{ Agricultural land (\% of land area):} Fraction des terres agricoles de la surface totale du pays.
@@ -299,7 +299,7 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 
 	Le principe des FA est de combiner plusieurs arbres ($ê_i$) de décision CART\cite{BREI84} en utilisant plusieurs échantillons bootstrap de l'ensemble d'apprentissage \textbf{$L_n$} et de choisir aléatoirement à chaque nœud un sous-ensemble de \textit{k} variables exogènes $X_i$. 
 	\par
-	L'agrégation à laquelle procèdent les FA est d’autant plus performante que la corrélation entre les prédicteurs agrégés  (arbres CART) est faible. Afin de diminuer cette corrélation, Breiman\cite{BREI01} propose de rajouter une couche d’aléa dans la construction des
+	L'agrégation à laquelle procèdent les FA est d’autant plus performante que la corrélation entre les prédicteurs agrégés  (arbres CART\nomenclature{\textbf{CART : }}{Classification And Regression Trees}) est faible. Afin de diminuer cette corrélation, Breiman\cite{BREI01} propose de rajouter une couche d’aléa dans la construction des
 	prédicteurs.  Nous attirons l'attention du lecteur vers l'annexe A2 pour une note sur CART et son utilisation au sein des FA. Sommairement, à chaque étape de CART, \textit{k} variables sont sélectionnées aléatoirement parmi les \textit{p} et la meilleure coupure est sélectionnée uniquement sur ces \textit{k} variables : \par
 	\textbf{Algorithme Forêts aléatoires}
 	\begin{itemize}

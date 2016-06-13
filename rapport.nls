@@ -6,6 +6,8 @@
 		\nompageref{25}
   \item [{\textbf{BI : }}]\begingroup Business Intelligence\nomeqref {1.0}
 		\nompageref{17}
+  \item [{\textbf{CART : }}]\begingroup Classification And Regression Trees\nomeqref {3.0}
+		\nompageref{38}
   \item [{\textbf{CM : }}]\begingroup Commercial-Marketing\nomeqref {1.0}
 		\nompageref{18}
   \item [{\textbf{CRISP-DM : }}]\begingroup Cross-Industry Standard Process for Data Mining\nomeqref {1.0}
@@ -26,6 +28,10 @@
 		\nompageref{14}
   \item [{\textbf{OCP : }}]\begingroup Office Chérifien des Phosphates\nomeqref {1.0}
 		\nompageref{12}
+  \item [{\textbf{PA : }}]\begingroup Acide phosphorique\nomeqref {3.0}
+		\nompageref{27}
+  \item [{\textbf{PIB : }}]\begingroup Produit intérieur brut\nomeqref {3.0}
+		\nompageref{35}
   \item [{\textbf{R\&D : }}]\begingroup Recherche et Développement\nomeqref {0}
 		\nompageref{10}
   \item [{\textbf{TSP : }}]\begingroup Triple Super Phosphate\nomeqref {1.0}
