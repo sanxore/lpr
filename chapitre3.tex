@@ -41,7 +41,7 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 	\end{itemize}
 	\begin{figure}[H]
 		    		\centering
-	    			\includegraphics[scale=0.325]{Table}
+	    			\fbox{\includegraphics[scale=0.325]{Table}}
 		    		\caption{Exemple d'une sortie de requête sur le Datamart OCP-CM}
 		    		\label{fig:DMOCP}
 	\end{figure}
@@ -69,8 +69,8 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 		\end{itemize}
 	\item Les rapports diffèrent par les normes des chiffres rapportés. En effet ceux-ci peuvent être:
 		\begin{itemize}
-		\item NOT CUMULATED : Les chiffres rapportés pour le trimestre ${Q_i}$ sont bruts et représentent uniquement les ventes ayant effectivement eu lieu durant ce trimestre.
-		\item CUMULATED : Les chiffres rapportés pour le trimestre ${Q_i}$ sont cumulés, i.e ${Q_i = \sum_{j=1}^{j=i} Q_j}$
+		\item NOT CUMULATED : Les chiffres rapportés au trimestre ${Q_i}$ sont bruts et représentent uniquement les ventes ayant effectivement eu lieu durant ce trimestre.
+		\item CUMULATED : Les chiffres rapportés au trimestre ${Q_i}$ sont cumulés, i.e ${Q_i = \sum_{j=1}^{j=i} Q_j}$
 		\item ANN : Les chiffres rapportés représentent toutes les ventes de l'année, i.e ${Q_i = \sum_{j=1}^{j=4} Q_j}$
 		\end{itemize}
 	\item Les attributs des enregistrements du datamart OCP-CM, sont des champs obligatoirement \textbf{NOT NULL} et sont les suivants:
@@ -95,7 +95,7 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 		\item \textbf{Normés:} La nature de l'agrégation trimestrielle de l'enregistrement-vente doit être spécifiée.
 		\end{itemize}
 	\end{enumerate}
-	\subsubsection{Conception technique}
+	\subsubsection{Conception technique}\label{parser}
 	\par
 	La collecte et la préparation des données est un processus extrêmement lent et complexe,			\begin{wrapfigure}[14]{c}{8.4 cm}
 						    		
@@ -109,7 +109,7 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	PDF est un format de description de page et ne contient aucune information sur la structure logique d'un document telle que:\begin{itemize}
 	\item L'emplacement du titre,
 	\item Le début d'un paragraphe,
-	\item Si la page est en une seule colonne ou plusieurs,etc.
+	\item Si la page est en une seule colonne ou plusieurs, etc.
 	\end{itemize}
 	\par
 	Tout ce qu'un fichier .pdf indique est l'emplacement des caractères. La figure \ref{fig:charplot} ci-dessous montre comment les caractères sont disposés sur la page de la figure \ref{fig:IFA-PDF}.\\Une solution existe : \textbf{Tabula} de \textit{Mozilla} écrite en \textbf{Ruby} et précédemment utilisée par nos prédécesseurs (\cite{CHEMLAL},\cite{NACER}). Mais celle-ci présente l'inconvénient de nécessiter de l'utilisateur de dessiner des rectangles autour des tables cibles, ce qui n'offre aucun avantage d'automatisation.
@@ -122,12 +122,12 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 		\end{wrapfigure}
 		 non-texte et les mots de liaison en tant que blocs cohérents. Cette classification est montrée dans la figure \ref{fig:charclass} ci-contre. Les boîtes bleues indiquent où \textbf{pdfminer} a rassemblé un ensemble de caractères pour en faire des \textit{text boxes}\footnote{Zone de texte.} (cet ensemble de caractères peut être des mots ou des phrases) et les boites rouges indiquent les éléments non-texte (i.e, des lignes, des rectangles, etc.).
 	\par
-	La méthode utilisée par notre solution s'inspire des algorithmes d'analyse d'image et est similaire à la transformation Hough utilisée par \textbf{Tabula}. Une transformation Hough retrouve des segments de droites arbitrairement orientés dans une image. Notre problème,ici, est plus simple, nous nous intéressons uniquement au formes horizontales et verticales.
+	La méthode utilisée par notre solution s'inspire des algorithmes d'analyse d'image et est similaire à la transformée de Hough utilisée par \textbf{Tabula}. Une transformée de Hough retrouve des segments de droites arbitrairement orientés dans une image. Notre problème, ici, est plus simple, nous nous intéressons uniquement au formes horizontales et verticales.
 	\paragraph{}
 	\begin{wrapfigure}[14]{c}{8.4 cm}
 							\centering			    		
 							\fbox{\includegraphics[scale=0.38]{projplot}}
-							\caption{Inférence des frontières de la table de la figure \ref{fig:IFA-PDF}.)}
+							\caption{Inférence des frontières de la table de la figure \ref{fig:IFA-PDF}.}
 							\label{fig:projplot}
 						\end{wrapfigure}
 	Pour trouver ces lignes verticales et ces colonnes, nous projetons les boites bleues (textuelles)sur l'axe horizontal (pour retrouver les colonnes\footnote{Nom du pays exportateur}) et sur l'axe vertical (pour retrouver les lignes\footnote{Données des enregistrements-ventes effectués par un pays importateur }). La projection consiste en l'énumération du nombre de boites bleues le long d'une ligne horizontale ou verticale. Nous concluons ainsi que les frontières entre les colonnes et les lignes sont marquées par les creux des valeurs des projections dans le graphe de projection; alors que les colonnes et les lignes en elles-même représentent les pics de la courbe. La figure \ref{fig:projplot} montre le résultat du traitement de la page de la figure \ref{fig:IFA-PDF}.\\Les graphes en haut et à gauche représentent le décompte des projections alors que les points noirs représentent les endroits où nous allons placer les frontières des lignes et des colonnes.
@@ -158,6 +158,80 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 		    		\label{fig:DF}
 		\end{figure}
 	\subsection{Audit et description des données locales consolidées}
+	\subsubsection{Audit des données de consolidation}
+	Lors de nos tests de la solution que nous avons mis au point lors de la section \ref{parser}, nous obtenions un taux de réussite de reconnaissance et extraction des tableau de 100\%. Cependant et de par la nature critique des données que nous traitons, nous avons procédé à tes tests rigoureux de deux natures différentes.
+	\paragraph{Audit assisté par ordinateur:\\}
+	Notre processus de consolidation a généré en moyenne près de 40800 enregistrements par année. Après une consolidation des années 2014, 2015 et début 2016, le total s'élève à 94240 nouveaux enregistrements dont nous nous devons d'assurer la justesse. Une vérification humaine un par un de chacun de ces enregistrements est une tâche pharamineuse que nous taclons en premier lieu en nous assistons du langage \textbf{R\footnote{\textbf{R} est un langage de programmation, de traitement des données et d'analyse statistique mettant en œuvre le langage de programmation \textbf{S}, avec la sémantique dérivée du langage \textbf{Scheme}}}.
+\paragraph{}
+		La figure \ref{fig:size} ci-dessous, valide bien le nombre d'enregistrements auxquels on s'attend, soit 94240 lignes. De plus, nous remarquons un premier soucis : Les cases de volumes nuls au sein de la colonne "kT" de la Trade Matrix ont été interprétés par le caractère "-". Ce qui empêche la colonne d'être traitée en tant que vecteur numérique. Nous remédions à ce problème en remplaçant ce caractère par le numérique "0", comme procédé dans la figure \ref{fig:nas} ci -après.
+		\newline
+			\begin{figure}[H]
+			\begin{subfigure}{.5\textwidth}
+				\centering
+				\includegraphics[height=215pt]{1}
+				\caption{Vérification de la dimension\\des données consolidés}
+				\label{fig:size}
+			\end{subfigure}
+			\begin{subfigure}{.5\textwidth}
+					\centering
+					\includegraphics[height=215pt]{2}
+					\caption{Traitement des cases vides\\des données consolidés}
+					\label{fig:nas}
+			\end{subfigure}
+			\caption{Audit : Dimensions et données manquantes.}
+				\end{figure}
+				
+	\paragraph{}
+	Dans les figures \ref{fig:dubai} et \ref{fig:taiwan}, Nous observons deux interprétation différentes de \textbf{Dubai} en ("\textit{Dubai, UAE}","\textit{Dubai/ UAE}") et de \textbf{Taiwan} en ("\textit{Taiwan, China}","\textit{Taiwan/ China}"). Ces discrépances seraient analysées en tant que 4 pays différents alors qu'en réalité, ceux-ci ne sont que deux. Nous procédons à la correction de ces deux ambiguïtés dans les figures \ref{fig:corrDubai} et \ref{fig:corrTaiwan} respectivement.
+	\begin{figure}[H]
+	\begin{subfigure}{.5\textwidth}
+			\centering
+			\includegraphics[height=90pt]{4}
+			\caption{Ambiguïté Dubai, UAE}
+			\label{fig:dubai}
+	\end{subfigure}
+	\begin{subfigure}{.5\textwidth}
+		\centering
+		\includegraphics[height=90pt]{5}
+		\caption{Ambiguïté Taiwan, China}
+		\label{fig:taiwan}
+	\end{subfigure}
+	\begin{subfigure}{\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{6}
+			\caption{Correction Dubai, UAE}
+			\label{fig:corrDubai}
+	\end{subfigure}
+	\begin{subfigure}{\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{7}
+			\caption{Correction Taiwan, China}
+			\label{fig:corrTaiwan}
+	\end{subfigure}
+	\caption{Audit: Interprétation des chaînes de caractères.}
+	\end{figure}
+	\par
+		
+		\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.4]{8}
+		\caption{}
+		\label{fig:}
+	\end{figure}
+		\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.4]{9}
+		\caption{}
+		\label{fig:}
+	\end{figure}
+		\begin{figure}[H]
+		\centering
+		\includegraphics[scale=0.4]{10}
+		\caption{}
+		\label{fig:}
+	\end{figure}
+	\paragraph{Audit manuel d'échantillons aléatoires:}
+	\subsubsection{Déscription des données de consolidation}
 	\section{Collecte et préparation des données externes}
 	L'étendue des données disponibles au sein du système d'information de l'OCP ne pouvant donner qu'une vue réduite de la situation du marché et ne peuvent de par leur définition révéler les structures socio-économiques,  et de politiques agraires sous-jacentes aux demandes en produits phosphatés, nous nous attellerons à la tâche d'enrichir cette base de données historiques par des données quantitatives concernant les pays du monde.
 	\par
