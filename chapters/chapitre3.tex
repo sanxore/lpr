@@ -10,7 +10,7 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 	Seules sont ainsi présentes les données concernant les échanges internationaux en terme de produits phosphatés et ceux-ci sont présents sous deux différentes formes de données.
 					\begin{wrapfigure}[9]{r}{5 cm}
 						\raggedleft
-						\fbox{\includegraphics[scale=0.5]{IFA-txt}}
+						\fbox{\includegraphics[scale=0.5]{ch3-images/IFA-txt}}
 						\raggedleft
 						\caption{Lecture "machine" du .pdf de la "Trade Matrix" de la figure \ref{fig:IFA-PDF}}
 						\label{fig:IFA-TXT}
@@ -21,7 +21,7 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 		\item L’inconvénient d’être flexible pour la lecture humaine mais ne présentant pas une grammaire machine formelle rendant possible une analyse syntaxique, comme en témoigne la figure \ref{fig:IFA-TXT}.
 			\begin{figure}[H]
 			    		\raggedright
-		    			\fbox{\includegraphics[scale=0.3]{IFA_EX}}
+		    			\fbox{\includegraphics[scale=0.3]{ch3-images/IFA_EX}}
 		    			\captionsetup{justification=raggedright,
 		    			singlelinecheck=false
 		    			}
@@ -41,7 +41,7 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 	\end{itemize}
 	\begin{figure}[H]
 		    		\centering
-	    			\fbox{\includegraphics[scale=0.325]{Table}}
+	    			\fbox{\includegraphics[scale=0.325]{ch3-images/Table}}
 		    		\caption{Exemple d'une sortie de requête sur le Datamart OCP-CM}
 		    		\label{fig:DMOCP}
 	\end{figure}
@@ -57,13 +57,13 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 		\item DET : Détaillés. Présentant l'historique des mouvements de produits entre les pays du monde deux-à deux.
 		\begin{figure}[h]
 					    		\centering
-					    		\fbox{\includegraphics[scale=0.35]{det}}
+					    		\fbox{\includegraphics[scale=0.35]{ch3-images/det}}
 					    		\caption{Exemple d'en-tête des tables du format DET des rapports IFA.}
 				\end{figure}
 		\item AGG : Agrégés. Présentant l'historique des mouvements entre les pays agrégés selon la région du monde à laquelle ceux-ci appartiennent.
 		\begin{figure}[h]
 			    		\centering
-			    		\fbox{\includegraphics[scale=0.35]{agg}}
+			    		\fbox{\includegraphics[scale=0.35]{ch3-images/agg}}
 			    		\caption{Exemple d'en-tête des tables du format  AGG des rapports IFA.}
 		\end{figure}
 		\end{itemize}
@@ -99,7 +99,7 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 	\par
 	La collecte et la préparation des données est un processus extrêmement lent et complexe,			\begin{wrapfigure}[14]{c}{8.4 cm}
 						    		
-						    		\fbox{\includegraphics[scale=0.38]{charplot}}
+						    		\fbox{\includegraphics[scale=0.38]{ch3-images/charplot}}
 						    		\caption{Représentation de l'information transportée par la page .pdf de la figure \ref{fig:IFA-PDF} pour une résolution d'image de 700x800.}
 						    		\label{fig:charplot}
 				\end{wrapfigure}  traditionnellement fait à la main et dont l'automatisation est souvent très difficile.
@@ -116,7 +116,7 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\par
 	Notre solution utilise le package \textbf{pdfminer}\cite{pdfminer} du langage \textbf{Python} qui extrait les objets	\begin{wrapfigure}[16]{c}{8.4 cm}
 			\centering			    		
-			\fbox{\includegraphics[scale=0.37]{classplot}}
+			\fbox{\includegraphics[scale=0.37]{ch3-images/classplot}}
 			\caption{Classification de l'information transportée par la page .pdf de la figure \ref{fig:IFA-PDF}\\ selon ($\in$ zone de texte, $\notin$ zone de texte)}
 			\label{fig:charclass}
 		\end{wrapfigure}
@@ -126,7 +126,7 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\paragraph{}
 	\begin{wrapfigure}[14]{c}{8.4 cm}
 							\centering			    		
-							\fbox{\includegraphics[scale=0.38]{projplot}}
+							\fbox{\includegraphics[scale=0.38]{ch3-images/projplot}}
 							\caption{Inférence des frontières de la table de la figure \ref{fig:IFA-PDF}.}
 							\label{fig:projplot}
 						\end{wrapfigure}
@@ -153,7 +153,7 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	Ces étapes sont résumées par le diagramme de flux de données de la figure \ref{fig:DF}.
 		\begin{figure}[h]
 		    		\centering
-		    		\fbox{\includegraphics[scale=0.575]{dataflow}}
+		    		\fbox{\includegraphics[scale=0.575]{ch3-images/dataflow}}
 		    		\caption{Flux de données du processus de consolidation.}
 		    		\label{fig:DF}
 		\end{figure}
@@ -168,13 +168,13 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 			\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
-				\includegraphics[height=215pt]{1}
+				\includegraphics[height=215pt]{ch3-images/1}
 				\caption{Vérification de la dimension\\des données consolidés}
 				\label{fig:size}
 			\end{subfigure}
 			\begin{subfigure}{.5\textwidth}
 					\centering
-					\includegraphics[height=215pt]{2}
+					\includegraphics[height=215pt]{ch3-images/2}
 					\caption{Traitement des cases vides\\des données consolidés}
 					\label{fig:nas}
 			\end{subfigure}
@@ -186,25 +186,25 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\begin{figure}[H]
 	\begin{subfigure}{.5\textwidth}
 			\centering
-			\includegraphics[height=90pt]{4}
+			\includegraphics[height=90pt]{ch3-images/4}
 			\caption{Ambiguïté Dubai, UAE}
 			\label{fig:dubai}
 	\end{subfigure}
 	\begin{subfigure}{.5\textwidth}
 		\centering
-		\includegraphics[height=90pt]{5}
+		\includegraphics[height=90pt]{ch3-images/5}
 		\caption{Ambiguïté Taiwan, China}
 		\label{fig:taiwan}
 	\end{subfigure}
 	\begin{subfigure}{\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{6}
+			\includegraphics[width=\linewidth]{ch3-images/6}
 			\caption{Correction Dubai, UAE}
 			\label{fig:corrDubai}
 	\end{subfigure}
 	\begin{subfigure}{\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{7}
+			\includegraphics[width=\linewidth]{ch3-images/7}
 			\caption{Correction Taiwan, China}
 			\label{fig:corrTaiwan}
 	\end{subfigure}
@@ -214,19 +214,19 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 		
 		\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.4]{8}
+		\includegraphics[scale=0.4]{ch3-images/8}
 		\caption{}
 		\label{fig:}
 	\end{figure}
 		\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.4]{9}
+		\includegraphics[scale=0.4]{ch3-images/9}
 		\caption{}
 		\label{fig:}
 	\end{figure}
 		\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.4]{10}
+		\includegraphics[scale=0.4]{ch3-images/10}
 		\caption{}
 		\label{fig:}
 	\end{figure}
