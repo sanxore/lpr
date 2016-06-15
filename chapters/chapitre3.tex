@@ -49,7 +49,7 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 	Il est naturel d'adresser les problèmes de disponibilité de données aux premiers abords. La consolidation désigne la collection et l'intégration des données de sources multiples en une unique destination. Durant ce processus, nous unifierons les deux types de formats de données. Ceci nous permettra de présenter les données de manière plus flexible, tout en facilitant leur analyse effective. Ceci nous amène à considérer le format adopté par le datamart OCP-CM comme format cible de consolidation et les fichiers .pdf comme format source.
 	\paragraph{}
 	La solution que nous mettons en œuvre est disponible dans le dossier \textit{Sanxoriarty IFA Parser} du dépôt \textbf{GitHub} de notre mémoire de projet de fin d'études\cite{this}.
-	\subsubsection{Conception fonctionelle}
+	\subsubsection{Conception fonctionnelle du processus de consolidation}
 	L'OCP reçoit régulièrement des rapports trimestriels présentant la situation du marché accompagnée des mouvements observés des produits fertilisants. Ces mouvements sont reportés sur des tableaux tel que celui présenté dans la figure \ref{fig:IFA-PDF}. Notre solution doit ainsi considérer les nuances fonctionnelles suivantes :\newpage
 	\begin{enumerate}
 	\item Les rapports diffèrent par leur granularité. En effet ceux-ci peuvent être:
@@ -95,7 +95,7 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 		\item \textbf{Normés:} La nature de l'agrégation trimestrielle de l'enregistrement-vente doit être spécifiée.
 		\end{itemize}
 	\end{enumerate}
-	\subsubsection{Conception technique}\label{parser}
+	\subsubsection{Conception technique du processus de consolidation}\label{parser}
 	\par
 	La collecte et la préparation des données est un processus extrêmement lent et complexe,			\begin{wrapfigure}[14]{c}{8.4 cm}
 						    		
@@ -161,9 +161,9 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\subsubsection{Audit des données de consolidation}
 	Lors de nos tests de la solution que nous avons mis au point lors de la section \ref{parser}, nous obtenions un taux de réussite de reconnaissance et extraction des tableau de 100\%. Cependant et de par la nature critique des données que nous traitons, nous avons procédé à tes tests rigoureux de deux natures différentes.
 	\paragraph{Audit assisté par ordinateur:\\}
-	Notre processus de consolidation a généré en moyenne près de 40800 enregistrements par année. Après une consolidation des années 2014, 2015 et début 2016, le total s'élève à 94240 nouveaux enregistrements dont nous nous devons d'assurer la justesse. Une vérification humaine un par un de chacun de ces enregistrements est une tâche pharamineuse que nous taclons en premier lieu en nous assistons du langage \textbf{R\footnote{\textbf{R} est un langage de programmation, de traitement des données et d'analyse statistique mettant en œuvre le langage de programmation \textbf{S}, avec la sémantique dérivée du langage \textbf{Scheme}}}.
+	Notre processus de consolidation a généré en moyenne près de 40800 enregistrements-vente par année. Après une consolidation des années 2014, 2015 et début 2016, le total s'élève à 94240 nouveaux enregistrements-vente dont nous nous devons d'assurer la justesse. Une vérification humaine un par un de chacun de ces enregistrements-vente est une tâche pharamineuse que nous taclons en premier lieu en nous assistons du langage \textbf{R\footnote{\textbf{R} est un langage de programmation, de traitement des données et d'analyse statistique mettant en œuvre le langage de programmation \textbf{S}, avec la sémantique dérivée du langage \textbf{Scheme}}}.
 \paragraph{}
-		La figure \ref{fig:size} ci-dessous, valide bien le nombre d'enregistrements auxquels on s'attend, soit 94240 lignes. De plus, nous remarquons un premier soucis : Les cases de volumes nuls au sein de la colonne "kT" de la Trade Matrix ont été interprétés par le caractère "-". Ce qui empêche la colonne d'être traitée en tant que vecteur numérique. Nous remédions à ce problème en remplaçant ce caractère par le numérique "0", comme procédé dans la figure \ref{fig:nas} ci -après.
+		La figure \ref{fig:size} ci-dessous, valide bien le nombre d'enregistrements-vente auxquels on s'attend, soit 94240 lignes. De plus, nous remarquons un premier soucis : Les cases de volumes nuls au sein de la colonne "kT" de la Trade Matrix ont été interprétés par le caractère "-". Ce qui empêche la colonne d'être traitée en tant que vecteur numérique. Nous remédions à ce problème en remplaçant ce caractère par le numérique "0", comme procédé dans la figure \ref{fig:nas} ci -après.
 		\newline
 			\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
@@ -225,15 +225,28 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 		\caption{Audit: Conversion des unités de mesures.}
 		\label{fig:diffprod}
 		\end{figure}
-		La figure \ref{fig:diffprod} ci-dessous, relève un écart de 51368-42872 = 8496 enregistrements de plus possédant le drapeau \textit{Product} et pas le drapeau \textit{P2O5}. Ce chiffre nous interpelle puisque celui-ci est justement celui d'enregistrements \textbf{Product == "Rock"}. Dans la figure \ref{fig:corrprod}, nous investiguons cette fausse coïncidence en nous nous intéressons uniquement aux enregistrements  \textbf{Product $\neq$ "Rock"} où il s'avère que cet écart n'est plus. Ceci nous amène à ajuster notre code de conversion présenté dans la phase de structuration à la section \ref{struct}.
+		La figure \ref{fig:diffprod} ci-dessous, relève un écart de 51368-42872 = 8496 enregistrements-vente de plus possédant le drapeau \textit{Product} et pas le drapeau \textit{P2O5}. Ce chiffre nous interpelle puisque celui-ci est justement celui d'enregistrements-vente \textbf{Product == "Rock"}. Dans la figure \ref{fig:corrprod}, nous investiguons cette fausse coïncidence en nous nous intéressons uniquement aux enregistrements-vente  \textbf{Product $\neq$ "Rock"} où il s'avère que cet écart n'est plus. Ceci nous amène à ajuster notre code de conversion présenté dans la phase d'unification à la section \ref{struct}.
 		\begin{figure}[H]
 		\centering
 		\includegraphics[width=\linewidth]{ch3-images/8bis}
 		\caption{Audit: Correction des unités de mesures.}
 		\label{fig:corrprod}
 		\end{figure}
-
-	\paragraph{Audit manuel d'échantillons aléatoires:}
+	\paragraph{Audit manuel d'échantillons aléatoires:\\}
+	Une vérification supplémentaire a été entreprise par nos soins, en choisissant aléatoirement:
+	\begin{itemize}
+	\item Une année d'exercice,
+	\item Un semestre d'exercice,
+	\item Un produit phosphaté,
+	\item Un pays importateur.
+	\end{itemize}
+	Nous listons l'ensemble des imports de celui-ci que nous avons consolidé qu'on compare par la suite visuellement aux fichier .pdf de départ en termes de:
+	\begin{itemize}
+	\item Poids rapporté,
+	\item Drapeaux et normes de l'enregistrement-vente,
+	\item Adéquation des chaînes de synthèse de la colonne \textit{Code}.
+	\end{itemize}
+	Pour un échantillon de 20 tirages, nous n'avons observé aucun écart.
 	\subsubsection{Déscription des données de consolidation}
 	\section{Collecte et préparation des données externes}
 	L'étendue des données disponibles au sein du système d'information de l'OCP ne pouvant donner qu'une vue réduite de la situation du marché et ne peuvent de par leur définition révéler les structures socio-économiques,  et de politiques agraires sous-jacentes aux demandes en produits phosphatés, nous nous attellerons à la tâche d'enrichir cette base de données historiques par des données quantitatives concernant les pays du monde.
@@ -296,7 +309,7 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\subsection{Préparation des données externes}
 	Cette section s’intéresse à l'application des forêts de décisions aléatoires à des fins de sélection de variables. Le but ici est double : d'abord introduire le comportement de l'indexation de l'importance des variables en utilisant les forêts aléatoires et l'utiliser pour proposer un algorithme à deux phases pour la sélection de variables à la base de leur importance.\par
 	La stratégie générale se résume en un classement des variables exogènes\footnote{à savoir les variables externes "crawlées" dans la section \ref{crawl}.} en utilisant le score d'importance de ces variables introduit par les forêts aléatoires puis une sélection ascendante itérative des variables.
-	\subsubsection{Introduction aux forêts de décision aléatoires}
+	\subsubsection{Introduction à la selection de variables via forêts de décision aléatoires}
 	Les FA\nomenclature{\textbf{FA : }}{Forêts aléatoires} est un algorithme populaire et très efficient basé appartenant aux méthodes d'agrégation pour les problèmes de régression et de classification, introduit par Breiman\cite{BREI01}, et apparaît dans les application de 'Machine Learning'\footnote{L'apprentissage automatique ou apprentissage statistique (machine learning en anglais), champ d'étude de l'intelligence artificielle, concerne la conception, l'analyse, le développement et l'implémentation de méthodes permettant à une machine (au sens large) d'évoluer par un processus systématique, et ainsi de remplir des tâches difficiles ou impossibles à remplir par des moyens algorithmiques plus classiques.} à la fin du dernier millénaire\cite{DITRI99}. Les FA deviennent de plus en plus populaires et semblent être très robustes dans beaucoup d'applications bien qu'ils ne soient pas clairement théorisés mathématiquement\cite{BIA08}. Une introduction sommaire des FA est donnée en annexe A1.
 	\par
 
