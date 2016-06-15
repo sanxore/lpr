@@ -79,12 +79,12 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 	\item "Region..IFA." : Région à laquelle appartient le pays de destination selon le découpage IFA.
 	\item "Region..OCP." : Région à laquelle appartient le pays de destination selon le découpage OCP.
 	\item "Exporting.countries" : Pays d'origine de l'enregistrement-vente.
-	\item "Product" : Produit de l'enregistrement-vente. (MAP, DAP,PA\nomenclature{\textbf{PA : }}{Acide phosphorique},TSP ,ROCK\footnote{Minerai du phosphate brut en roche.})
+	\item "Product" : Produit de l'enregistrement-vente. (MAP, DAP,PA\nomenclature{\textbf{PA : }}{Acide phosphorique},TSP ,Rock\footnote{Minerai du phosphate brut en roche.})
 	\item "Year" : Année de l'enregistrement-vente.
 	\item "Quarter" Trimestre de l'enregistrement-vente.
 	\item "Code" : Code de Synthèse des champs précédents.
-	\item "kT" :  Poids de l'enregistrement-vente en kT\footnote{Kilotonne = $10^6$ kilogramme.} de produit.           
-	\item "P2O5.Product" : Poids équivalent du produit en P2O5\footnote{Pentoxyde de phosphore, la molécule de base des engrais phosphatés.}
+	\item "kT" :  Poids de l'enregistrement-vente en kT\footnote{Kilotonne = $10^6$ kilogramme.}.           
+	\item "P2O5.Product" : Drapeau indiquant si le poids indiqué à la colonne \textit{kT}est net en P2O5\footnote{Pentoxyde de phosphore, la molécule de base des engrais phosphatés} ou en poids brut.
 	\item "Cumulated.Not.cumulated" : Drapeau indiquant la norme trimestrielle de l'enregistrement-vente.
 	\item "AGG.DET.ANN" : Drapeau indiquant la granularité de l'enregistrement-vente
 	\end{itemize}
@@ -131,7 +131,7 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 							\label{fig:projplot}
 						\end{wrapfigure}
 	Pour trouver ces lignes verticales et ces colonnes, nous projetons les boites bleues (textuelles)sur l'axe horizontal (pour retrouver les colonnes\footnote{Nom du pays exportateur}) et sur l'axe vertical (pour retrouver les lignes\footnote{Données des enregistrements-ventes effectués par un pays importateur }). La projection consiste en l'énumération du nombre de boites bleues le long d'une ligne horizontale ou verticale. Nous concluons ainsi que les frontières entre les colonnes et les lignes sont marquées par les creux des valeurs des projections dans le graphe de projection; alors que les colonnes et les lignes en elles-même représentent les pics de la courbe. La figure \ref{fig:projplot} montre le résultat du traitement de la page de la figure \ref{fig:IFA-PDF}.\\Les graphes en haut et à gauche représentent le décompte des projections alors que les points noirs représentent les endroits où nous allons placer les frontières des lignes et des colonnes.
-	\subsubsection{Conception du flux de données du processus de consolidation}
+	\subsubsection{Conception du flux de données du processus de consolidation} \label{struct}
 	La nature des transformations à faire subir les sources de données en vue de leur consolidation, nous amène à concevoir une solution technique en 2 phases:
 	\begin{enumerate}
 	\item \textbf{Une phase de structuration des données\footnote{cf. Annexe B1 pour le code-source}:}
@@ -182,7 +182,9 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 				\end{figure}
 				
 	\paragraph{}
-	Dans les figures \ref{fig:dubai} et \ref{fig:taiwan}, Nous observons deux interprétation différentes de \textbf{Dubai} en ("\textit{Dubai, UAE}","\textit{Dubai/ UAE}") et de \textbf{Taiwan} en ("\textit{Taiwan, China}","\textit{Taiwan/ China}"). Ces discrépances seraient analysées en tant que 4 pays différents alors qu'en réalité, ceux-ci ne sont que deux. Nous procédons à la correction de ces deux ambiguïtés dans les figures \ref{fig:corrDubai} et \ref{fig:corrTaiwan} respectivement.
+	Dans les figures \ref{fig:dubai} et \ref{fig:taiwan}, Nous observons deux interprétation différentes de \textbf{Dubai} en ("\textit{Dubai, UAE}","\textit{Dubai/ UAE}") et de \textbf{Taiwan} en ("\textit{Taiwan, China}","\textit{Taiwan/ China}"). Ces discrépances seraient analysées en tant que 4 pays différents alors qu'en réalité, ceux-ci ne sont que deux.\\Nous procédons à la correction de ces deux ambiguïtés dans les figures \ref{fig:corrDubai} et \ref{fig:corrTaiwan} respectivement.
+	\par
+	Un malfonctionnement similaire est à noter pour les drapeaux de la colonne \textit{P2O5.Product}\footnote{Drapeau indiquant si le poids indiqué à la colonne \textit{kT}est net en P2O5 ou en poids brut.} où des caractères "\textbf{espace}" se sont introduits en début de chaîne pour proposer ici aussi 4 niveaux qualitatifs  au lieu de 2 uniquement.\\Nous diagnostiquons ce soucis et le corrigeons dans la figure \ref{fig:corr}
 	\begin{figure}[H]
 	\begin{subfigure}{.5\textwidth}
 			\centering
@@ -208,28 +210,29 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 			\caption{Correction Taiwan, China}
 			\label{fig:corrTaiwan}
 	\end{subfigure}
-	\caption{Audit: Interprétation des chaînes de caractères.}
-	\end{figure}
-	\par
-		
+		\begin{subfigure}{\linewidth}
+			\centering
+			\includegraphics[width=\linewidth]{ch3-images/10}
+			\caption{Correction des drapeaux de la colonne \textit{P2O5.Product}}
+			\label{fig:corr}
+		\end{subfigure}
+			\caption{Audit: Interprétation des chaînes de caractères.}
+			\end{figure}
+		\begin{figure}[H]
+%		\begin{subfigure}{\linewidth}
+		\centering
+		\includegraphics[width=0.925\linewidth]{ch3-images/8}
+		\caption{Audit: Conversion des unités de mesures.}
+		\label{fig:diffprod}
+		\end{figure}
+		La figure \ref{fig:diffprod} ci-dessous, relève un écart de 51368-42872 = 8496 enregistrements de plus possédant le drapeau \textit{Product} et pas le drapeau \textit{P2O5}. Ce chiffre nous interpelle puisque celui-ci est justement celui d'enregistrements \textbf{Product == "Rock"}. Dans la figure \ref{fig:corrprod}, nous investiguons cette fausse coïncidence en nous nous intéressons uniquement aux enregistrements  \textbf{Product $\neq$ "Rock"} où il s'avère que cet écart n'est plus. Ceci nous amène à ajuster notre code de conversion présenté dans la phase de structuration à la section \ref{struct}.
 		\begin{figure}[H]
 		\centering
-		\includegraphics[scale=0.4]{ch3-images/8}
-		\caption{}
-		\label{fig:}
-	\end{figure}
-		\begin{figure}[H]
-		\centering
-		\includegraphics[scale=0.4]{ch3-images/9}
-		\caption{}
-		\label{fig:}
-	\end{figure}
-		\begin{figure}[H]
-		\centering
-		\includegraphics[scale=0.4]{ch3-images/10}
-		\caption{}
-		\label{fig:}
-	\end{figure}
+		\includegraphics[width=\linewidth]{ch3-images/8bis}
+		\caption{Audit: Correction des unités de mesures.}
+		\label{fig:corrprod}
+		\end{figure}
+
 	\paragraph{Audit manuel d'échantillons aléatoires:}
 	\subsubsection{Déscription des données de consolidation}
 	\section{Collecte et préparation des données externes}
