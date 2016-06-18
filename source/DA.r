@@ -22,12 +22,12 @@ attach(DF.NC.TR)
 ggplot(DF.NC.TR,
        aes(x = Product, y = logkT)) + 
   geom_jitter(alpha = 0.4) + 
-  geom_boxplot(color = "yellow", outlier.colour = "Red",fill=NA,ylab = "Transformée logarithmique des volumes échangés à l'international",xlab="Produits phosphatés dérivés")
+  geom_boxplot(color = "yellow", outlier.colour = "Red",fill=NA) + ylab("Transformée logarithmique des volumes échangés à l'international") + xlab("Produits phosphatés dérivés")
 
 ggplot(DF.NC.TR[OCP_Index,],
        aes(x = Product, y = logkT)) + 
   geom_jitter(alpha = 0.4) + 
-  geom_boxplot(color = "yellow", outlier.colour = "Red",fill=NA,ylab = "Transformée logarithmiques des volumes exportés par le Maroc",xlab="Produits phosphatés dérivés")
+  geom_boxplot(color = "yellow", outlier.colour = "Red",fill=NA)+ ylab ("Transformée logarithmiques des volumes exportés par le Maroc") + xlab("Produits phosphatés dérivés")
 
 #--------------------------------------------
 qplot(logkT,data=DF.NC.TR,fill=Product,bins=45,ylab="Nombre des échanges internationaux par produit",xlab="Transformée logartihmique des volumes échangés")
@@ -52,6 +52,7 @@ with(DF.NC.TR[OCP_Index,],qplot(logkT,Region..OCP.,col=Product),alpha = I(0.6))
 #--------------------------------------------
 
 multiplot(plot_cons_trim_region("DAP"),plot_cons_trim_region("MAP"),plot_cons_trim_region("PA"),plot_cons_trim_region("TSP"))
+
 
 #---------------------------------------------
 
