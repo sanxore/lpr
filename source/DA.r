@@ -20,31 +20,90 @@ DF.NC.TR$Big_Players[Russia_Index]="Russia"
 attach(DF.NC.TR)
 
 
-boxplot(logkT ~ Product, data =DF.NC.TR, col = "blue")
-boxplot(logkT ~ Product, data =DF.NC.TR[OCP_Index,], col = "blue")
+qplot(Product,logkT, data =DF.NC.TR, fill = Product,geom="boxplot",ylab = "Transformée logarithmique des volumes échangés à l'international",xlab="Produits phosphatés dérivés")
+qplot(Product,logkT, data =DF.NC.TR[OCP_Index,], fill = Product,geom="boxplot",ylab = "Transformée logarithmiques des volumes exportés par le Maroc",xlab="Produits phosphatés dérivés")
 #--------------------------------------------
-qplot(logkT,data=DF.NC.TR,fill=Product)
-qplot(logkT,data=DF.NC.TR,fill=Big_Players)
-qplot(logkT,data=DF.NC.TR[OCP_Index,],fill=Product)
+qplot(logkT,data=DF.NC.TR,fill=Product,bins=45,ylab="Nombre des échanges internationaux par produit",xlab="Transformée logartihmique des volumes échangés")
+qplot(logkT,data=DF.NC.TR,color=Product,geom="density",ylab="Distribution des échanges internationaux par produit",xlab="Transformée logartihmique des volumes échangés")
 
-qplot(logkT,data=DF.NC.TR,fill=Big_Players,facets = .~Product)
-qplot(logkT,data=DF.NC.TR[OCP_Index,],facets = .~Product,fill=Region..OCP.)
+qplot(logkT,data=DF.NC.TR,fill=Big_Players,bins=45,ylab="Nombre d'échanges internationaux par exportateur majeur",xlab="Transformée logartihmique des volumes échangés")
+qplot(logkT,data=DF.NC.TR,color=Big_Players,geom="density",ylab="Distribution des échanges internationaux par exportateur majeur",xlab="Transformée logartihmique des volumes échangés")
 
-qplot(logkT,data=DF.NC.TR,color=Product,geom="density")
-qplot(logkT,data=DF.NC.TR[OCP_Index,],color=Product,geom="density")
+qplot(logkT,data=DF.NC.TR[OCP_Index,],color=Product,geom="density",ylab="Distribution des exports marocains par produit",xlab="Transformée logartihmique des volumes échangés")
+
+qplot(logkT,data=DF.NC.TR,facets = .~Product,xlim = c(0,7.5),ylim=c(0,160))
+qplot(logkT,data=DF.NC.TR[OCP_Index,],facets = .~Product,xlim = c(0,7.5),bins=15,ylim=c(0,50))
+
+
 #--------------------------------------------
-qplot(Quarter,logkT, data = DF.NC.TR, facets = Product~Region..OCP.)
-qplot(Quarter,logkT, data = DF.NC.TR, facets = Product~Region..OCP.,col=Big_Players)
+qplot(Quarter,logkT, data = DF.NC.TR, facets = Product~Region..OCP.,alpha = I(0.1))
+qplot(Quarter,logkT, data = DF.NC.TR, facets = Product~Region..OCP.,col=Big_Players,alpha = I(0.7))
 
 #--------------------------------------------
-with(DF.NC.TR,qplot(logkT,Region..OCP.,col=Product))
-with(DF.NC.TR[OCP_Index,],qplot(logkT,Region..OCP.,col=Product))
-
+with(DF.NC.TR,qplot(logkT,Region..OCP.,col=Product,alpha = I(0.7)))
+with(DF.NC.TR[OCP_Index,],qplot(logkT,Region..OCP.,col=Product),alpha = I(0.6))
+#
 
 #qplot(Region..OCP.,data=DF.NC.TR,fill=Product)
 #qplot(Region..OCP.,data=DF.NC.TR[OCP_Index,],fill=Product)
 
+ggplot(DF.NC.TR,
+       aes(x = logkT, y = logkT)) + 
+  geom_jitter(alpha = 0.1) + 
+  geom_boxplot(color = "yellow", outlier.colour = NA, fill = NA)
+
 qplot(Quarter,logkT, data = DF.NC.TR, facets = .~Product,col=Region..OCP.)
 qplot(Quarter,logkT, data = DF.NC.TR[OCP_Index,], facets = .~Product,col=Region..OCP.)
 
+#--------------------------------------------------
+#--------------------------------------------------
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
+  library(grid)
+  
+  # Make a list from the ... arguments and plotlist
+  plots <- c(list(...), plotlist)
+  
+  numPlots = length(plots)
+  
+  # If layout is NULL, then use 'cols' to determine layout
+  if (is.null(layout)) {
+    # Make the panel
+    # ncol: Number of columns of plots
+    # nrow: Number of rows needed, calculated from # of cols
+    layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
+                     ncol = cols, nrow = ceiling(numPlots/cols))
+  }
+  
+  if (numPlots==1) {
+    print(plots[[1]])
+    
+  } else {
+    # Set up the page
+    grid.newpage()
+    pushViewport(viewport(layout = grid.layout(nrow(layout), ncol(layout))))
+    
+    # Make each plot, in the correct location
+    for (i in 1:numPlots) {
+      # Get the i,j matrix positions of the regions that contain this subplot
+      matchidx <- as.data.frame(which(layout == i, arr.ind = TRUE))
+      
+      print(plots[[i]], vp = viewport(layout.pos.row = matchidx$row,
+                                      layout.pos.col = matchidx$col))
+    }
+  }
+}

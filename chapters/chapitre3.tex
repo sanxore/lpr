@@ -333,18 +333,14 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 		\item \textbf{ Rural poverty gap at national poverty lines (\%):} L'écart de pauvreté par rapport au seuil national de la pauvreté en milieu rural est le manque à gagner pour remonter au-dessus du seuil de la pauvreté (en considérant que les non pauvres ont un manque à gagner de zéro) exprimé en pourcentage du seuil national de la pauvreté en milieu urbain.Cette mesure témoigne à la fois de l'ampleur de la pauvreté et de sa fréquence.
 		\item \textbf{ Unemployment, total (\% of total labor force):} Fraction de la population active qui est sans emploi mais qui est disponible pour et à la recherche d'un emploi.
 		\end{itemize}
-	\subsubsection{Recherche des sources WEB des variables souhaitées}
+	\subsubsection{Énumération des sources WEB des variables souhaitées}
 	\par
-	\begin{Huge}{ Liste des cibles (sites web et bases de données publiques) du Crawling }
+	\begin{Huge}{ Liste des cibles  web et bases de données publiques}
 		\end{Huge}
-	\subsubsection{Extraction et formatage des variables souhaitées}\label{crawl}
-	\par
-	 \begin{Huge}{ Workflow du  Crawling }
-	 		\end{Huge}
-	
+
 	\subsection{Préparation des données externes}
 	Cette section s’intéresse à l'application des forêts de décisions aléatoires à des fins de sélection de variables. Le but ici est double : d'abord introduire le comportement de l'indexation de l'importance des variables en utilisant les forêts aléatoires et l'utiliser pour proposer un algorithme à deux phases pour la sélection de variables à la base de leur importance.\par
-	La stratégie générale se résume en un classement des variables exogènes\footnote{à savoir les variables externes "crawlées" dans la section \ref{crawl}.} en utilisant le score d'importance de ces variables introduit par les forêts aléatoires puis une sélection ascendante itérative des variables.
+	La stratégie générale se résume en un classement des variables exogènes\footnote{à savoir les variables externes énumérées dans la section \ref{exoList}}. en utilisant le score d'importance de ces variables introduit par les forêts aléatoires puis une sélection ascendante itérative des variables.
 	\subsubsection{Introduction à la selection de variables via forêts de décision aléatoires}
 	Les FA\nomenclature{\textbf{FA : }}{Forêts aléatoires} est un algorithme populaire et très efficient basé appartenant aux méthodes d'agrégation pour les problèmes de régression et de classification, introduit par Breiman\cite{BREI01}, et apparaît dans les application de 'Machine Learning'\footnote{L'apprentissage automatique ou apprentissage statistique (machine learning en anglais), champ d'étude de l'intelligence artificielle, concerne la conception, l'analyse, le développement et l'implémentation de méthodes permettant à une machine (au sens large) d'évoluer par un processus systématique, et ainsi de remplir des tâches difficiles ou impossibles à remplir par des moyens algorithmiques plus classiques.} à la fin du dernier millénaire\cite{DITRI99}. Les FA deviennent de plus en plus populaires et semblent être très robustes dans beaucoup d'applications bien qu'ils ne soient pas clairement théorisés mathématiquement\cite{BIA08}. Une introduction sommaire des FA est donnée en annexe A1.
 	\par
