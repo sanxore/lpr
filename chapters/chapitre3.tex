@@ -168,13 +168,13 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 			\begin{figure}[H]
 			\begin{subfigure}{.5\textwidth}
 				\centering
-				\includegraphics[height=215pt]{ch3-images/1}
+				\fbox{\includegraphics[height=215pt]{ch3-images/1}}
 				\caption{Vérification de la dimension\\des données consolidés}
 				\label{fig:size}
 			\end{subfigure}
 			\begin{subfigure}{.5\textwidth}
 					\centering
-					\includegraphics[height=215pt]{ch3-images/2}
+					\fbox{\includegraphics[height=215pt]{ch3-images/2}}
 					\caption{Traitement des cases vides\\des données consolidés}
 					\label{fig:nas}
 			\end{subfigure}
@@ -188,31 +188,31 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\begin{figure}[H]
 	\begin{subfigure}{.5\textwidth}
 			\centering
-			\includegraphics[height=90pt]{ch3-images/4}
+			\fbox{\includegraphics[height=90pt]{ch3-images/4}}
 			\caption{Ambiguïté Dubai, UAE}
 			\label{fig:dubai}
 	\end{subfigure}
 	\begin{subfigure}{.5\textwidth}
 		\centering
-		\includegraphics[height=90pt]{ch3-images/5}
+		\fbox{\includegraphics[height=90pt]{ch3-images/5}}
 		\caption{Ambiguïté Taiwan, China}
 		\label{fig:taiwan}
 	\end{subfigure}
 	\begin{subfigure}{\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{ch3-images/6}
+			\fbox{\includegraphics[width=\linewidth]{ch3-images/6}}
 			\caption{Correction Dubai, UAE}
 			\label{fig:corrDubai}
 	\end{subfigure}
 	\begin{subfigure}{\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{ch3-images/7}
+			\fbox{\includegraphics[width=\linewidth]{ch3-images/7}}
 			\caption{Correction Taiwan, China}
 			\label{fig:corrTaiwan}
 	\end{subfigure}
 		\begin{subfigure}{\linewidth}
 			\centering
-			\includegraphics[width=\linewidth]{ch3-images/10}
+			\fbox{\includegraphics[width=\linewidth]{ch3-images/10}}
 			\caption{Correction des drapeaux de la colonne \textit{P2O5.Product}}
 			\label{fig:corr}
 		\end{subfigure}
@@ -221,14 +221,14 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 		\begin{figure}[H]
 %		\begin{subfigure}{\linewidth}
 		\centering
-		\includegraphics[width=0.925\linewidth]{ch3-images/8}
+		\fbox{\includegraphics[width=0.925\linewidth]{ch3-images/8}}
 		\caption{Audit: Conversion des unités de mesures.}
 		\label{fig:diffprod}
 		\end{figure}
 		La figure \ref{fig:diffprod} ci-dessous, relève un écart de 51368-42872 = 8496 enregistrements-vente de plus possédant le drapeau \textit{Product} et pas le drapeau \textit{P2O5}. Ce chiffre nous interpelle puisque celui-ci est justement celui d'enregistrements-vente \textbf{Product == "Rock"}. Dans la figure \ref{fig:corrprod}, nous investiguons cette fausse coïncidence en nous nous intéressons uniquement aux enregistrements-vente  \textbf{Product $\neq$ "Rock"} où il s'avère que cet écart n'est plus. Ceci nous amène à ajuster notre code de conversion présenté dans la phase d'unification à la section \ref{struct}.
 		\begin{figure}[H]
 		\centering
-		\includegraphics[width=\linewidth]{ch3-images/8bis}
+		\fbox{\includegraphics[width=\linewidth]{ch3-images/8bis}}
 		\caption{Audit: Correction des unités de mesures.}
 		\label{fig:corrprod}
 		\end{figure}
@@ -248,42 +248,75 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\end{itemize}
 	Pour un échantillon de 20 tirages, nous n'avons observé aucun écart.
 	\subsubsection{Description des données de consolidation}
+			\begin{figure}[H]
+			\centering
+			\fbox{\includegraphics[width=\linewidth]{ch3-images/A}}
+			\caption{}
+			\label{fig:corrprod}
+			\end{figure}
+		\begin{figure}[H]
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\fbox{\includegraphics[width=\textwidth]{ch3-images/B}}
+				\caption{}
+				\label{fig:}
+		\end{subfigure}
+		\begin{subfigure}{.5\textwidth}
+				\centering
+				\fbox{\includegraphics[width=\textwidth]{ch3-images/D}}
+				\caption{}
+				\label{fig:}
+		\end{subfigure}
+				\begin{subfigure}{.5\textwidth}
+						\centering
+						\fbox{\includegraphics[width=\textwidth]{ch3-images/C}}
+						\caption{}
+						\label{fig:}
+				\end{subfigure}
+				\begin{subfigure}{.5\textwidth}
+						\centering
+						\fbox{\includegraphics[width=\textwidth]{ch3-images/E}}
+						\caption{}
+						\label{fig:}
+				\end{subfigure}
+												\caption{}
+												\label{fig:}
+		\end{figure}
 						\begin{figure}[H]
-						    		\centering
-						    		\fbox{\includegraphics[width=\textwidth]{ch3-images/A}}
-						    		\caption{}
-						    		\label{}
+						\centering
+						\fbox{\includegraphics[width=\linewidth]{ch3-images/F}}
+						\caption{}
+						\label{fig:}
 						\end{figure}
-						\begin{figure}[H]
-						    		\centering
-						    		\fbox{\includegraphics[width=\textwidth]{ch3-images/F}}
-						    		\caption{}
-						    		\label{}
-						\end{figure}
-						\begin{figure}[H]
-						    		\centering
-						    		\fbox{\includegraphics[width=\textwidth]{ch3-images/B}}
-						    		\caption{}
-						    		\label{}
-						\end{figure}
-						\begin{figure}[H]
-						    		\centering
-						    		\fbox{\includegraphics[width=\textwidth]{ch3-images/C}}
-						    		\caption{}
-						    		\label{}
-						\end{figure}
-						\begin{figure}[H]
-						    		\centering
-						    		\fbox{\includegraphics[width=\textwidth]{ch3-images/D}}
-						    		\caption{}
-						    		\label{}
-						\end{figure}
-						\begin{figure}[H]
-						    		\centering
-						    		\fbox{\includegraphics[width=\textwidth]{ch3-images/E}}
-						    		\caption{}
-						    		\label{}
-						\end{figure}
+		\begin{figure}[H]
+				\begin{subfigure}{.5\textwidth}
+						\centering
+						\fbox{\includegraphics[width=\textwidth]{ch3-images/G}}
+						\caption{}
+						\label{fig:}
+				\end{subfigure}
+				\begin{subfigure}{.5\textwidth}
+										\centering
+										\fbox{\includegraphics[width=\textwidth]{ch3-images/H}}
+										\caption{}
+										\label{fig:}
+				\end{subfigure}
+								\caption{}
+								\label{fig:}
+				\end{figure}
+				\begin{figure}[H]
+				\centering
+				\fbox{\includegraphics[width=\linewidth]{ch3-images/J}}
+				\caption{}
+				\label{fig:}
+				\end{figure}	
+				\begin{figure}[H]
+				\centering
+				\fbox{\includegraphics[width=\linewidth]{ch3-images/K}}
+				\caption{}
+				\label{fig:}
+				\end{figure}
+
 	\section{Collecte et préparation des données externes}
 	L'étendue des données disponibles au sein du système d'information de l'OCP ne pouvant donner qu'une vue réduite de la situation du marché et ne peuvent de par leur définition révéler les structures socio-économiques,  et de politiques agraires sous-jacentes aux demandes en produits phosphatés, nous nous attellerons à la tâche d'enrichir cette base de données historiques par des données quantitatives concernant les pays du monde.
 	\par
