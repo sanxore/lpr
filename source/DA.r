@@ -1,8 +1,8 @@
 DF = read.csv('~/Desktop/OCP/BackUPS/Final_Database.csv')
 library(ggplot2)
 DF.NC = DF[which(DF$Cumulated.Not.Cumulated == 'Not Cumulated'),]
-DF.NC = DF[which(DF$AGG.DET.ANN == 'DET'),]
-DF.NC = DF[which(DF$P2O5.Product == 'Product'),]
+DF.NC = DF.NC[which(DF.NC$AGG.DET.ANN == 'DET'),]
+DF.NC = DF.NC[which(DF.NC$P2O5.Product == 'Product'),]
 summary(DF.NC$kT)
 DF.NC.TR = DF.NC[which(DF.NC$kT > 0),]
 attach(DF.NC.TR)
@@ -21,13 +21,13 @@ attach(DF.NC.TR)
 
 ggplot(DF.NC.TR,
        aes(x = Product, y = logkT)) + 
-  geom_jitter(alpha = 0.4) + 
-  geom_boxplot(color = "yellow", outlier.colour = "Red",fill=NA) + ylab("Transformée logarithmique des volumes échangés à l'international") + xlab("Produits phosphatés dérivés")
+  geom_jitter(alpha = 0.7) + 
+  geom_boxplot(color = "yellow", outlier.colour = "Red",fill=NA) + ylab("Transformée logarithmique des volumes échangés à l'international : log(kilotonnes)") + xlab("Produits phosphatés dérivés")
 
 ggplot(DF.NC.TR[OCP_Index,],
        aes(x = Product, y = logkT)) + 
-  geom_jitter(alpha = 0.4) + 
-  geom_boxplot(color = "yellow", outlier.colour = "Red",fill=NA)+ ylab ("Transformée logarithmiques des volumes exportés par le Maroc") + xlab("Produits phosphatés dérivés")
+  geom_jitter(alpha = 0.9) + 
+  geom_boxplot(color = "yellow", outlier.colour = "Red",fill=NA)+ ylab ("Transformée logarithmiques des volumes exportés par le Maroc : log(kilotonnes)") + xlab("Produits phosphatés dérivés")
 
 #--------------------------------------------
 qplot(logkT,data=DF.NC.TR,fill=Product,bins=45,ylab="Nombre des échanges internationaux par produit",xlab="Transformée logartihmique des volumes échangés")
@@ -38,16 +38,16 @@ qplot(logkT,data=DF.NC.TR,color=Big_Players,geom="density",ylab="Distribution de
 
 qplot(logkT,data=DF.NC.TR[OCP_Index,],color=Product,geom="density",ylab="Distribution des exports marocains par produit",xlab="Transformée logartihmique des volumes échangés")
 
-qplot(logkT,data=DF.NC.TR,facets = .~Product,xlim = c(0,7.5),ylim=c(0,160))
-qplot(logkT,data=DF.NC.TR[OCP_Index,],facets = .~Product,xlim = c(0,7.5),bins=15,ylim=c(0,50))
+qplot(logkT,data=DF.NC.TR,facets = .~Product,ylab="Nombre des échanges internationaux par produit",xlab="Transformée logartihmique des volumes échangés")
+qplot(logkT,data=DF.NC.TR[OCP_Index,],facets = .~Product,ylab="Nombre des des exports marocains par produit",xlab="Transformée logartihmique des volumes échangés")
 
 
 #--------------------------------------------
-qplot(Quarter,logkT, data = DF.NC.TR, facets = Product~Region..OCP.,alpha = I(0.1))
-qplot(Quarter,logkT, data = DF.NC.TR, facets = Product~Region..OCP.,col=Big_Players,alpha = I(0.7))
+qplot(Quarter,logkT, data = DF.NC.TR, facets = Product~Region..OCP.,alpha = I(0.4),ylab="Transformée logarithmique des échanges par produit et par région de destination",xlab = "Trimestre des échanges")
+qplot(Quarter,logkT, data = DF.NC.TR, facets = Product~Region..OCP.,col=Big_Players,alpha = I(0.5),ylab="Transformée logarithmique des échanges par produit, par régions de destination et par exportateur majeur",xlab = "Trimestre des échanges")
 
 #--------------------------------------------
-with(DF.NC.TR,qplot(logkT,Region..OCP.,col=Product,alpha = I(0.7)))
+with(DF.NC.TR,qplot(logkT,Region..OCP.,col=Product,alpha = I(0.7),ylab="Région de destination",xlab = "Transformée logarithmique des échanges par produit"))
 with(DF.NC.TR[OCP_Index,],qplot(logkT,Region..OCP.,col=Product),alpha = I(0.6))
 #--------------------------------------------
 
