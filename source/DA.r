@@ -22,12 +22,12 @@ attach(DF.NC.TR)
 ggplot(DF.NC.TR,
        aes(x = Product, y = logkT)) + 
   geom_jitter(alpha = 0.7) + 
-  geom_boxplot(color = "yellow", outlier.colour = "Red",fill=NA) + ylab("Transformée logarithmique des volumes échangés à l'international : log(kilotonnes)") + xlab("Produits phosphatés dérivés")
+  geom_boxplot(color = "Red", outlier.colour = "Orange",fill=NA) + ylab("Transformée logarithmique des volumes échangés à l'international : log(kilotonnes)") + xlab("Produits phosphatés dérivés")
 
 ggplot(DF.NC.TR[OCP_Index,],
        aes(x = Product, y = logkT)) + 
   geom_jitter(alpha = 0.9) + 
-  geom_boxplot(color = "yellow", outlier.colour = "Red",fill=NA)+ ylab ("Transformée logarithmiques des volumes exportés par le Maroc : log(kilotonnes)") + xlab("Produits phosphatés dérivés")
+  geom_boxplot(color = "Red", outlier.colour = "Orange",fill=NA)+ ylab ("Transformée logarithmiques des volumes exportés par le Maroc : log(kilotonnes)") + xlab("Produits phosphatés dérivés")
 
 #--------------------------------------------
 qplot(logkT,data=DF.NC.TR,fill=Product,bins=45,ylab="Nombre des échanges internationaux par produit",xlab="Transformée logartihmique des volumes échangés")
@@ -48,17 +48,18 @@ qplot(Quarter,logkT, data = DF.NC.TR, facets = Product~Region..OCP.,col=Big_Play
 
 #--------------------------------------------
 with(DF.NC.TR,qplot(logkT,Region..OCP.,col=Product,alpha = I(0.7),ylab="Région de destination",xlab = "Transformée logarithmique des échanges par produit"))
-with(DF.NC.TR[OCP_Index,],qplot(logkT,Region..OCP.,col=Product),alpha = I(0.6))
+with(DF.NC.TR[OCP_Index,],qplot(logkT,Region..OCP.,col=Product,alpha = I(0.6),ylab="Région de destination des exports Marocains",xlab = "Transformée logarithmique des échanges par produit"))
 #--------------------------------------------
 
 multiplot(plot_cons_trim_region("DAP"),plot_cons_trim_region("MAP"),plot_cons_trim_region("PA"),plot_cons_trim_region("TSP"))
 
 
+
 #---------------------------------------------
 
 
-qplot(Quarter,logkT, data = DF.NC.TR, facets = .~Product,col=Region..OCP.)
-qplot(Quarter,logkT, data = DF.NC.TR[OCP_Index,], facets = .~Product,col=Region..OCP.)
+qplot(Quarter,logkT, data = DF.NC.TR, facets = .~Product,col=Region..OCP.,ylab="Transformée logarithmique des échanges mondiaux par produit et par région de desination",xlab = "Trimestre des échanges")
+qplot(Quarter,logkT, data = DF.NC.TR[OCP_Index,], facets = .~Product,col=Region..OCP.,ylab="Transformée logarithmique des exports Marocains par produit et par région de desination",xlab = "Trimestre des échanges")
 
 #--------------------------------------------------
 #--------------------------------------------------
@@ -80,8 +81,8 @@ plot_cons_trim_region = function(produit){
   MAP.FN$Time = as.numeric(str_sub(MAP.FN$Region_Quarter,-1,-1))
   MAP.FN$Region=matrix(unlist(strsplit(MAP.FN$Region_Quarter,"_")),ncol=2,byrow=TRUE)[,1]
   MAP.FN=MAP.FN[,-1]
-  titre=paste("Courbe des consomations trimestrielles ",paste(produit," par région du Monde"))
-  return(ggplot(MAP.FN, aes(x=Time, y=ML, colour=Region, group=Region)) + geom_line() + ggtitle(titre))
+  titre=paste("Courbe des consommations trimestrielles ",paste(produit," par région du Monde"))
+  return(ggplot(MAP.FN, aes(x=Time, y=ML, colour=Region, group=Region)) + geom_line() + ggtitle(titre) + ylab("Somme des Conso/Trim. des régions") + xlab("Trimestre des consommations"))
 }
 
 multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
@@ -98,7 +99,7 @@ multiplot <- function(..., plotlist=NULL, file, cols=1, layout=NULL) {
     # ncol: Number of columns of plots
     # nrow: Number of rows needed, calculated from # of cols
     layout <- matrix(seq(1, cols * ceiling(numPlots/cols)),
-                     ncol = cols, nrow = ceiling(numPlots/cols))
+                     ncol = 2, nrow = 2)
   }
   
   if (numPlots==1) {
