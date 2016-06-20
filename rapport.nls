@@ -3,38 +3,38 @@
  \nomgroup{A}
 
   \item [{\textbf {OLAP : }}]\begingroup OnLine Analytical Processing\nomeqref {3.0}
-		\nompageref{27}
+		\nompageref{28}
   \item [{\textbf{BI : }}]\begingroup Business Intelligence\nomeqref {1.0}
-		\nompageref{17}
+		\nompageref{18}
   \item [{\textbf{CART : }}]\begingroup Classification And Regression Trees\nomeqref {3.0}
-		\nompageref{42}
+		\nompageref{43}
   \item [{\textbf{CM : }}]\begingroup Commercial-Marketing\nomeqref {1.0}
-		\nompageref{18}
+		\nompageref{19}
   \item [{\textbf{CRISP-DM : }}]\begingroup Cross-Industry Standard Process for Data Mining\nomeqref {1.0}
-		\nompageref{18}
+		\nompageref{19}
   \item [{\textbf{DAP : }}]\begingroup DiAmmonium Phosphate\nomeqref {1.0}
-		\nompageref{14}
+		\nompageref{15}
   \item [{\textbf{ENSIAS : }}]\begingroup École Nationale Supérieure d'Informatique et d'Analyse des Systèmes\nomeqref {1.0}
-		\nompageref{17}
+		\nompageref{18}
   \item [{\textbf{FA : }}]\begingroup Forêts aléatoires\nomeqref {3.0}
-		\nompageref{42}
+		\nompageref{43}
   \item [{\textbf{FAO : }}]\begingroup Food and Agriculture Organization of the United Nations\nomeqref {3.0}
-		\nompageref{40}
+		\nompageref{41}
   \item [{\textbf{IFA : }}]\begingroup International Fertilizer industry Association\nomeqref {3.0}
-		\nompageref{27}
+		\nompageref{28}
   \item [{\textbf{MAP : }}]\begingroup MonoAmmonium Phosphate\nomeqref {1.0}
-		\nompageref{14}
+		\nompageref{15}
   \item [{\textbf{NPK : }}]\begingroup Nitrogen-Phosphorus-Potassium\nomeqref {1.0}
-		\nompageref{14}
+		\nompageref{15}
   \item [{\textbf{OCP : }}]\begingroup Office Chérifien des Phosphates\nomeqref {1.0}
-		\nompageref{12}
+		\nompageref{13}
   \item [{\textbf{PA : }}]\begingroup Acide phosphorique\nomeqref {3.0}
-		\nompageref{29}
+		\nompageref{30}
   \item [{\textbf{PIB : }}]\begingroup Produit intérieur brut\nomeqref {3.0}
-		\nompageref{39}
+		\nompageref{40}
   \item [{\textbf{R\&D : }}]\begingroup Recherche et Développement\nomeqref {0}
-		\nompageref{10}
+		\nompageref{11}
   \item [{\textbf{TSP : }}]\begingroup Triple Super Phosphate\nomeqref {1.0}
-		\nompageref{14}
+		\nompageref{15}
 
 \end{thenomenclature}
