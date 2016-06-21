@@ -4,7 +4,48 @@
 Ce chapitre procède à une analyse de l'existant au sein du département commercial-marketing au début de notre stage et y relève des points de critiques auxquels nous proposons une architecture applicative en guise de solution. Ceci après avoir fait un tour d'horizon des recherches scientifiques ayant adressé des problématiques similaires pour inspirer le cadrage fonctionnel et technique de notre projet.
 \cleardoublepage
 
-\section{Analyse de l’existant}
+\section{Analyse de l’existant\cite{NACER}}
+L’utilisation des données au sein de la direction commerciale est basée sur le partage
+d’information concernant les marchés cibles de l’OCP. La répartition des chargés d'études de
+marché selon les continents du globe crée un besoin spécifique pour chaque analyste marché.
+Pour déterminer les prix de vente ou négocier les prix d’achat des matières premières plusieurs
+réunions quotidiennes sont indispensables. Non seulement le prix est déterminé par les
+comportements stratégiques de l’OCP et sa vision de marché mais il est aussi lié à des facteurs
+imprévisibles aussi bien politiques qu’environnementaux.
+\par
+L’objectif de ce stage est la fluidification de ce processus afin de faciliter la prise de décision
+ou exactement la détermination des prix de toute nature.
+\begin{figure}[H]
+					\centering
+					\fbox{\includegraphics[width=.9\textwidth]{ch2-images/ex_flow}}
+					
+					\label{fig:archi}
+				\caption{Architecture Globale.}
+			\end{figure}
+\par
+Le processus est déclenché par le besoin d’information, après vient la recherche du mail relatif aux besoins de l’analyste. Ce besoin est décrit par l’organisme, le marché et le type de la publication. Normalement les fichiers sont stockés en une structure hiérarchique bien définie. En cas de manque d’information ou de fichier, la recherche se fait sur les mails.
+\par
+En se basant sur l’utilisation actuelle des fichiers, nous avons constaté que les analystes passent un temps important à structurer les données avant qu’ils les utilisent pour la négociation des prix de vente ou l’élaboration des structures de coût des produits (DAP, MAP ...) liées au prix des matières premières utilisées lors du processus de transformation.
+\par
+En effet, les structures de coût sont utilisées pour connaitre la marge de bénéfice sur ces produits pour ensuite adapter les prix de vente ou viser les marchés à fort gain.
+\par
+Après avoir structuré les données, l’analyste les transforme en information en les éditant sous Excel. Cette transformation, des fois manuelle, peut engendrer plusieurs erreurs qui sont liées à la protection de fichiers PDF ou leur mise en page. Enfin, il présente les résultats synthétisés sous forme d’une présentation Powerpoint.
+\par
+Après avoir présenté les résultats, l’accès à l’information devient pénible ou bien impossible dans le cas d’une perte, ce qui nécessite de reprendre le processus à nouveau avec les mêmes hypothèses. Cette contrainte mène généralement le processus à l’échec.
+\par
+Au vu de ce processus, nous avons pu identifier plusieurs problèmes parmi lesquels nous citons :
+\begin{itemize}
+	\item L’absence de la structuration automatique des fichiers sur la structure hiérarchique.
+	\item Le traitement des données prend un temps important ce qui gêne la compréhension
+mutuelle et la collaboration des analystes.
+	\item Le niveau d'exploitabilité des données est très bas.
+	\item L’absence d’un système d’historisation des données brutes ainsi que les résultats des
+analyses.
+	\item L’absence de la structuration automatique des données brutes.
+	\item L’absence d’un outil d’extraction de données des fichiers PDF.
+	\item Faible fiabilité des données saisies manuellement.
+	\item Risque de perte d’information à toute étape du processus.
+\end{itemize}
 \section{Revue de littérature}
 \subsection{Qu'est ce que le Data Mining ?}
 La fouille de données, français pour le "Data Mining" est le processus de recherche et de découverte d'auparavant inconnus et potentiellement intéressants modèles dans les grands ensembles de données \cite{def-DM}. L'information 'minée' est typiquement représentée par un modèle de la structure sémantique de l'ensemble de données, où le modèle peut être utilisé sur de nouvelles données à des fins de prédiction ou de classification. Alternativement, des experts humains du métier en question peuvent choisir d'examiner manuellement le modèle, à la recherche d'éléments qui expliqueraient des caractéristiques précédemment mal comprises ou inconnues du domaine d'étude.
