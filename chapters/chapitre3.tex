@@ -258,7 +258,7 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 			\label{fig:BAM}
 			\end{figure}
 			\newpage
-			De par les lignes centrales des boites, il s'avère que le Maroc exporte nettement plus que la moyenne mondiale en acide phosphorique (PA), en roche (Rock); dépasse sensiblement les moyennes DAP et MAP, et sous-performe dans les exports des TSP. Nous prêterons plus d'attention aux histogrammes de la figure \ref{fig:HistProd} ci-dessous en les contextualisant au sein des rôles des exportateurs majeurs de produits phosphatés. Nous nous suffirons ici de relever que ces histogrammes confirment bien la rareté des valeurs aberrantes ressortant après notre transformation logarithmique : 
+			De par les lignes centrales des boites, il s'avère que le Maroc exporte nettement plus que la moyenne mondiale en acide phosphorique (PA), en roche (Rock); dépasse sensiblement les moyennes DAP et MAP, et sous-performe dans les exports des TSP. Nous prêterons plus d'attention aux histogrammes de la figure \ref{fig:HistProd} ci-dessous en les contextualisant au sein des rôles des exportateurs majeurs de produits phosphatés. Nous nous suffirons ici de relever que ces histogrammes confirment bien la rareté des valeurs aberrantes après notre transformation logarithmique : 
 			\begin{figure}[H]
 
 						\begin{subfigure}{.5\textwidth}
@@ -277,21 +277,20 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 						\label{fig:HistProd}
 					\end{figure}
 		\paragraph{Description des exportateurs majeurs\\}
-		Nous nous proposons dans la section suivante d'étudier de plus près la position du Maroc au sein des exportateurs majeurs de produits phosphatés. Nous empilons les histogrammes des produits de la figure \ref{fig:HistProd} en coloriant les barres selon le produit concerné (figure \ref{fig:colprod}) et les exportateurs les ayant émis (figure \ref{fig:colexp}). La figure \ref{fig:DistProdExp} permet les observations suivantes:
-		\begin{enumerate}
-		\item Observations relatives au type de produits exportés:
+		Nous empilons les histogrammes des produits de la figure \ref{fig:HistProd} en coloriant les barres selon le produit concerné (figure \ref{fig:colprod}) et les exportateurs les ayant émis (figure \ref{fig:colexp}). La figure \ref{fig:DistProdExp} permet les observations suivantes:\\
+		\textbf{Observations relatives au type de produits exportés:}
 			\begin{itemize}
-			\item Les volumes d'acide phosphorique sont échangés par lot de petites quantités. Ceci s'explique d'une part par la spécificité des besoins en acide qui ne couvrent qu'un ensemble réduit d'industries; et d'une autre part par les précautions contraignantes à observer durant le fret de l'acide. La figure \ref{fig:densprod} montre bien un pic au niveau des plus faibles valeurs des quantités exportées.
-			\item Les fertilisants DAP, MAP et TSP sont similairement centrés. L’explication est à corréler avec la généricité des applications agricoles de ceux-ci ainsi que le volume transportable par les cargo maritimes de type \textit{Panamax}\cite{ocp-fil}.
-			\item Les volumes des lot de roche de phosphate s'articule largement au-dessus du reste des produits et est possiblement imputable au format de transport de la roche - en vrac - qui ne nécessite par de dispositions particulières lors du transport maritime ainsi que la nécessité pour les pays importateurs de disposer d'usine de traitement de la roche, exemple d'industrie qui acquiert sa matière première en contrat annuels\cite{ocp-fil}.
+			\item Les volumes d'acide phosphorique sont échangés par lot de petites quantités. Ceci s'explique d'une part par la spécificité des besoins en acide qui ne couvrent qu'un ensemble réduit d'industries; et d'une autre part par les précautions contraignantes à observer durant le fret de l'acide \cite{acidmax}. La figure \ref{fig:densprod} montre bien un pic au niveau des plus faibles valeurs des quantités exportées.
+			\item Les fertilisants DAP, MAP et TSP sont similairement centrés. L’explication est à corréler avec la généricité des applications agricoles de ceux-ci ainsi que le volume transportable par les cargo maritimes de type \textit{Panamax\footnote{Les navires classés comme Panamax ont les dimensions maximum pour rentrer dans les écluses du canal de Panama. La majorité des navires sont conçus à la limite de cette taille. Pour le transport des fertilisants phosphatés, ceux-ci sont chargés à la hauteur de 55kT = $e^{1.74} kT$\cite{panamax}}}.
+			\item Les volumes des lot de roche de phosphate s'articule largement au-dessus du reste des produits et est possiblement imputable au format de transport de la roche\footnote{Le format de transport de la roche en vrac permet d'atteindre des chargements Panamax de 56000 kT = $e^{4.75} kT$\cite{rockmax}} qui ne nécessite pas de dispositions particulières lors du transport maritime ainsi que la nécessité pour les pays importateurs de disposer d'usine de traitement de la roche, exemple d'industrie qui acquiert sa matière première en contrat annuels\cite{panamax}.
 			\end{itemize}
-		\newpage
-		\item Observations relatives aux positionnement des exportateurs majeurs:
+		\textbf{Observations relatives aux positionnement des exportateurs majeurs:}
 			\begin{itemize}
 		\item La Chine s'est forgée un marché de lots d'export de faibles quantités mais plus grand en fréquence. Ce positionnement est représenté par la courbe chinoise sur la figure \ref{fig:colexp} et éclairci par la figure \ref{fig:destReg} qui présente une Chine dominant le marché asiatique caractérisé par un nombre élevé de pays-clients différents.
-		\item Dans les livraisons à grand volume, le Maroc est incontestablement favori, surclassant ainsi la Russie et les USA dans la figure \ref{fig:colexp}
-			\end{itemize} 
-		\end{enumerate} 
+		\item Dans les livraisons à volumes intermédiaires, les USA adoptent une politique unimodale caractérisée par des exports en forme quasi-gaussienne, indicateur d'une stabilité des volumes de production.
+		\item La Russie présente le même positionnement que la moyenne du marché avec des courbes calquées sur la figure \ref{fig:colexp} avec une tendance des Russes à décaler leur exports vers des volumes légèrement supérieurs à la moyenne. C'est la position du \textit{Market Follower\footnote{Market Follower : se dit d'une entreprise qui permet à des firmes plus dominantes de décider des prix du marché.}}
+		\item Dans les livraisons à grand volume, le Maroc est incontestablement favori, surclassant ainsi la Russie et les USA dans la figure \ref{fig:colexp}. C'est la position du \textit{Price Setter} qui s'affirme.
+			\end{itemize}
 		\begin{figure}[H]
 		\begin{subfigure}{.5\textwidth}
 				\centering
@@ -321,18 +320,24 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 						\label{fig:DistProdExp}
 		\end{figure}
 		\paragraph{Description des régions importatrices\\}
-		Nous
+		Deux facteurs semblent peser sensiblement dans l'acquisition des parts de marchés par les différents exportateurs. D'abord la distance de ceux-ci par rapport aux régions de destinations. Ensuite les atouts politiques dont jouissent les exportateurs majeurs sur le marché. Nous dressons à l'appréciation du lecteur la figure \ref{fig:destReg} ci-dessous en attirons son attention sur les deux exemples suivants :
+		\begin{itemize}
+		\item La Chine s'accapare les marchés est et sud asiatique. 
+		\item La Russie domine les pays FSU\footnote{Former Soviet Union : Ex-URSS} bien que ceux-ci soit proches des exportateurs européens.
+		\item Le marché américain latin et nord privilégie les USA.
+		\item Le Maroc présent sur l'ensemble du marché dans les tranches supérieurs des exports tous produits confondus.
+		\end{itemize}
 				\begin{figure}[H]
 				\centering
 				\fbox{\includegraphics[width=\linewidth]{ch3-images/J}}
-				\caption{}
+				\caption{Parts de marché des produits phosphatés par région de destination et exportateur majeur}
 				\label{fig:destReg}
 				\end{figure}	
 				\begin{figure}[H]
 				\centering
 				\fbox{\includegraphics[width=\linewidth]{ch3-images/K}}
-				\caption{}
-				\label{}
+				\caption{Sommes trimestrielles des exports par région de destination}
+				\label{fig:compReg}
 				\end{figure}
 
 	\section{Collecte et préparation des données externes}
