@@ -1,7 +1,7 @@
 \chapter{Analyse et spécification}
 \epigraph{If a student takes the whole series of my folklore courses including the graduate seminars, he or she should learn something about fieldwork, something about bibliography, something about how to carry out library research, and something about how to publish that research.}{Alan Dundes}
 \subparagraph{}
-Ce chapitre contextualise le projet dans son environnement, en présentant en premier lieu l'organisme hôte de celui-ci – L'Office Chérifien des Phosphates – avant de motiver les raisons inhérentes à son implémentation pour finir sur la planification du déroulement de l'analyse, la conception et la réalisation du projet.
+Ce chapitre procède à une analyse de l'existant au sein du département commercial-marketing au début de notre stage et y relève des points de critiques auxquels nous proposons une architecture applicative en guise de solution. Ceci après avoir fait un tour d'horizon des recherches scientifiques ayant adressé des problématiques similaires pour inspirer le cadrage fonctionnel et technique de notre projet.
 \cleardoublepage
 
 \section{Analyse de l’existant}
@@ -34,6 +34,7 @@ modèle souffre de multi-colinéarité. Ceci a été corrigé en supprimant ces 
 Ces études mettent en avant deux concepts importants dans les prévisions agricoles. Tout d'abord, la plupart des modèles de prévisions utilisés sont des modèles causaux qui tentent de relier une variable dépendante telle que la demande d'engrais à un ensemble de variables exogènes. Deuxièmement, ces études nous indiquent quelques uns des facteurs de base ou variables indépendantes que nous devrions prendre en compte dans la construction de notre modèle : Des facteurs agraires, climatiques mais aussi socio-économiques.
 \section{Compréhension du problème}
 	\subsection{Cadrage fonctionnel du projet}
+	À la lumière de notre lecture bibliographique, nous procédons à l'établissement de la liste des divers méthodologies de prévisions en nous intéressant particulièrement aux forces et faiblesses de chacune ainsi qu'aux exigences techniques et informationnelles que celles-ci nécessitent. Nous retiendrons deux approches qui constitueront le cadre fonctionnel de notre projet. Les paragraphes suivants rendent compte de cette évaluation.
 	\subsubsection{Les étapes d'une prévision}
 	La prévision des engrais peut être divisée en trois étapes complémentaires les unes aux autres, à savoir:\begin{enumerate}
 	\item l'évaluation du potentiel,
