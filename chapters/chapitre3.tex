@@ -249,75 +249,90 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	Pour un échantillon de 20 tirages, nous n'avons observé aucun écart.
 	\subsubsection{Description des données de consolidation}
 	Nous procédons dans la partie suivante à la visualisation exploratoire de nos données consolidées. En statistiques, l'analyse exploratoire des données (AED) est une approche de l'analyse des ensembles de données pour résumer leurs principales caractéristiques, souvent avec des méthodes visuelles. Un modèle statistique peut être utilisé ou non, mais surtout l'AED interrogent les données sur ce qu'elles peuvent nous dire au-delà de la modélisation formelle ou des tâches de vérification d'hypothèses. Le script en langage \textbf{R} de l'AED à suivre peut être retrouvé dans le dossier \textit{Source} du dépôt \textbf{GitHub} de notre mémoire de projet de fin d'études\cite{this}.
-	\par
-	Dans la figure
+	\paragraph{Description des quantités exportées\\}
+	La figure \ref{fig:BAM} ci-dessous est la représentation graphique des distributions des échanges mondiaux des produits. Nous nous intéressons ainsi à la colonne \textit{kT} du datamart de la figure \ref{fig:DMOCP}. Nous procédons en un premier lieu à la transformation logarithmique de cette colonne en vue d'atténuer les écarts entre les valeurs les plus extrêmes et produire des diagramme visuellement plus plaisants offrant plus de flexibilité à l'interprétation. Les diagramme de la figure \ref{fig:BAM} sont communément appelés des \textit{Boites à Moustaches} et résument l'information de dispersion des valeurs tracées par une boite (en rouge) délimitée par l'écart interquartile $Q_3 - Q_1$ représentant les enregistrements séparant les 25\% des valeurs les plus extrêmes et dont la ligne centrale représente la moyenne de l'échantillon. Les moustaches de la boite permettent de se prononcer quant aux valeurs aberrantes : sont coloriées en Orange, les valeurs dépassant les limites des moustaches dont la longueur est (1.5 x $Q_3 - Q_1$).
 			\begin{figure}[H]
 			\centering
 			\fbox{\includegraphics[width=\linewidth]{ch3-images/A}}
-			\caption{}
-			\label{fig:}
+			\caption{Boites à moustaches des quantités logarithmiques exportées par produit phosphatés. Gauche : Quantités mondiales. Droite : Exports Marocains.}
+			\label{fig:BAM}
 			\end{figure}
+			\newpage
+			De par les lignes centrales des boites, il s'avère que le Maroc exporte nettement plus que la moyenne mondiale en acide phosphorique (PA), en roche (Rock); dépasse sensiblement les moyennes DAP et MAP, et sous-performe dans les exports des TSP. Nous prêterons plus d'attention aux histogrammes de la figure \ref{fig:HistProd} ci-dessous en les contextualisant au sein des rôles des exportateurs majeurs de produits phosphatés. Nous nous suffirons ici de relever que ces histogrammes confirment bien la rareté des valeurs aberrantes ressortant après notre transformation logarithmique : 
+			\begin{figure}[H]
+
+						\begin{subfigure}{.5\textwidth}
+								\centering
+								\fbox{\includegraphics[width=\textwidth]{ch3-images/G}}
+								\caption{Histogramme des quantités logarithmiques mondiales exportées par produit.}
+								\label{fig:}
+						\end{subfigure}
+						\begin{subfigure}{.5\textwidth}
+												\centering
+												\fbox{\includegraphics[width=\textwidth]{ch3-images/H}}
+												\caption{Histogramme des exports logarithmiques\\Marocains par produit.}
+												\label{fig:}
+						\end{subfigure}
+						\caption{Histogramme des quantités logarithmiques exportées par produit.}
+						\label{fig:HistProd}
+					\end{figure}
+		\paragraph{Description des exportateurs majeurs\\}
+		Nous nous proposons dans la section suivante d'étudier de plus près la position du Maroc au sein des exportateurs majeurs de produits phosphatés. Nous empilons les histogrammes des produits de la figure \ref{fig:HistProd} en coloriant les barres selon le produit concerné (figure \ref{fig:colprod}) et les exportateurs les ayant émis (figure \ref{fig:colexp}). La figure \ref{fig:DistProdExp} permet les observations suivantes:
+		\begin{enumerate}
+		\item Observations relatives au type de produits exportés:
+			\begin{itemize}
+			\item Les volumes d'acide phosphorique sont échangés par lot de petites quantités. Ceci s'explique d'une part par la spécificité des besoins en acide qui ne couvrent qu'un ensemble réduit d'industries; et d'une autre part par les précautions contraignantes à observer durant le fret de l'acide. La figure \ref{fig:densprod} montre bien un pic au niveau des plus faibles valeurs des quantités exportées.
+			\item Les fertilisants DAP, MAP et TSP sont similairement centrés. L’explication est à corréler avec la généricité des applications agricoles de ceux-ci ainsi que le volume transportable par les cargo maritimes de type \textit{Panamax}\cite{ocp-fil}.
+			\item Les volumes des lot de roche de phosphate s'articule largement au-dessus du reste des produits et est possiblement imputable au format de transport de la roche - en vrac - qui ne nécessite par de dispositions particulières lors du transport maritime ainsi que la nécessité pour les pays importateurs de disposer d'usine de traitement de la roche, exemple d'industrie qui acquiert sa matière première en contrat annuels\cite{ocp-fil}.
+			\end{itemize}
+		\newpage
+		\item Observations relatives aux positionnement des exportateurs majeurs:
+			\begin{itemize}
+		\item La Chine s'est forgée un marché de lots d'export de faibles quantités mais plus grand en fréquence. Ce positionnement est représenté par la courbe chinoise sur la figure \ref{fig:colexp} et éclairci par la figure \ref{fig:destReg} qui présente une Chine dominant le marché asiatique caractérisé par un nombre élevé de pays-clients différents.
+		\item Dans les livraisons à grand volume, le Maroc est incontestablement favori, surclassant ainsi la Russie et les USA dans la figure \ref{fig:colexp}
+			\end{itemize} 
+		\end{enumerate} 
 		\begin{figure}[H]
 		\begin{subfigure}{.5\textwidth}
 				\centering
 				\fbox{\includegraphics[width=\textwidth]{ch3-images/B}}
-				\caption{}
-				\label{fig:}
+				\caption{Histogramme des quantités logarithmiques mondiales exportées par produit.}
+				\label{fig:colprod}
 		\end{subfigure}
 		\begin{subfigure}{.5\textwidth}
 				\centering
 				\fbox{\includegraphics[width=\textwidth]{ch3-images/D}}
-				\caption{}
-				\label{fig:}
+				\caption{Histogramme des quantités logarithmiques mondiales exportées par exportateur majeur.}
+				\label{fig:colexp}
 		\end{subfigure}
 				\begin{subfigure}{.5\textwidth}
 						\centering
 						\fbox{\includegraphics[width=\textwidth]{ch3-images/C}}
-						\caption{}
-						\label{fig:}
+						\caption{Densités des quantités logarithmiques\\mondiales exportées par produit.}
+						\label{fig:densprod}
 				\end{subfigure}
 				\begin{subfigure}{.5\textwidth}
 						\centering
 						\fbox{\includegraphics[width=\textwidth]{ch3-images/E}}
-						\caption{}
-						\label{fig:}
+						\caption{Densités des quantités logarithmiques\\mondiales exportées par exportateur majeur.}
+						\label{fig:densexp}
 				\end{subfigure}
-												\caption{}
-												\label{fig:}
+						\caption{Distributions des quantités logarithmiques mondiales exportées par produit et par exportateur majeur.}
+						\label{fig:DistProdExp}
 		\end{figure}
-						\begin{figure}[H]
-						\centering
-						\fbox{\includegraphics[width=\linewidth]{ch3-images/F}}
-						\caption{}
-						\label{fig:}
-						\end{figure}
-		\begin{figure}[H]
-				\begin{subfigure}{.5\textwidth}
-						\centering
-						\fbox{\includegraphics[width=\textwidth]{ch3-images/G}}
-						\caption{}
-						\label{fig:}
-				\end{subfigure}
-				\begin{subfigure}{.5\textwidth}
-										\centering
-										\fbox{\includegraphics[width=\textwidth]{ch3-images/H}}
-										\caption{}
-										\label{fig:}
-				\end{subfigure}
-								\caption{}
-								\label{fig:}
-				\end{figure}
+		\paragraph{Description des régions importatrices\\}
+		Nous
 				\begin{figure}[H]
 				\centering
 				\fbox{\includegraphics[width=\linewidth]{ch3-images/J}}
 				\caption{}
-				\label{fig:}
+				\label{fig:destReg}
 				\end{figure}	
 				\begin{figure}[H]
 				\centering
 				\fbox{\includegraphics[width=\linewidth]{ch3-images/K}}
 				\caption{}
-				\label{fig:}
+				\label{}
 				\end{figure}
 
 	\section{Collecte et préparation des données externes}
