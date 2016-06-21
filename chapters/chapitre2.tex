@@ -5,12 +5,25 @@ Ce chapitre procède à une analyse de l'existant au sein du département commer
 \cleardoublepage
 
 \section{Analyse de l’existant}
+\subsection{Description du processus d'analyse du marché}
+L’utilisation des données au sein de la direction commerciale est basée sur le partage
+d’information concernant les marchés cibles de l’OCP. La répartition des chargés d'études de
+marché selon les continents du globe crée un besoin spécifique pour chaque analyste marché.
+Pour déterminer les prix de vente ou négocier les prix d’achat des matières premières plusieurs
+réunions quotidiennes sont indispensables. Lors de ces réunions des perspectives sur le marché sont partagés entre les analystes OCP à la base de leur revue des données qui leur parviennent par les prestataires d'informations et les solution de Business Intelligence mises en place par nos prédécesseurs(\cite{NACER,CHEMLAL}). L'objectif de notre stage est d'emmener les capacités Business Intelligence du simple reporting à la proposition de mécanismes prévisionnels fluidifiant le processus d'arbitrage quant aux volumes et prix de production. Nous résumons ce processus par la figure \ref{fig:exista} ci-dessous.
+			\begin{figure}[H]
+					\centering
+					\fbox{\includegraphics[width=\textwidth]{ch2-images/exist}}
+				\caption{Description du processus d'analyse du marché}
+				\label{fig:exista}
+			\end{figure}
+\subsection{Critique de l'existant}
+\subsection{Recueil des besoins}
 \section{Revue de littérature}
 \subsection{Qu'est ce que le Data Mining ?}
 La fouille de données, français pour le "Data Mining" est le processus de recherche et de découverte d'auparavant inconnus et potentiellement intéressants modèles dans les grands ensembles de données \cite{def-DM}. L'information 'minée' est typiquement représentée par un modèle de la structure sémantique de l'ensemble de données, où le modèle peut être utilisé sur de nouvelles données à des fins de prédiction ou de classification. Alternativement, des experts humains du métier en question peuvent choisir d'examiner manuellement le modèle, à la recherche d'éléments qui expliqueraient des caractéristiques précédemment mal comprises ou inconnues du domaine d'étude.
 \par
-Brynjolfsson, Hitt, et Kim\cite{data-driven-des} ont mené des recherches empiriques et ont conclu que la performance des organisations est directement liée à leur capacité à prendre des décisions dirigées par les données. Il est donc important de comprendre les facteurs de succès nécessaires pour adopter des techniques de fouilles de données dans les organisations.\\
-En plus des défis techniques, le data mining présente également un ensemble de défis de gestion. Le plus important parmi ceux-ci est la nouvellement acquise capacité de l'organisation à prendre des décisions basées sur les données et donc l'éloigne de la prise de décision basée sur l'intuition. Le leadership, la gestion des talents, de la technologie, la prise de décisions et de la culture de l'entreprise sont des facteurs essentiels pour réussir à tirer parti des grandes données pour la performance organisationnelle\cite{mcafee12}.\paragraph{}
+Brynjolfsson, Hitt, et Kim\cite{data-driven-des} ont mené des recherches empiriques et ont conclu que la performance des organisations est directement liée à leur capacité à prendre des décisions dirigées par les données. Il est donc important de comprendre les facteurs de succès nécessaires pour adopter des techniques de fouilles de données dans les organisations. En plus des défis techniques, le data mining présente également un ensemble de défis de gestion. Le plus important parmi ceux-ci est la nouvellement acquise capacité de l'organisation à prendre des décisions basées sur les données et donc l'éloigne de la prise de décision basée sur l'intuition. Le leadership, la gestion des talents, de la technologie, la prise de décisions et de la culture de l'entreprise sont des facteurs essentiels pour réussir à tirer parti des grandes données pour la performance organisationnelle\cite{mcafee12}.\paragraph{}
 Du côté agricole, Ashlee Vance de rapporte que l'entreprise innovante, \textit{Climate Corp}, qui utilise des données météorologiques localisées pour prédire les rendements des cultures et utilise ces données pour échafauder des primes d'assurance sur les récoltes sur mesure aux agriculteurs individuels. \textit{Climate Corp} enregistre et analyse plus de 60 ans de données météorologiques, comprenant les précipitations, la température et les conditions du sol avec une granularité de 4 kilomètres de rayon afin d'arriver à des prévisions de rendement des cultures\cite{vince12}.\par
 \subsection{Les études de prévisions en matière de fertilisants}\label{read1}
 L'agriculture est étroitement liée à la sécurité alimentaire des nations, un grand nombre de recherches ont été menées par des organismes gouvernementaux pour assurer un avenir agricole durable et productif. La majorité des prévisions dans les utilisations agricoles utilisent des modélisations économétriques. Cela implique l'utilisation de variables exogènes pour prévoir les rendements des cultures,la consommation des engrais, etc. Nous sommes particulièrement intéressés par les recherches liées à la prévision de la consommation d'engrais puisqu'elles se rapportent à notre problématique.\par
@@ -65,7 +78,7 @@ Ces études mettent en avant deux concepts importants dans les prévisions agric
 	
 	Cette méthode est extrêmement complexe, impliquant des équations mathématiques pour exprimer les relations et les inter-relations entre les variables. En outre, la fiabilité n'est pas garantie car elle dépend des prévisions des valeurs des facteurs critiques choisis. Au mieux, il nous dit ce que la demande est susceptible d'être dans un ensemble donné de circonstances, mais il n'y a aucune certitude que cet ensemble de circonstances prévaudra durant les années sous prévisions.
 	
-	Une condition sine qua non pour l'utilisation de cette méthode est la disponibilité des données, selon la région et la saison, de divers facteurs critiques en plus des données sur la demande d'engrais pendant plusieurs années. Comme mentionné, une sérieuse limitation de la méthode de causalité est que la prévision est, à son tour, dépend des indicateurs qui doivent être eux-mêmes projetés.
+	Une condition sine qua non pour l'utilisation de cette méthode est la disponibilité des données, selon la région et la saison, de divers facteurs critiques en plus des données sur la demande d'engrais pendant plusieurs années. Comme mentionné, une sérieuse limitation de la méthode de causalité est que la prévision, à son tour, dépend des indicateurs qui doivent être eux-mêmes projetés.
 	\subsection{Cadrage technique du projet}
 	\subsubsection{Architecture globale de notre solution}
 			\begin{figure}[H]
