@@ -1,6 +1,7 @@
 \chapter{Analyse et spécification}
 \epigraph{If a student takes the whole series of my folklore courses including the graduate seminars, he or she should learn something about fieldwork, something about bibliography, something about how to carry out library research, and something about how to publish that research.}{Alan Dundes}
-
+\subparagraph{}
+Ce chapitre contextualise le projet dans son environnement, en présentant en premier lieu l'organisme hôte de celui-ci – L'Office Chérifien des Phosphates – avant de motiver les raisons inhérentes à son implémentation pour finir sur la planification du déroulement de l'analyse, la conception et la réalisation du projet.
 \cleardoublepage
 
 \section{Analyse de l’existant}
@@ -32,9 +33,39 @@ généralement suivie par un rendement plus faible. Par conséquent, ils manquen
 modèle souffre de multi-colinéarité. Ceci a été corrigé en supprimant ces variables indépendantes de l'équation en se basant sur le VIF\footnote{Le Facteur de l'Inflation de la Variance quantifie la gravité de multi-colinéarité dans une régressions par méthodes des moindres carrés. Il fournit un indice qui mesure combien la variance d'un coefficient de régression estimé est augmenté en raison de la colinéarité.}. Le modèle final,ajusté pour multi-colinéarité, a réalisé un $R^2$ élevé\footnote{En statistique, le coefficient de détermination $R^2$ est une mesure de la qualité de la prédiction d'une régression linéaire. Il est défini comme 1 moins le ratio entre l'erreur avec les valeurs prédites et la variance des données}, avec pour la majorité des régions, la terre cultivée comme facteur le plus important.\paragraph{}
 Ces études mettent en avant deux concepts importants dans les prévisions agricoles. Tout d'abord, la plupart des modèles de prévisions utilisés sont des modèles causaux qui tentent de relier une variable dépendante telle que la demande d'engrais à un ensemble de variables exogènes. Deuxièmement, ces études nous indiquent quelques uns des facteurs de base ou variables indépendantes que nous devrions prendre en compte dans la construction de notre modèle : Des facteurs agraires, climatiques mais aussi socio-économiques.
 \section{Compréhension du problème}
-	\subsection{Spécification fonctionelle}
-
-	\subsection{Spécification technique}
+	\subsection{Cadrage fonctionnel du projet}
+	\subsubsection{Les étapes d'une prévision}
+	La prévision des engrais peut être divisée en trois étapes complémentaires les unes aux autres, à savoir:\begin{enumerate}
+	\item l'évaluation du potentiel,
+	\item les prévisions de la demande
+	\item les prévisions des ventes
+	\end{enumerate}
+	Pour le gouvernement les deux premières étapes sont importantes. Pour les organisations de commercialisation, les deuxième et troisième étapes sont pertinentes. Le gouvernement souhaite savoir l'écart entre le potentiel et la demande afin de déterminer ce qu'il doit faire pour transformer une partie du potentiel en demande effective. Une entreprise souhaite savoir ce que la demande effective est et quelle part elle peut être satisfaite par les ventes de l'entreprise.\par
+	En ce qui concerne la méthodologie de prévision employée, les méthodes de prévision entrent dans l'une des quatre approches de base:\begin{itemize}
+	\item Mesure du potentiel par des méthodes agronomiques ou orientées besoins, 
+	\item L'analyse et la projection de séries chronologiques,
+	\item Modèles causaux,
+	\item Approche qualitative.
+	\end{itemize}\par
+	De par sa nature, la première approche s’intéresse au long terme et est essentiellement idéaliste. Elle nous dit ce que la demande d'engrais pourrait être et non ce que la demande d'engrais est susceptible d'être.\par
+	La seconde approche repose sur des données historiques pour analyser et discerner des schémas de la demande pour prévoir l'avenir, l'hypothèse étant que l'avenir est une continuation du passé. Des données fiables sur plusieurs années sont essentielles pour cette approche.\par
+	La troisième approche cherche à établir une relation de cause à effet entre la demande d'engrais et d'autres variables indépendantes dans l'environnement du marché des fertilisants. Comme dans le cas de la méthode des séries chronologiques, les données passées sont importantes pour évaluer l'effet de ces facteurs sur la demande. Les deuxième et troisième méthodes ne peuvent pas être utilisées lorsque l'on veut prévoir l'avenir d'un produit qui n'a pas d'historique ou est dans un stade de développement tel qu'aucun modèle ni tendance sont perceptibles. La consommation d'engrais dans de nombreux pays en développement est dans une telle situation.\par
+	La quatrième approche utilise des informations qualitatives, y compris des avis d'experts, pour prévoir la demande. Cette approche peut ou peut ne pas considérer le passé. Les approches qualitatives sont utilisées lorsque les informations sont rares ou ne sont pas fiables, comme dans le stade élémentaire du cycle de vie du produit. Ces conditions étant caractéristiques des marchés des engrais dans les pays en développement, les techniques qualitatives sont très utiles. L'utilisation du jugement humain associé à des systèmes de notation transforment les opinions qualitatives en moyens quantitatifs pour les prévisions.
+	\subsubsection{L'extension de la tendance via séries chronologiques pour la prévision}
+	Une méthode couramment utilisée pour la prévision est l'analyse des données historiques pour discerner l'évolution de la croissance de la demande et de l'étendre à l'avenir pour prévoir la demande. Si les données de plusieurs années de ventes d'engrais sont disponibles et la tendance est relativement stable, il est possible de lire les données antérieures de la "vitesse" actuelle de la croissance de la demande et la mesure dans laquelle la vitesse augmente ou diminue.\par
+	L'extension de tendance est effectuée comme suit:
+	\begin{itemize}
+	\item Les données chronologiques de la demande d'engrais sont répertoriées.
+	\item Ces données sont susceptibles d'avoir quatre composantes majeurs. La première reflète la \textit{tendance} qui se réfère à la variation se produisant constamment sur une longue période. La deuxième composante saisit un mouvement cyclique de la demande dont la plupart des produits, y compris les engrais, sont soumis. Comprendre la variation cyclique est utile pour les prévisions à court et moyen terme. Le troisième élément est la \textit{variation saisonnière} au sein de chaque année. La quatrième composante est la perturbation causée par des \textit{événements erratiques et aléatoires}. Grâce à des méthodes statistiques les données de séries chronologiques sont analysées et décomposées en ces quatre composantes et re-combinés pour fournir la formule de prévision.
+	\item L'extension de la tendance est déterminée par un ajustement d'une équation mathématique appropriée qui se rapproche de la tendance historique. Par exemple, la tendance peut être linéaire, à savoir une ligne droite, la pente de degré de la ligne droite indiquant la quantité d'augmentation annuelle de la demande. Les tendances peuvent être quadratique ou exponentielle. Les équations mathématiques décrivent le taux représenté par chacune de ces formes de croissance et nous choisissons l'équation minimisant l'erreur à la tendance historique pour calculer la demande future.
+	\end{itemize}
+	\subsubsection{Les modèles causaux pour la prévision}
+	Le modèle causal est ainsi appelé parce qu'il emploie la relation de cause à effet entre la demande d'engrais et les facteurs qui l'affectent. Le modèle ne représente pas la demande d'engrais au fil du temps ou pour un moment particulier, mais présente la demande par rapport à un ensemble de circonstances. Bien que la méthode d'extension de tendance suppose que le temps reflète tous les facteurs, la méthode causale cherche à établir des relations directes entre la demande d'engrais et les facteurs qui l'influencent. Les facteurs influant sur la demande, comme nous l'avons vu dans la section \ref{read1}, comprennent les prix des cultures, les prix des engrais, la disponibilité du crédit, la superficie irriguée, les précipitations, la superficie cultivée en variétés à haut rendement, le modèle de culture,etc. En analysant les données passées, un ensemble de facteurs essentiels qui ont l'effet le plus profond peuvent être sélectionnés et l'effet des facteurs sélectionnés quantifiés et exprimés sous la forme d'équations mathématiques. Pour projeter la demande pour les années à venir, l'état probable de chaque facteur critique sélectionné à ce point de temps doit d'abord être évalué.
+	
+	Cette méthode est extrêmement complexe, impliquant des équations mathématiques pour exprimer les relations et les inter-relations entre les variables. En outre, la fiabilité n'est pas garantie car elle dépend des prévisions des valeurs des facteurs critiques choisis. Au mieux, il nous dit ce que la demande est susceptible d'être dans un ensemble donné de circonstances, mais il n'y a aucune certitude que cet ensemble de circonstances prévaudra durant les années sous prévisions.
+	
+	Une condition sine qua non pour l'utilisation de cette méthode est la disponibilité des données, selon la région et la saison, de divers facteurs critiques en plus des données sur la demande d'engrais pendant plusieurs années. Comme mentionné, une sérieuse limitation de la méthode de causalité est que la prévision est, à son tour, dépend des indicateurs qui doivent être eux-mêmes projetés.
+	\subsection{Cadrage technique du projet}
 	\subsubsection{Architecture globale de notre solution}
 			\begin{figure}[H]
 					\centering
