@@ -7,21 +7,42 @@
 \section{Revue de littérature}
 \subsection{Qu'est ce que le Data Mining ?}
 La fouille de données, français pour le "Data Mining" est le processus de recherche et de découverte d'auparavant inconnus et potentiellement intéressants modèles dans les grands ensembles de données \cite{def-DM}. L'information 'minée' est typiquement représentée par un modèle de la structure sémantique de l'ensemble de données, où le modèle peut être utilisé sur de nouvelles données à des fins de prédiction ou de classification. Alternativement, des experts humains du métier en question peuvent choisir d'examiner manuellement le modèle, à la recherche d'éléments qui expliqueraient des caractéristiques précédemment mal comprises ou inconnues du domaine d'étude.
-\paragraph{}
-Brynjolfsson, Hitt, et Kim\cite{data-driven-des} ont mené des recherches empiriques et ont conclu que la performance des organisations est directement liée à leur capacité à prendre des décisions dirigées par les données. Il est donc important de comprendre les facteurs de succès nécessaires pour adopter des techniques de fouilles de données dans les organisations.
+\par
+Brynjolfsson, Hitt, et Kim\cite{data-driven-des} ont mené des recherches empiriques et ont conclu que la performance des organisations est directement liée à leur capacité à prendre des décisions dirigées par les données. Il est donc important de comprendre les facteurs de succès nécessaires pour adopter des techniques de fouilles de données dans les organisations.\\
+En plus des défis techniques, le data mining présente également un ensemble de défis de gestion. Le plus important parmi ceux-ci est la nouvellement acquise capacité de l'organisation à prendre des décisions basées sur les données et donc l'éloigne de la prise de décision basée sur l'intuition. Le leadership, la gestion des talents, de la technologie, la prise de décisions et de la culture de l'entreprise sont des facteurs essentiels pour réussir à tirer parti des grandes données pour la performance organisationnelle\cite{mcafee12}.\paragraph{}
+Du côté agricole, Ashlee Vance de rapporte que l'entreprise innovante, \textit{Climate Corp}, qui utilise des données météorologiques localisées pour prédire les rendements des cultures et utilise ces données pour échafauder des primes d'assurance sur les récoltes sur mesure aux agriculteurs individuels. \textit{Climate Corp} enregistre et analyse plus de 60 ans de données météorologiques, comprenant les précipitations, la température et les conditions du sol avec une granularité de 4 kilomètres de rayon afin d'arriver à des prévisions de rendement des cultures\cite{vince12}.\par
 \subsection{Les études de prévisions en matière de fertilisants}\label{read1}
-\subsection{Prévision à court-terme de la demande de fertilisants}\label{read2}
+L'agriculture est étroitement liée à la sécurité alimentaire des nations, un grand nombre de recherches ont été menées par des organismes gouvernementaux pour assurer un avenir agricole durable et productif. La majorité des prévisions dans les utilisations agricoles utilisent des modélisations économétriques. Cela implique l'utilisation de variables exogènes pour prévoir les rendements des cultures,la consommation des engrais, etc. Nous sommes particulièrement intéressés par les recherches liées à la prévision de la consommation d'engrais puisqu'elles se rapportent à notre problématique.\par
+Les premiers travaux connus en matière de prévision de la consommation des engrais ont été réalisés par Vail \cite{Vail27}, puis par
+Mehring et Shaw \cite{Mehr44}. Ils ont essayé d'étudier la relation entre la consommation par hectare d'azote et entre la valeur des récoltes, la teneur du sol en azote, et la proportion de trésorerie générée
+du bétail. Ils ont tous étudié la relation entre les dépenses en engrais avec
+le revenu agricole retardé d'une année. Mehring et Shaw ont conclu que les agriculteurs ont toujours tendance à dépenser une proportion constante de leur revenu sur les engrais. Vail n'a trouvé aucune relation significative entre la consommation d'engrais et les prix des engrais.
+Zvi Griliches\cite{Zvi58} a réalisé une autre étude de la consommation d'engrais avec l'objectif d'estimer l'élasticité à court et long terme de la demande. Il a constaté que
+les changements technologiques qui ont abouti à de nouvelles technologies de production ont conduit à une réduction du prix réel des engrais, ce qui conduit à l'adoption à grande échelle et une utilisation accrue des engrais.
+L'hypothèse de Griliches était qu'une augmentation de l'utilisation d'engrais a été principalement entraînée par une baisse du prix de l'engrais par rapport à d'autres intrants agricoles. Il a modelé la consommation d'engrais dans la saison en cours en fonction du prix de l'engrais et la consommation d'engrais de la saison précédente en utilisant les données 1911-1956.\par
+La FAO\footnote{Organisation des nations unies pour l'alimentation et l'agriculture} publie une perspective mondiale sur la demande d'engrais et les tendances des autres produits agricoles telles que les rendements des cultures et la production de céréales. Parthasarathy\cite{PAR94} de la FAO a analysé divers facteurs qui influent sur la consommation d'engrais à long et court terme. En plus de facteurs exogène tels que le pouvoir d'achat des agriculteurs, qui est déterminé par le caractère abordable des engrais, et la trésorerie de liquidités des agriculteurs, la disponibilité de l'engrais influence également la consommation. L'infrastructure et une meilleure gestion de la logistique résultent en une plus grande disponibilité du produit au moment du besoin des agriculteurs, ainsi la demande en assurant est convertie en vente. Selon Parthasarathy, en outre à la terre (superficie plantée et récoltée) et le rendement, d'autres facteurs tels que la quantité et la répartition des précipitations, les modes de culture, et la taille des exploitations influent également sur la consommation d'engrais.\\
+Dans un rapport plus récent, la FAO a émis ses prévisions de la consommation d'engrais pour 2015 et 2030 et conclue que les intrants agricoles sont étroitement liés au rendement des cultures, et que la croissance de la production est directement gouvernée par les facteurs macro tels que l'augmentation de la population et le revenu par habitant.
+La relation positive entre la consommation d'engrais et la production agricole est bien
+établie dans les deux pays en développement et développés. Le scénario de base pour la projection des utilisations d'engrais suppose l'utilisation d'engrais liée à la superficie plantée et le rendement. Le modèle était un modèle de régression logistique, où les transformations logarithmiques des variables indépendantes ont été utilisés comme intrants\cite{FAO2000}.\par
+Enfin, alors que les travaux de Griliches \cite{Zvi58} ont porté uniquement sur l'utilisation des engrais, Tenkorang \cite{Tenk06} a tenté de prévoir la demande d'engrais global à long terme, similairement au travail effectué par la
+FAO. En plus de la prévision de la consommation d'engrais, que la FAO a achevée, Tenkorang a également tenté d'estimer l'équilibre des éléments nutritifs du sol. Puisque notre projet ne portera pas sur l'estimation des éléments nutritifs du sol, nous nous concentrons sur sa méthode d'estimation des engrais. Il a prévu la demande à travers 182 pays divisés en neuf régions, en utilisant les données de 1962 à 2005. Un intéressant
+constat est la relation entre les usages d'engrais dans les années suite à une récolte exceptionnelle.
+Les agriculteurs ont tendance à avoir le syndrome de \textit{Good Year/Bad Year} où ils sentent qu'une saison à haut rendement est
+généralement suivie par un rendement plus faible. Par conséquent, ils manquent peut-être de motivation à prendre des mesures pour augmenter les consommations de fertilisants suite à une bonne année. En conséquence, Tenkorang a modélisé l'utilisation des engrais dans une région et période de temps données en fonction d'une régression linéaire entre la production de la campagne agricole actuelle, la récolte de l'année précédente, la superficie totale cultivée, et une variable fictive\footnote{\textit{Dummy Variable} pour les anglophones.} pour tenir compte de tout changement structurel des utilisation d'engrais. Cependant, puisque que les terres cultivées et le rendement des cultures sont fondamentalement liés, son
+modèle souffre de multi-colinéarité. Ceci a été corrigé en supprimant ces variables indépendantes de l'équation en se basant sur le VIF\footnote{Le Facteur de l'Inflation de la Variance quantifie la gravité de multi-colinéarité dans une régressions par méthodes des moindres carrés. Il fournit un indice qui mesure combien la variance d'un coefficient de régression estimé est augmenté en raison de la colinéarité.}. Le modèle final,ajusté pour multi-colinéarité, a réalisé un $R^2$ élevé\footnote{En statistique, le coefficient de détermination $R^2$ est une mesure de la qualité de la prédiction d'une régression linéaire. Il est défini comme 1 moins le ratio entre l'erreur avec les valeurs prédites et la variance des données}, avec pour la majorité des régions, la terre cultivée comme facteur le plus important.\paragraph{}
+Ces études mettent en avant deux concepts importants dans les prévisions agricoles. Tout d'abord, la plupart des modèles de prévisions utilisés sont des modèles causaux qui tentent de relier une variable dépendante telle que la demande d'engrais à un ensemble de variables exogènes. Deuxièmement, ces études nous indiquent quelques uns des facteurs de base ou variables indépendantes que nous devrions prendre en compte dans la construction de notre modèle : Des facteurs agraires, climatiques mais aussi socio-économiques.
 \section{Compréhension du problème}
-\section{Spécification}
 	\subsection{Spécification fonctionelle}
-		\begin{figure}[H]
-				\centering
-				\fbox{\includegraphics[width=.7\textwidth]{ch2-images/archi}}
-				
-				\label{fig:archi}
-			\caption{Architecture Globale.}
-		\end{figure}
+
 	\subsection{Spécification technique}
+	\subsubsection{Architecture globale de notre solution}
+			\begin{figure}[H]
+					\centering
+	%				\fbox{\includegraphics[width=.7\textwidth]{ch2-images/archi}}
+					
+					\label{fig:archi}
+				\caption{Architecture Globale.}
+			\end{figure}
 	\subsubsection{Outils de réalisation}
 		\begin{itemize}
 			\item
