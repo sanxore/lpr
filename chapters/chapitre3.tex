@@ -421,9 +421,9 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	hasard parmi les \textit{p}. On note $ê(.,\theta_i)$ l’arbre construit.
 	\item[\textbf{Sortie:}]L’estimateur ${ê(x) =  \frac{1}{B} \sum_{i=1}^{B} ê_i(x,\theta_i)}$
 	\end{itemize}	
-	\subsubsection{Sélection des variables et élagage des données externes}
+	\subsubsection{Procédure de sélection des variables et élagage des données externes}
 	Parmi les nombreuses sorties proposées par la fonction randomForest, deux se révèlent particulièrement intéressantes. \textbf{L'erreur Out-of-Bag} et \textbf{Le score FA d'importance des variables}. Nous définissons celles-ci rigoureusement dans l'annexe A3. Ces deux sorties nous permettent de proposer la procédure suivante à deux phases pour l'élimination itérative des variables les moins pertinentes:
-	\paragraph{Phase 1. Élimination initiale et classement:}\begin{itemize}
+	\paragraph{Phase 1. Classement et élimination initiale:}\begin{itemize}
 	\item Nous modélisons par FA notre ensemble de données initial, comprenant la totalité des variables exogènes listées dans la section \ref{exoList}.
 	\item Nous calculons les score FA d'importance des variables et nous éliminons les variables d'importance triviale.
 	\item Nous classons les \textit{m} variables restantes par ordre descendant des score FA d'importance
@@ -433,4 +433,68 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\item Nous construisons la collection itérative des modèles de FA employant les \textit{$\alpha$} premières variables selon leur classement de score d'Importance. Pour ${\alpha \in [1,\textit{m}]}$.
 	\item Nous retenons les variables du modèle ayant réussi la plus faible erreur OOB.
 	\end{itemize}
-	
+	La mise en œuvre de cette procédure de sélection des variables peut être retrouvée écrite en langage \textbf{R} dans le dossier \textit{Source} du dépôt \textbf{GitHub} de notre mémoire de projet de fin d’études\cite{this}.
+	\subsubsection{Mise en œuvre de la sélection des variables et élagage}
+	Comme discuté en Annexe A2, la nature de l'algorithme des FA fait que le paramètre \textit{k} est plus critique que le nombre \textit{B} d'arbres qui lui devrait être choisi aussi grand que les limites calculatoires le permettent.
+	Nous commençons d'abord par trouver la valeur \textit{k} maximisant le coefficient d'ajustement $R^2$ pour une prédiction via FA de la \textbf{Consommation de kilogrammes de fertilisants phosphatés par hectare de terre arable} par la liste des \textbf{39 variables exogènes} listées à la section \ref{exoList}.
+	\paragraph{Recherche aléatoire de \textit{k}:} Puisque nous n'avons pas une idée de l'intervalle sur lequel le meilleur \textit{k} pourrait se trouver, nous commençons d'abord par essayer des valeurs aléatoires sur un intervalle. De par la nature du faible nombre de pays, 214, pour 52 caractères quantitatifs, nous ne pouvons pas nous permettre de retenir un ensemble de test. Nous utilisons ainsi 3 répétitions d'une validation-croisée sur 10 dossiers pour minimiser les risque de sur-apprentissage.
+	\begin{figure}[H]
+				\begin{subfigure}{.5\textwidth}
+					\centering
+					\fbox{\includegraphics[height=170pt]{ch3-images/randmtry}}
+					\caption{Valeurs du $R^2$ selon \textit{k} }
+					\label{fig:mtry1}
+				\end{subfigure}
+				\begin{subfigure}{.5\textwidth}
+						\centering
+						\fbox{\includegraphics[height=170pt]{ch3-images/randmtry2}}
+						\caption{Graphe de $R^2$ selon \textit{k}}
+						\label{fig:mtry2}
+				\end{subfigure}
+				\caption{Recherche aléatoire du paramètre \textit{k} (\textit{mtry})}
+				\label{fig:mtry}
+					\end{figure}
+	\paragraph{Recherche séquentielle de \textit{k}:} D'après les valeurs prises par $R^2$ sur la figure \ref{fig:mtry}, il nous parait que le meilleur \textit{k} se trouve quelque part dans les plus petites valeurs. Nous définissons une grille des 15 premières valeurs que nous parcourons à la recherche du \textit{k} optimal sur la figure \ref{fig:seqtry}.\\
+	Il s'avère ainsi que la meilleure valeur de \textit{k} est 2. Nous utiliserons ce paramètre lors des deux phases de notre procédure de sélection de variables.
+	\begin{figure}[H]
+					\begin{subfigure}{.5\textwidth}
+						\centering
+						\fbox{\includegraphics[height=200pt]{ch3-images/seqmtry}}
+						\caption{Valeurs du $R^2$ selon \textit{k} }
+						\label{fig:reqtry1}
+					\end{subfigure}
+					\begin{subfigure}{.5\textwidth}
+							\centering
+							\fbox{\includegraphics[height=200pt]{ch3-images/seqmtry2}}
+							\caption{Graphe de $R^2$ selon \textit{k}}
+							\label{fig:seqtry2}
+					\end{subfigure}
+					\caption{Recherche séquentielle du paramètre \textit{k} (\textit{mtry})}
+					\label{fig:seqtry}
+						\end{figure}
+
+	\paragraph{Phase 1. Classement et élimination initiale:}
+	Le graphe de la figure \ref{fig:eboul} suivant trace les variations de l'importance des variables de l'ajustement FA de la \textit{Consommation de kilogrammes de fertilisants phosphatés par hectare de terre arable} par la liste des \textbf{39 variables exogènes} listées à la section \ref{exoList} et classées par ordre décroissant de score d'importance.
+					\begin{figure}[H]
+					\centering
+					\fbox{\includegraphics[width=\linewidth]{ch3-images/eboulVI}}
+					\caption{Variation de l'importance des variables exogènes.}
+					\label{fig:eboul}
+					\end{figure}
+	Nous avons tracé en vert le profil de la variation des score d'importance pour décider quant aux variables dont l'importance triviale nous pousse à éliminer. Nous nous arrêtons ainsi à la \textit{m = }24e variable la plus importante et éliminons 15 = 39-24 variables triviales d'emblée.
+	La liste classée par ordre décroissant de score d'importance est donnée par la figure \ref{fig:VARIMP}.
+						\begin{figure}[H]
+						\centering
+						\fbox{\includegraphics[width=.7\linewidth]{ch3-images/VARIMP}}
+						\caption{Classement par ordre d'importance des 24 premières variables}
+						\label{fig:VARIMP}
+						\end{figure}
+	\paragraph{Phase 2. Sélection des variables:}
+	Durant cette phase nous procéderons à l'ajustement de 24 modèles de FA. Chaque modèle $FA_i$ ${i \in [1,24]}$ intégrera les \textit{i} variables les plus importantes comme classées sur la figure \ref{fig:VARIMP}. Nous choisissons le modèle \textit{j} ayant réalisé la plus faible erreur OOB. Ce modèle déterminera le nombre \text{j} de variables que nous conserverons de nos données externes réalisant ainsi l'élagage des variables non importantes.\\
+	La figure \ref{fig:laggedvars} ci-après trace l'évolution de l'erreur OOB pour chaque modèle $FA_i$. Nous traçons en rouge l'abscisse du modèle \text{j} = 12.
+							\begin{figure}[H]
+							\centering
+							\fbox{\includegraphics[width=.7\linewidth]{ch3-images/laggedvars}}
+							\caption{Graphe de l'évolution de l'erreur OOB dépendamment du nombre de variables exogènes intégrées.}
+							\label{fig:laggedvars}
+							\end{figure}
