@@ -20,7 +20,7 @@ réunions quotidiennes sont indispensables. Lors de ces réunions des perspectiv
 \subsection{Critique de l'existant}
 En se basant sur l’utilisation actuelle des fichiers, nous avons constaté que les analystes passent un temps important à structurer les données avant leur utilisation pour émettre des perspectives du marché en cas de non existence de prévision souhaitées.
 \par
-Après avoir structuré les données, l’analyste les transforme en information en les éditant sous Excel. Cette transformation, des fois manuelle, peut engendrer plusieurs erreurs qui sont liées à la protection de fichiers PDF ou leur mise en page sans compter le temps gaspillé par ces routines non automatisées. Cette tâche est fastidieuse et sera amplement détaillée dans la section \ref{humanpdf}.
+Après avoir structuré les données, l’analyste les transforme en information en les éditant sous Excel. Cette transformation, des fois manuelle, peut engendrer plusieurs erreurs qui sont liées à la protection de fichiers PDF ou leur mise en page sans compter le temps gaspillé par ces routines non automatisées.
 \par
 Les données ainsi compilées, elle sont utilisées aux fins de modélisation. A la réapparition d'un scénario similaire concernant un client différent, le processus est à nouveau repris avec les mêmes hypothèses.
 \par
@@ -37,6 +37,7 @@ analyses.
 	\item Faible fiabilité des données saisies manuellement.
 	\item Risque de perte d’information à toute étape du processus.
 \end{itemize}
+Cette situation est principalement imputable à l'inexistence d'un traitement efficient des données non structurées à la disposition de l'OCP. Nous détaillerons dans la section \ref{humanpdf} les technicités inhérentes à cette situation. 
 \section{Revue de littérature}
 \subsection{Qu'est ce que le Data Mining ?}
 La fouille de données, français pour le "Data Mining" est le processus de recherche et de découverte d'auparavant inconnus et potentiellement intéressants modèles dans les grands ensembles de données \cite{def-DM}. L'information 'minée' est typiquement représentée par un modèle de la structure sémantique de l'ensemble de données, où le modèle peut être utilisé sur de nouvelles données à des fins de prédiction ou de classification. Alternativement, des experts humains du métier en question peuvent choisir d'examiner manuellement le modèle, à la recherche d'éléments qui expliqueraient des caractéristiques précédemment mal comprises ou inconnues du domaine d'étude.
@@ -66,7 +67,7 @@ Ces études mettent en avant deux concepts importants dans les prévisions agric
 \section{Compréhension du problème}
 	\subsection{Cadrage fonctionnel du projet}
 	À la lumière de notre lecture bibliographique, nous procédons à l'établissement de la liste des divers méthodologies de prévisions en nous intéressant particulièrement aux forces et faiblesses de chacune ainsi qu'aux exigences techniques et informationnelles que celles-ci nécessitent. Nous retiendrons deux approches qui constitueront le cadre fonctionnel de notre projet. Les paragraphes suivants rendent compte de cette évaluation.
-	\subsubsection{Les étapes d'une prévision}
+	\subsubsection{Les étapes d'une prévision en matière de fertilisants}
 	La prévision des engrais peut être divisée en trois étapes complémentaires les unes aux autres, à savoir:\begin{enumerate}
 	\item l'évaluation du potentiel,
 	\item les prévisions de la demande
@@ -99,12 +100,26 @@ Ces études mettent en avant deux concepts importants dans les prévisions agric
 	Une condition sine qua non pour l'utilisation de cette méthode est la disponibilité des données, selon la région et la saison, de divers facteurs critiques en plus des données sur la demande d'engrais pendant plusieurs années. Comme mentionné, une sérieuse limitation de la méthode de causalité est que la prévision, à son tour, dépend des indicateurs qui doivent être eux-mêmes projetés.
 	\subsection{Cadrage technique du projet}
 	\subsubsection{Architecture globale de notre solution}
+	La solution que nous proposons à la problématique que nous nous sommes fixée en section \ref{problematik} intègre les réalisations suivantes:\begin{itemize}
+	\item Un noyau de prévisions générant des modèles causaux et chronologiques stockable en des procédures automatisables.
+	\item Un noyau de Parsing asservi au noyau de prévisions, servant à structurer les données nécessaires à l'établissement des modèles de prévision.
+	\item Un système de fichiers indexant les données avant et après leur structuration, ainsi que les procédures automatisables produites par le noyau de prévisions.
+	\end{itemize}
+	La solution mise en place devrait permettre de:
+	\begin{itemize}
+	\item Automatiser les processus de collecte, de structuration et de modélisation des données.
+	\item Minimiser le temps de structurations des données complexes.
+	\item Centraliser et historiser les données dérivées aux fins d'analyse et de modélisation.
+	\item Augmenter la fiabilité des données non structurées transformées.
+	\item Proposer des prévisions à la demande en matières de demande en fertilisants.
+	\item La Génération de rapports et de graphiques de synthèses des conditions du marché.
+	L'architecture applicative d'une telle solution est résumée par la figure \ref{fig:archi} :
+	\end{itemize}
 			\begin{figure}[H]
 					\centering
 					\fbox{\includegraphics[width=.7\textwidth]{ch2-images/archi}}
-					
+					\caption{Architecture applicative de la solution proposée}					
 					\label{fig:archi}
-				\caption{Architecture Globale.}
 			\end{figure}
 	\subsubsection{Outils de réalisation}
 		\begin{itemize}
@@ -151,19 +166,19 @@ Ces études mettent en avant deux concepts importants dans les prévisions agric
 		\begin{figure}[H]
 			\begin{subfigure}[b]{.3\textwidth}
 				\centering
-				\includegraphics[width=\textwidth]{ch2-images/python}
+				\includegraphics[height=40px]{ch2-images/python}
 				\caption{Logo Python}
 				\label{fig:python}
 			\end{subfigure}
 			\begin{subfigure}[b]{.3\textwidth}
 					\centering
-					\includegraphics[width=.8\textwidth]{ch2-images/R}
+					\includegraphics[height=40px]{ch2-images/R}
 					\caption{Logo R}
 					\label{fig:R}
 			\end{subfigure}
 			\begin{subfigure}[b]{.3\textwidth}
 					\centering
-					\includegraphics[width=.8\textwidth]{ch2-images/Bash}
+					\includegraphics[height=40px]{ch2-images/Bash}
 					\caption{Logo Bash}
 					\label{fig:bash}
 			\end{subfigure}
