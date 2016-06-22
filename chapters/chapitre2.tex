@@ -18,7 +18,25 @@ réunions quotidiennes sont indispensables. Lors de ces réunions des perspectiv
 				\label{fig:exista}
 			\end{figure}
 \subsection{Critique de l'existant}
-\subsection{Recueil des besoins}
+En se basant sur l’utilisation actuelle des fichiers, nous avons constaté que les analystes passent un temps important à structurer les données avant leur utilisation pour émettre des perspectives du marché en cas de non existence de prévision souhaitées.
+\par
+Après avoir structuré les données, l’analyste les transforme en information en les éditant sous Excel. Cette transformation, des fois manuelle, peut engendrer plusieurs erreurs qui sont liées à la protection de fichiers PDF ou leur mise en page sans compter le temps gaspillé par ces routines non automatisées. Cette tâche est fastidieuse et sera amplement détaillée dans la section \ref{humanpdf}.
+\par
+Les données ainsi compilées, elle sont utilisées aux fins de modélisation. A la réapparition d'un scénario similaire concernant un client différent, le processus est à nouveau repris avec les mêmes hypothèses.
+\par
+Au vu de ce processus, nous avons pu identifier plusieurs problèmes parmi lesquels nous citons :
+\begin{itemize}
+	\item Inexistence d'outils d'aide à la décision intégrant des mécanismes prévisionnels.
+	\item Les données rapportés par le système BI en place datte parfois de fin décembre 2013.
+	\item Le traitement des données prend un temps important ce qui gêne la compréhension
+mutuelle et la collaboration des analystes.
+	\item Le niveau d'exploitabilité des données est très bas.
+	\item L’absence d’un système d’historisation des données brutes ainsi que les résultats des
+analyses.
+	\item L’absence de la structuration automatique des données brutes, notamment les .pdf.
+	\item Faible fiabilité des données saisies manuellement.
+	\item Risque de perte d’information à toute étape du processus.
+\end{itemize}
 \section{Revue de littérature}
 \subsection{Qu'est ce que le Data Mining ?}
 La fouille de données, français pour le "Data Mining" est le processus de recherche et de découverte d'auparavant inconnus et potentiellement intéressants modèles dans les grands ensembles de données \cite{def-DM}. L'information 'minée' est typiquement représentée par un modèle de la structure sémantique de l'ensemble de données, où le modèle peut être utilisé sur de nouvelles données à des fins de prédiction ou de classification. Alternativement, des experts humains du métier en question peuvent choisir d'examiner manuellement le modèle, à la recherche d'éléments qui expliqueraient des caractéristiques précédemment mal comprises ou inconnues du domaine d'étude.
