@@ -4,6 +4,8 @@
 
   \item [{\textbf {OLAP : }}]\begingroup OnLine Analytical Processing\nomeqref {3.0}
 		\nompageref{34}
+  \item [{\textbf{AED : }}]\begingroup Analyse exploratoire des données\nomeqref {3.0}
+		\nompageref{43}
   \item [{\textbf{BI : }}]\begingroup Business Intelligence\nomeqref {1.0}
 		\nompageref{18}
   \item [{\textbf{CART : }}]\begingroup Classification And Regression Trees\nomeqref {3.0}
@@ -20,6 +22,8 @@
 		\nompageref{50}
   \item [{\textbf{FAO : }}]\begingroup Food and Agriculture Organization of the United Nations\nomeqref {3.0}
 		\nompageref{49}
+  \item [{\textbf{FSU : }}]\begingroup Former Soviet Union\nomeqref {3.0}
+		\nompageref{46}
   \item [{\textbf{IFA : }}]\begingroup International Fertilizer industry Association\nomeqref {3.0}
 		\nompageref{34}
   \item [{\textbf{MAP : }}]\begingroup MonoAmmonium Phosphate\nomeqref {1.0}
@@ -28,6 +32,8 @@
 		\nompageref{15}
   \item [{\textbf{OCP : }}]\begingroup Office Chérifien des Phosphates\nomeqref {1.0}
 		\nompageref{13}
+  \item [{\textbf{OOB : }}]\begingroup Out-of-Bag\nomeqref {3.0}
+		\nompageref{52}
   \item [{\textbf{PA : }}]\begingroup Acide phosphorique\nomeqref {3.0}
 		\nompageref{36}
   \item [{\textbf{PIB : }}]\begingroup Produit intérieur brut\nomeqref {3.0}
@@ -36,5 +42,7 @@
 		\nompageref{11}
   \item [{\textbf{TSP : }}]\begingroup Triple Super Phosphate\nomeqref {1.0}
 		\nompageref{15}
+  \item [{\textbf{USA : }}]\begingroup United States of America\nomeqref {3.0}
+		\nompageref{46}
 
 \end{thenomenclature}

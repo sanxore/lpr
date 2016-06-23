@@ -248,7 +248,7 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\end{itemize}
 	Pour un échantillon de 20 tirages, nous n'avons observé aucun écart.
 	\subsubsection{Description des données de consolidation}
-	Nous procédons dans la partie suivante à la visualisation exploratoire de nos données consolidées. En statistiques, l'analyse exploratoire des données (AED) est une approche de l'analyse des ensembles de données pour résumer leurs principales caractéristiques, souvent avec des méthodes visuelles. Un modèle statistique peut être utilisé ou non, mais surtout l'AED interrogent les données sur ce qu'elles peuvent nous dire au-delà de la modélisation formelle ou des tâches de vérification d'hypothèses. Le script en langage \textbf{R} de l'AED à suivre peut être retrouvé dans le dossier \textit{Source} du dépôt \textbf{GitHub} de notre mémoire de projet de fin d'études\cite{this}.
+	Nous procédons dans la partie suivante à la visualisation exploratoire de nos données consolidées. En statistiques, l'analyse exploratoire des données (AED\nomenclature{\textbf{AED : }}{Analyse exploratoire des données}) est une approche de l'analyse des ensembles de données pour résumer leurs principales caractéristiques, souvent avec des méthodes visuelles. Un modèle statistique peut être utilisé ou non, mais surtout l'AED interrogent les données sur ce qu'elles peuvent nous dire au-delà de la modélisation formelle ou des tâches de vérification d'hypothèses. Le script en langage \textbf{R} de l'AED à suivre peut être retrouvé dans le dossier \textit{Source} du dépôt \textbf{GitHub} de notre mémoire de projet de fin d'études\cite{this}.
 	\paragraph{Description des quantités exportées\\}
 	La figure \ref{fig:BAM} ci-dessous est la représentation graphique des distributions des échanges mondiaux des produits. Nous nous intéressons ainsi à la colonne \textit{kT} du datamart de la figure \ref{fig:DMOCP}. Nous procédons en un premier lieu à la transformation logarithmique de cette colonne en vue d'atténuer les écarts entre les valeurs les plus extrêmes et produire des diagramme visuellement plus plaisants offrant plus de flexibilité à l'interprétation. Les diagramme de la figure \ref{fig:BAM} sont communément appelés des \textit{Boites à Moustaches} et résument l'information de dispersion des valeurs tracées par une boite (en rouge) délimitée par l'écart interquartile $Q_3 - Q_1$ représentant les enregistrements séparant les 25\% des valeurs les plus extrêmes et dont la ligne centrale représente la moyenne de l'échantillon. Les moustaches de la boite permettent de se prononcer quant aux valeurs aberrantes : sont coloriées en Orange, les valeurs dépassant les limites des moustaches dont la longueur est (1.5 x $Q_3 - Q_1$).
 			\begin{figure}[H]
@@ -323,8 +323,8 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 		Deux facteurs semblent peser sensiblement dans l'acquisition des parts de marchés par les différents exportateurs. D'abord la distance de ceux-ci par rapport aux régions de destinations. Ensuite les atouts politiques dont jouissent les exportateurs majeurs sur le marché. Nous dressons à l'appréciation du lecteur la figure \ref{fig:destReg} ci-dessous en attirons son attention sur les quatres exemples suivants :
 		\begin{itemize}
 		\item La Chine s'accapare les marchés est et sud asiatique. 
-		\item La Russie domine les pays FSU\footnote{Former Soviet Union : Ex-URSS} bien que ceux-ci soit proches des exportateurs européens.
-		\item Le marché américain latin et nord privilégie les USA.
+		\item La Russie domine les pays FSU\footnote{Ex-URSS} \nomenclature{\textbf{FSU : }}{Former Soviet Union}bien que ceux-ci soit proches des exportateurs européens.
+		\item Le marché américain latin et nord privilégie les USA\nomenclature{\textbf{USA : }}{United States of America}.
 		\item Le Maroc présent sur l'ensemble du marché dans les tranches supérieurs des exports tous produits confondus.
 		\end{itemize}
 				\begin{figure}[H]
@@ -431,7 +431,7 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\paragraph{Phase 2. Sélection des variables:}
 	\begin{itemize}
 	\item Nous construisons la collection itérative des modèles de FA employant les \textit{$\alpha$} premières variables selon leur classement de score d'Importance. Pour ${\alpha \in [1,\textit{m}]}$.
-	\item Nous retenons les variables du modèle ayant réussi la plus faible erreur OOB.
+	\item Nous retenons les variables du modèle ayant réussi la plus faible erreur OOB\nomenclature{\textbf{OOB : }}{Out-of-Bag}.
 	\end{itemize}
 	La mise en œuvre de cette procédure de sélection des variables peut être retrouvée écrite en langage \textbf{R} dans le dossier \textit{Source} du dépôt \textbf{GitHub} de notre mémoire de projet de fin d’études\cite{this}.
 	\subsubsection{Mise en œuvre de la sélection des variables et élagage} \label{faout}
