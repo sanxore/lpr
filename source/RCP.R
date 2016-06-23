@@ -7,23 +7,40 @@ Features = factor(Features)
 Features = as.list(levels(Features))
 DF.actifs = DF[,colnames(DF) %in% Features]
 DF.illus = DF[,"Fertilizer.consumption..kilograms.per.hectare.of.arable.land."]
-DF.actifs$Fertilizer.consumption..kilograms.per.hectare.of.arable.land.=DF.illus
-n <- nrow(DF.actifs)
-#centrage et réduction des données --> cor = T
-#calcul des coordonnées factorielles --> scores = T
-acp.df = princomp(DF.actifs, cor = T, scores = T)
-#print
-print(acp.df)
-#summary
-print(summary(acp.df))
-#quelles les propriétés associées à l'objet ?
-print(attributes(acp.df))
-#obtenir les variances associées aux axes c.-à-d. les valeurs propres
-val.propres <- acp.df$sdev^2
+library(pls)
+library(s20x)
+DF.actifs=scale(DF.actifs)
+DF.illus=scale(DF.illus)
+pairs20x(DF.actifs,cex.labels = 0.68)
+DF.cor=cor(DF.actifs)
+write.csv(cor(DF.actifs),'~/Desktop/DF.cor.csv')
+#library(corrplot)
+#corrplot(DF.cor,order="hclust",hclust.method="complete")
+heatmap(DF.cor)
+eigenDF = eigen(DF.cor)
+attributes(eigenDF)
+eigenDF$values
+sum(eigenDF$values)
+sum(eigenDF$values[1:4]/12)
+sum(eigenDF$values[1:5]/12)
+z1 = scale(DF.actifs)%*%eigenDF$vectors[,1]
+z2 = scale(DF.actifs)%*%eigenDF$vectors[,2]
+z3 = scale(DF.actifs)%*%eigenDF$vectors[,3]
+z4 = scale(DF.actifs)%*%eigenDF$vectors[,4]
+
+var(cbind(z1,z2,z3,z4))
+cor(cbind(z1,z2,z3,z4))
+
+DF_PC=data.frame(DF.illus,z1,z2,z3,z4)
+pairs20x(DF_PC)
+
+DF.pcr = lm(DF.illus~.,data = DF_PC)
+summary(DF.pcr)
+
+val.propres <- eigenDF$values
 print(val.propres)
 #scree plot (graphique des éboulis des valeurs propres)
-plot(1:12,val.propres,type="b",ylab="Valeurs
-     propres",xlab="Composante",main="Scree plot")
+plot(1:12,val.propres,type="b",ylab="Valeurs propres",xlab="Composante",main="Scree plot")
 #intervalle de confiance des val.propres à 95% 
 val.basse <- val.propres * exp(-1.96 * sqrt(2.0/(n-1)))
 val.haute <- val.propres * exp(+1.96 * sqrt(2.0/(n-1)))
@@ -33,19 +50,19 @@ colnames(tableau) <- c("B.Inf.","Val.","B.Sup")
 print(tableau,digits=3)
 
 #**** corrélation variables-facteurs ****
-Z1 <- acp.df$loadings[,1]*acp.df$sdev[1]
-Z2 <- acp.df$loadings[,2]*acp.df$sdev[2]
-Z3 <- acp.df$loadings[,3]*acp.df$sdev[3]
-Z4 <- acp.df$loadings[,4]*acp.df$sdev[4]
+c1 <- acp.df$loadings[,1]*val.propres[1]
+c2 <- acp.df$loadings[,2]*val.propres[2]
+c3 <- acp.df$loadings[,3]*val.propres[3]
+c4 <- acp.df$loadings[,4]*val.propres[4]
 #affichage
-correlation <- cbind(Z1,Z2,Z3,Z4)
+correlation <- cbind(c1,c2,c3,c4)
 print(correlation,digits=2)
 #carrés de la corrélation (cosinus²)
 print(correlation^2,digits=2)
 #cumul carrés de la corrélation
 print(t(apply(correlation^2,1,cumsum)),digits=2)
 #*** cercle des corrélations - variables actives ***
-plot(c1,c2,xlim=c(-1,+1),ylim=c(-1,+1),type="p",col="Red")
+plot(c1,c2,xlim=c(-1,+1),ylim=c(-1,+1),type="n")
 abline(h=0,v=0)
 text(c1,c2,labels=colnames(DF.actifs),cex=0.5)
 symbols(0,0,circles=1,inches=F,add=T)
@@ -58,14 +75,6 @@ plot(acp.df$scores[,1],acp.df$scores[,2],type="n",xlab="Comp.1 -
      %",ylab="Comp.2 - %")
 abline(h=0,v=0)
 text(acp.df$scores[,1],acp.df$scores[,2],labels=DF$Country.Name,cex=0.75)
-
-plot(acp.df$scores[,1],acp.df$scores[,2],type="n",xlab="Comp.1 -
-     %",ylab="Comp.2 - %",xlim=c(-4,+4),ylim=c(-2,+2))
-abline(h=0,v=0)
-text(acp.df$scores[,1],acp.df$scores[,2],labels=DF$Country.Name,cex=0.75)
-
-
-
 #------
 index = sample(n,0.1*n,replace=FALSE)
 plot(acp.df$scores[index,1],acp.df$scores[index,2],type="n",xlab="Comp.1 -
@@ -101,3 +110,37 @@ text(1.1*c1,1.1*c2,labels=colnames(DF.actifs),cex=0.75)
 text(s1,80*s2,labels="Consommation fertilisants par Hectare Arable",cex=0.75,col="red")
 abline(h=0,v=0)
 symbols(0,0,circles=1,inches=F,add=T)
+
+
+
+
+
+
+
+
+
+pairs.plus <<- function(dat, max.ncat=8, jitter=.3, extra=.1, 
+                        lims=NULL, cex=0.8, pch=16, col="black", gap=0, ...) {
+  # Turn factors into numeric:
+  for(j in 1:ncol(dat)) if(is.factor(dat[,j])) dat[,j] <- as.numeric(dat[,j])
+  # Jitter:
+  for(i in 1:ncol(dat)) {
+    x <- dat[,i];  xvals <- unique(x);  xvals <- xvals[!is.na(xvals)]
+    if(length(xvals) < max.ncat)
+    { space <- min(diff(sort(xvals)))
+    dat[,i] <- x + runif(length(x), -space*jitter, space*jitter) }
+  }
+  # Add extra space around the points by adding two points that are not drawn:
+  if(is.null(lims)) {
+    mins <- apply(dat, 2, min, na.rm=T)
+    maxs <- apply(dat, 2, max, na.rm=T);  ranges <- maxs-mins
+    dat <- rbind(mins-extra*ranges, maxs+extra*ranges, dat)  
+  } else {
+    dat <- rbind(lims[1], lims[2], dat)  
+  }
+  # Handle addition of two points in col, cex, pch:
+  col <- c(rep(par()$bg,2), rep(col,len=nrow(dat)-2))
+  pch <- c(rep(1,2), rep(pch,len=nrow(dat)-2))
+  # Finally:
+  pairs(dat, cex=cex, pch=pch, col=col, gap=gap, ...)
+}

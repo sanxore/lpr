@@ -32,8 +32,7 @@ Socolow}
 		Y=\beta_0 + \sum_{\j=1}^{k} \beta_jZ_j + \epsilon 
 		\end{equation*}
 	Dans ce qui suit nous mettons en œuvre une RCP sur nos données élaguées obtenus après le traitement du chapitre précédent. Le script en langage \textbf{R}, avec lequel la RCP est automatisée, est disponible dans le dossier \textit{Source} de notre dépôt PFE \textbf{GitHub}\cite{this}.
-	\subsection{Mise en œuvre de la régression en composantes principales}
-	\subsubsection{Corrélations croisées des variables exogènes}
+	\subsection{Mise en œuvre: corrélations croisées des variables exogènes}
 	Nous commençons d'abord par charger les données quantitatives des pays. Il s'agit de l'élagage des données externes présentées à la section \ref{exoList}. Ces données représentent, de la totalité des 39 variables initiales, les 12 variables retenues en sortie de la procédure introduite par les forets aléatoires en section \ref{faout} avant de créer deux matrices:\begin{itemize}
 	\item DF.actifs = Cette matrice accueillera les 12 variables retenues dans la figure \ref{fig:laggedvars}.
 	\item DF.illus = Cette matrice-vecteur accueillera notre variable de sortie qui est la \textbf{Consommation de kilogrammes de fertilisants phosphatés par hectare de terre arable} 
@@ -55,21 +54,85 @@ Socolow}
 	\item Certaines de ces variables entre elles par transition des couple ci-dessus.
 	\end{itemize}
 	Une autre façon d'examiner la structure des corrélations est la création de carte coloriée dressant les corrélations deux à deux entre les variables numériques. Ceci sont \textit{clusturisés} et ordonnés aux seins de groupes de variables corrélées. Sur la figure \ref{fig:heatmap} nous pouvons distinguer 4 à 5 groupes de variables exogènes corrélées. Ainsi une ACP devrait produire 4 à 5 composante principales intégrant la majorité de l'information contenue dans les données.
-				\begin{figure}[h]
+				\begin{figure}[H]
 					    		\centering
 					    		\fbox{\includegraphics[width=\linewidth]{ch4-images/heatmap}}
 					    		\caption{Carte coloriée des regroupement des variables corrélées}
 					    		\label{fig:heatmap}
 				\end{figure}
-	\subsubsection{Calcul des composantes principales des données élaguées}
-	Nous commençons par effectuer une décomposition spectrale de la matrice de corrélation. La figure \ref{fig:valpropres} ci-dessous liste les valeurs propres résultant de cette décomposition.
-				\begin{figure}[h]
+				Les groupes crées par le dendogramme ci-dessous donne un avant-goût des choses à venir. Il nous tente de deviner 3 familles de variables:\begin{itemize}
+				\item \textbf{Des indicateurs de pressions démographiques:} Les variables \textit{Densité de population}, \textit{PIB par habitant} et \textit{Espérance de vie} communiquent sur la concentration, le pouvoir d'achat et la qualité de vie (et donc de nourriture) des gens dans un pays en question. Puisque le pouvoir d'achat ainsi que l’approvisionnement continu en matières premières est possible (\textit{Indice de la performance logistique)}, des pays réalisant de hauts scores dans les variables de cette famille, devraient en toute intuition, mener à une culture intensive des terres à dispositions-\textit{Rendement des céréales en kg par hectare}-. Ces \textit{5 variables} sont rassemblées par l'arbre inférieur de niveau 1 sur le dendrogramme de la figure \ref{fig:heatmap}
+				\item \textbf{Des indicateurs de la structure industrielle:} La tendance d'un pays à importer de la marchandise dépend du coût des imports relativement à leur production chez soi. Plus la part de \textit{L'agriculture dans le PIB} augmente, moins le pays est industrialisé. De pair avec la \textit{Fraction des populations rurales des habitants},ceci informerait potentiellement sur la prépondérance de l'agriculture comme secteur clé ou secondaires au sein du pays. Ces \textit{3 variables} sont rassemblées par l'arbre supérieur de niveau 3 sur le dendrogramme de la figure \ref{fig:heatmap}
+				\item \textbf{Des indicateurs de pressions écologiques:} Les \textit{surface arables par personne} est un rapport essentiel dans notre analyse. Il est évident que pour un pays disposant de peu de terres pour subvenir aux besoins alimentaires d'une grande population, une utilisation intensive d'engrais est à prévoir. L'arbre intermédiaire de niveau 2 du dendrogramme de la figure \ref{fig:heatmap} qui fait intervenir \textit{le taux de chômage} nous incite à nous poser la question de la capacité du consommateur à payer les frais d'une utilisation massive d'engrais pour sa nourriture.
+				\end{itemize}
+	Ces hypothèses ne sont pas forcément significatives, mais nous aurons dépoussiéré des pistes de réflexions pour élucider éventuellement les contributions de chaque variable au sein des CP en section \ref{fig:ZZ} que nous calculerons dans le paragraphe suivant : 
+	\subsection{Mise en œuvre: calcul des composantes principales des données élaguées}
+	Nous commençons par effectuer une décomposition spectrale de la matrice de corrélation. La figure \ref{fig:valpropres} ci-dessous liste les valeurs propres résultant de cette décomposition. Alors que la figure \ref{fig:scree} résume leur Scree-plot.
+				\begin{figure}[H]
 					    		\centering
-					    		\fbox{\includegraphics[]{ch4-images/valeurs_propres}}
+					    		\fbox{\includegraphics[width=\linewidth]{ch4-images/valeurs_propres}}
 					    		\caption{Valeurs propres de la décomposition spectrale de la matrice de corrélation}
-					    		\label{valpropres}
+					    		\label{fig:valpropres}
 				\end{figure}
-	La figure \ref{fig:inert} suivante montre que 70\% et 78\% de l'inertie de l'ensemble des données est exp
+					\begin{figure}[H]
+						    		\centering
+						    		\fbox{\includegraphics[width=\linewidth]{ch4-images/scree}}
+						    		\caption{Graphe des éboulis de la décomposition spectrale de la matrice de corrélation}
+						    		\label{fig:scree}
+					\end{figure}
+	La figure \ref{fig:inert} suivante montre que 70\% et 78\% de l'inertie de l'ensemble des données est expliquée par les 4 et 5 premières CP respectivement.
+				\begin{figure}[H]
+					    		\centering
+					    		\fbox{\includegraphics[width=\linewidth]{ch4-images/inertie}}
+					    		\caption{Inertie expliquée par les 5 premières CP}
+					    		\label{fig:inert}
+				\end{figure}
+	Puisque seulement les 4 premières CP possèdent des variances supérieures à une variable normée, i.e. il y'a 4 valeurs propres > 1. Nous procédons à la création des termes des combinaisons linéaires $Z_1,Z_2,Z_3,Z_4$ en utilisant les vecteurs propres correspondant.
+	Les 4 facteurs ainsi créés, nous établissons leur corrélation à l'égard des variables intrantes de bases. La figure \ref{fig:ZZ} donne le résultat des corrélations variables-facteurs.
+					\begin{figure}[H]
+						    		\centering
+						    		\fbox{\includegraphics[width=\linewidth]{ch4-images/interpret}}
+						    		\caption{Corrélations variables-facteurs}
+						    		\label{fig:ZZ}
+					\end{figure}	
+	\begin{enumerate}
+	\item Le facteur Z1 est:\begin{itemize}
+		\item Négativement corrélé avec:\begin{itemize}
+		\item La part de l'agriculture dans le PIB
+		\item Les coûts d'import et exports
+		\item La fraction rurale de la population
+		\item La part de l'agriculture dans le PIB
+		\end{itemize}
+		\item Positivement corrélé avec:\begin{itemize}
+		\item L'espèrance de vie
+		\item L'indice de la performance logistique
+		\item Le PIB par habitant
+		\end{itemize}
+		Z1 varie le plus entre les pays les plus riche, avec les meilleurs standards de la vie et les plus industrialisés d'une part, et d'une autre part les pays les plus pauvres, les plus dépendant de la culture agricole vivrière pour la nourriture et où les conditions de vie sont très durs. Comme le montre la carte des individus \ref{fig:inter3}, sur les valeurs positives, nous retrouvons les pays européens et sur les valeurs négatives, nous retrouvons les pays africains subsahariens pour la plupart. La consommation de fertilisants est positivement corrélées indiquant ainsi une tendances des pays riches, et non dépendants sur l'agriculture économiquement à utiliser plus d'engrais contrairement aux pays pauvre agricoles. Les fertilisants nécessitent des moyens financiers pour encourager la consommation. Le besoin environnemental ne suffit pas.
+	\end{itemize}
+	\item Le facteur Z2 est:\begin{itemize}
+		\item Négativement corrélé avec:\begin{itemize}
+		\item La croissance démographique annuelle.
+		\item La consommation de fertilisants.
+		\item Le rendement de la production céréalière.
+		\end{itemize}
+		\item Positivement corrélé avec:\begin{itemize}
+		\item Le nombre d'hectares arables par personne
+		\item Taux de chômage
+		\end{itemize}
+		Z2 varie le plus entre les pays les moins peuplés par rapport à la surface du pays et disposant d'assez de terres arables pour leur population en émigration à cause des perspectives professionnels non prometteuses d'une part, et d'autre part entre les pays où le moins de terres arables est diponible par habitant pour une économie en plein boom. Comme le montre la carte des individus \ref{fig:inter3}, sur les valeurs positives, nous retrouvons les pays de l'ex URSS et les Balkans, et sur les valeurs négatives, nous retrouvons les pays souffrant de peu de surfaces praticables pour l'agriculture disposés en archipels d’îles, des pays désertiques et qui connaissent une croissance démographique majeure. L'économie florissante de ces derniers avec des taux de chômage marginaux pour une population grandissante, favorise largement la consommation de fertilisants puisque ceux-ci se voient renforcés par deux facteurs qui s'imposent souvent : Les moyens financiers et la pression démographique sur les ressources naturelles.
+		\end{itemize}
+		Nous nous suffirons dans notre discussion uniquement du premier plan factoriel puisque Z3 et Z4 ne sont pas corrélés à notre variable endogène : \textbf{Consommation de kilogrammes de fertilisants phosphatés par hectare de terre arable} comme présenté sur la figure \ref{fig:ZZ}.
+	\end{enumerate}
+					\begin{figure}[H]
+					\centering
+					\fbox{\includegraphics[width=1.1\linewidth]{ch4-images/interpret3}}
+					\caption{Carte des individus}
+					\label{fig:inter3}
+					\end{figure}
+			
+	\subsection{Mise en œuvre: régression en composantes principales}
+			
 	\section{Analyse en séries chronologiques et projections}
 	Étude de la série "Demande en fertilisant du brésil "
 	\begin{figure}[H]
@@ -85,7 +148,7 @@ Socolow}
 		\caption{Le tracé de la décomposition "Tendance + saisonnalité + résidu"}
 		\label{fig:dec}
 	\end{figure}
-	La figure ci-dessus montre la série originale (en haut), la tendance estimée (deuxième), la composante saisonnière estimée (troisième) et la composante irrégulière estimée (en bas).On remarque que la tendance est croissante.
+
 	\subsection{Lissage et prévision par la méthode de Holt-Winters}
 	\begin{figure}[H]
 		\centering
@@ -93,36 +156,21 @@ Socolow}
 		\caption{Paramètre de lissage et coefficients de saisonnalité}
 		\label{fig:hw_param}
 	\end{figure}
-	The estimated values of alpha, beta and gamma are 0.41, 0.00, and 0.96, respectively. The value of alpha (0.41)
-is relatively low, indicating that the estimate of the level at the current time point is based upon both recent
-observations and some observations in the more distant past. The value of beta is 0.00, indicating that the estimate
-of the slope b of the trend component is not updated over the time series, and instead is set equal to its initial value.
-This makes good intuitive sense, as the level changes quite a bit over the time series, but the slope b of the trend
-component remains roughly the same. In contrast, the value of gamma (0.96) is high, indicating that the estimate
-of the seasonal component at the current time point is just based upon very recent observations.
-\par
-As for simple exponential smoothing and Holt’s exponential smoothing, we can plot the original time series as a
-black line, with the forecasted values as a red line on top of that:
+
 	\begin{figure}[H]
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{ch4-images/hw_for}}
 		\caption{Courbe estimé par la méthode Holt-Winters.}
 		\label{fig:hw_for}
 	\end{figure}
-	We see from the plot that the Holt-Winters exponential method is very successful in predicting the seasonal peaks.
-	
+
 	\begin{figure}[H]
 		\centering
 		\fbox{\includegraphics[width=\textwidth]{ch4-images/forcast}}
 		\caption{Prédiction pour les quatre ans à venir:}
 		\label{fig:forecast}
 	\end{figure}
-	The forecasts are shown as a blue line, and the orange and yellow shaded areas show 80\% and 95\% prediction
-intervals, respectively.
-
-\par
-We can investigate whether the predictive model can be improved upon by checking whether the in-sample forecast
-errors show non-zero autocorrelations at lags 1-20, by making a correlogram and carrying out the Ljung-Box test:
+	
 	\begin{figure}[H]
 		\centering
 		\fbox{\includegraphics[width=.5\textwidth]{ch4-images/Ljung-Box}}
@@ -137,15 +185,6 @@ errors show non-zero autocorrelations at lags 1-20, by making a correlogram and 
 		\label{fig:correlogram}
 	\end{figure}
 	
-	The correlogram shows that the autocorrelations for the in-sample forecast errors do not exceed the significance
-bounds for lags 1-20. Furthermore, the p-value for Ljung-Box test is 0.6, indicating that there is little evidence of
-non-zero autocorrelations at lags 1-20.
-
-
-\par
-We can check whether the forecast errors have constant variance over time, and are normally distributed with
-mean zero, by making a time plot of the forecast errors and a histogram (with overlaid normal curve):
-
 
 \begin{figure}[H]
 		\centering
@@ -162,11 +201,3 @@ mean zero, by making a time plot of the forecast errors and a histogram (with ov
 	\end{figure}
 	
 	
-	From the time plot, it appears plausible that the forecast errors have constant variance over time. From the
-histogram of forecast errors, it seems plausible that the forecast errors are normally distributed with mean zero.
-\par
-Thus,there is little evidence of autocorrelation at lags 1-20 for the forecast errors, and the forecast errors appear
-to be normally distributed with mean zero and constant variance over time. This suggests that Holt-Winters
-exponential smoothing provides an adequate predictive model of the log of sales at the souvenir shop, which
-probably cannot be improved upon. Furthermore, the assumptions upon which the prediction intervals were based
-are probably valid.
