@@ -45,10 +45,10 @@ Ce chapitre présente le processus d'acquisition des données et leur préparati
 		    		\caption{Exemple d'une sortie de requête sur le Datamart OCP-CM}
 		    		\label{fig:DMOCP}
 	\end{figure}
-	\subsection{Consolidation des données locales}
-	Il est naturel d'adresser les problèmes de disponibilité de données aux premiers abords. La consolidation désigne la collection et l'intégration des données de sources multiples en une unique destination. Durant ce processus, nous unifierons les deux types de formats de données. Ceci nous permettra de présenter les données de manière plus flexible, tout en facilitant leur analyse effective. Ceci nous amène à considérer le format adopté par le datamart OCP-CM comme format cible de consolidation et les fichiers .pdf comme format source.
-	\paragraph{}
-	La solution que nous mettons en œuvre est disponible dans le dossier \textit{Sanxoriarty IFA Parser} du dépôt \textbf{GitHub} de notre mémoire de projet de fin d'études\cite{this}.
+	\subsection{Consolidation des données locales : Développement spécifique d'un ETL}
+	La consolidation désigne la collection et l'intégration des données de sources multiples en une unique destination. Durant ce processus, nous unifierons les deux types de formats de données. Ceci nous permettra de présenter les données de manière plus flexible, tout en facilitant leur analyse effective. Ceci nous amène à considérer le format adopté par le datamart OCP-CM comme format cible de consolidation et les fichiers .pdf comme format source.
+	\par
+	La nature non structurées des données interdit toute approche BI de l'intégration de données via ETL préfabriqué. Nous décrivons dans ce qui suit L'ETL que nous développons.\footnote{Le code-source est disponible dans le dossier \textit{Sanxoriarty IFA Parser} du dépôt \textbf{GitHub} de notre mémoire de projet de fin d'études\cite{this}}
 	\subsubsection{Conception fonctionnelle du processus de consolidation}
 	L'OCP reçoit régulièrement des rapports trimestriels présentant la situation du marché accompagnée des mouvements observés des produits fertilisants. Ces mouvements sont reportés sur des tableaux tel que celui présenté dans la figure \ref{fig:IFA-PDF}. Notre solution doit ainsi considérer les nuances fonctionnelles suivantes :\newpage
 	\begin{enumerate}
@@ -344,9 +344,8 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	L'étendue des données disponibles au sein du système d'information de l'OCP ne pouvant donner qu'une vue réduite de la situation du marché et ne peuvent de par leur définition révéler les structures socio-économiques,  et de politiques agraires sous-jacentes aux demandes en produits phosphatés, nous nous attellerons à la tâche d'enrichir cette base de données historiques par des données quantitatives concernant les pays du monde.
 	\par
 	Nous décrivons dans ce qui suit ce processus. 
-	\subsection{Collecte des données externes}
-	\subsubsection{Énumération et définitions des variables souhaitées }\label{exoList}
-			Guidés par nos lectures bibliographiques résumées dans la section \ref{read1}, nous nous fixons l'objectif de récolter les indicateurs de politiques agraires et socioéconomiques suivants:
+	\subsection{Énumération et collecte des données externes}\label{exoList}
+			Guidés par nos lectures bibliographiques résumées dans la section \ref{read1}, nous utilisons l'API de la banque de données publiques WorldBank\footnote{http://data.worldbank.org/developers?display=} qui présente une interface RESTful et nous permet de récolter les indicateurs de politiques agraires et socioéconomiques suivants:
 	\begin{itemize}
 		\item \textbf{ Access to electricity, rural (\% of rural population):} Fraction de paysans ayant accès à l'électricité.
 		\item \textbf{ Access to non-solid fuel, rural (\% of rural population):} Fraction de paysans ayant accès aux fuels non solides.
@@ -389,10 +388,6 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 		\item \textbf{ Rural poverty gap at national poverty lines (\%):} L'écart de pauvreté par rapport au seuil national de la pauvreté en milieu rural est le manque à gagner pour remonter au-dessus du seuil de la pauvreté (en considérant que les non pauvres ont un manque à gagner de zéro) exprimé en pourcentage du seuil national de la pauvreté en milieu urbain.Cette mesure témoigne à la fois de l'ampleur de la pauvreté et de sa fréquence.
 		\item \textbf{ Unemployment, total (\% of total labor force):} Fraction de la population active qui est sans emploi mais qui est disponible pour et à la recherche d'un emploi.
 		\end{itemize}
-	\subsubsection{Énumération des sources WEB des variables souhaitées}
-	\par
-	\begin{Huge}{ Liste des cibles  web et bases de données publiques}
-		\end{Huge}
 
 	\subsection{Préparation des données externes}
 	Cette section s’intéresse à l'application des forêts de décisions aléatoires à des fins de sélection de variables. Le but ici est double : d'abord introduire le comportement de l'indexation de l'importance des variables en utilisant les forêts aléatoires et l'utiliser pour proposer un algorithme à deux phases pour la sélection de variables à la base de leur importance.\par

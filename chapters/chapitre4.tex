@@ -132,7 +132,35 @@ Socolow}
 					\end{figure}
 			
 	\subsection{Mise en œuvre: régression en composantes principales}
-			
+	Nous créons une nouvelle matrice des données composée de la variable endogène, \textbf{Consommation de kilogrammes de fertilisants phosphatés par hectare de terre arable} et des composantes principales.
+	La figure \ref{fig:scatter2} ci-après présente la sortie de la matrice des corrélations croisée mais cette fois-ci entre la variable endogène et les CP.
+				\begin{figure}[H]
+					    		\centering
+					    		\fbox{\includegraphics[width=.8\linewidth]{ch4-images/scatter2}}
+					    		\caption{Diagrammes des dispersions croisées, courbes splines et corrélations des CPs}
+					    		\label{fig:scatter2}
+				\end{figure}
+	Nous procédons par la suite à une régression linéaire multiple en utilisant les 4 CPs en tant que variables expliquatives de la \textbf{Consommation de kilogrammes de fertilisants phosphatés par hectare de terre arable}. La procédure et la sortie de cette régression est donnée par la figure \ref{fig:PCR} suivante :
+					\begin{figure}[H]
+						    		\centering
+						    		\fbox{\includegraphics[width=.65\linewidth]{ch4-images/rcp}}
+						    		\caption{Régression linéaire de Cons.Fert sur les CP}
+						    		\label{fig:PCR}
+					\end{figure}
+	Les résidus que nous traçons sur la figure \ref{fig:residuals} se montrent remarquables compte tenu des relations non linéaires sur les graphes de la figure \ref{fig:scatter2}.
+						\begin{figure}[H]
+							    		\centering
+							    		\fbox{\includegraphics[width=.65\linewidth]{ch4-images/residuals}}
+							    		\caption{Graphiques des résidus de la régression linéaire de Cons.Fert sur les CP}
+							    		\label{fig:residuals}
+						\end{figure}
+	Nous avons retenu 7 échantillons des données originales que nous utilisons ici aux fins de validation et d'évaluation du modèle sur lequel nous réalisons un RMSE = 4.48.
+							\begin{figure}[H]
+								    		\centering
+								    		\fbox{\includegraphics[width=.8\linewidth]{ch4-images/validation}}
+								    		\caption{Validation du modèle et calcul du RMSE}
+								    		\label{fig:residuals}
+							\end{figure}
 	\section{Analyse en séries chronologiques et projections}
 	Étude de la série "Demande en fertilisant du brésil "
 	\begin{figure}[H]
