@@ -434,10 +434,10 @@ Le constat montre que 80 \% de la durée d'un projet Data Mining est consacrée 
 	\item Nous retenons les variables du modèle ayant réussi la plus faible erreur OOB.
 	\end{itemize}
 	La mise en œuvre de cette procédure de sélection des variables peut être retrouvée écrite en langage \textbf{R} dans le dossier \textit{Source} du dépôt \textbf{GitHub} de notre mémoire de projet de fin d’études\cite{this}.
-	\subsubsection{Mise en œuvre de la sélection des variables et élagage}
+	\subsubsection{Mise en œuvre de la sélection des variables et élagage} \label{faout}
 	Comme discuté en Annexe A2, la nature de l'algorithme des FA fait que le paramètre \textit{k} est plus critique que le nombre \textit{B} d'arbres qui lui devrait être choisi aussi grand que les limites calculatoires le permettent.
 	Nous commençons d'abord par trouver la valeur \textit{k} maximisant le coefficient d'ajustement $R^2$ pour une prédiction via FA de la \textbf{Consommation de kilogrammes de fertilisants phosphatés par hectare de terre arable} par la liste des \textbf{39 variables exogènes} listées à la section \ref{exoList}.
-	\paragraph{Recherche aléatoire de \textit{k}:} Puisque nous n'avons pas une idée de l'intervalle sur lequel le meilleur \textit{k} pourrait se trouver, nous commençons d'abord par essayer des valeurs aléatoires sur un intervalle. De par la nature du faible nombre de pays, 214, pour 52 caractères quantitatifs, nous ne pouvons pas nous permettre de retenir un ensemble de test. Nous utilisons ainsi 3 répétitions d'une validation-croisée sur 10 dossiers pour minimiser les risque de sur-apprentissage.
+	\paragraph{Recherche aléatoire de \textit{k}:} Puisque nous n'avons pas une idée de l'intervalle sur lequel le meilleur \textit{k} pourrait se trouver, nous commençons d'abord par essayer des valeurs aléatoires sur un intervalle. De par la nature du faible nombre de pays, 214, pour 52 caractères quantitatifs, nous ne pouvons pas nous permettre de retenir un ensemble de test. Nous utilisons ainsi 3 répétitions d'une validation-croisée sur 10 dossiers pour minimiser les risques de sur-apprentissage.
 	\begin{figure}[H]
 				\begin{subfigure}{.5\textwidth}
 					\centering

@@ -52,13 +52,14 @@ symbols(0,0,circles=1,inches=F,add=T)
 
 #***carte des individus***
 #l'option "scores" demandé dans princomp est très important ici
-index = sample(length(acp.df$scores[,1]),length(acp.df$scores[,1])/50,replace=FALSE)
+
 #------
 plot(acp.df$scores[,1],acp.df$scores[,2],type="n",xlab="Comp.1 -
      %",ylab="Comp.2 - %")
 abline(h=0,v=0)
 text(acp.df$scores[,1],acp.df$scores[,2],labels=DF$Country.Name,cex=0.75)
 #------
+index = sample(n,0.1*n,replace=FALSE)
 plot(acp.df$scores[index,1],acp.df$scores[index,2],type="n",xlab="Comp.1 -
      %",ylab="Comp.2 - %")
 abline(h=0,v=0)
