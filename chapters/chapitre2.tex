@@ -66,7 +66,7 @@ modèle souffre de multi-colinéarité. Ceci a été corrigé en supprimant ces 
 Ces études mettent en avant deux concepts importants dans les prévisions agricoles. Tout d'abord, la plupart des modèles de prévisions utilisés sont des modèles causaux qui tentent de relier une variable dépendante telle que la demande d'engrais à un ensemble de variables exogènes. Deuxièmement, ces études nous indiquent quelques uns des facteurs de base ou variables indépendantes que nous devrions prendre en compte dans la construction de notre modèle : Des facteurs agraires, climatiques mais aussi socio-économiques.
 \section{Compréhension du problème}
 	\subsection{Cadrage fonctionnel du projet}
-	À la lumière de notre lecture bibliographique, nous procédons à l'établissement de la liste des divers méthodologies de prévisions en nous intéressant particulièrement aux forces et faiblesses de chacune ainsi qu'aux exigences techniques et informationnelles que celles-ci nécessitent. Nous retiendrons deux approches qui constitueront le cadre fonctionnel de notre projet. Les paragraphes suivants rendent compte de cette évaluation.
+	À la lumière de notre lecture bibliographique, nous procédons à l'établissement de la liste des divers méthodologies de prévisions en nous intéressant particulièrement aux forces et faiblesses de chacune ainsi qu'aux exigences techniques et informationnelles que celles-ci nécessitent. Nous présenterons l'approche retenue : La méthode causale.
 	\subsubsection{Les étapes d'une prévision en matière de fertilisants}
 	La prévision des engrais peut être divisée en trois étapes complémentaires les unes aux autres, à savoir:\begin{enumerate}
 	\item l'évaluation du potentiel,
@@ -84,7 +84,6 @@ Ces études mettent en avant deux concepts importants dans les prévisions agric
 	La seconde approche repose sur des données historiques pour analyser et discerner des schémas de la demande pour prévoir l'avenir, l'hypothèse étant que l'avenir est une continuation du passé. Des données fiables sur plusieurs années sont essentielles pour cette approche.\par
 	La troisième approche cherche à établir une relation de cause à effet entre la demande d'engrais et d'autres variables indépendantes dans l'environnement du marché des fertilisants. Comme dans le cas de la méthode des séries chronologiques, les données passées sont importantes pour évaluer l'effet de ces facteurs sur la demande. Les deuxième et troisième méthodes ne peuvent pas être utilisées lorsque l'on veut prévoir l'avenir d'un produit qui n'a pas d'historique ou est dans un stade de développement tel qu'aucun modèle ni tendance sont perceptibles. La consommation d'engrais dans de nombreux pays en développement est dans une telle situation.\par
 	La quatrième approche utilise des informations qualitatives, y compris des avis d'experts, pour prévoir la demande. Cette approche peut ou peut ne pas considérer le passé. Les approches qualitatives sont utilisées lorsque les informations sont rares ou ne sont pas fiables, comme dans le stade élémentaire du cycle de vie du produit. Ces conditions étant caractéristiques des marchés des engrais dans les pays en développement, les techniques qualitatives sont très utiles. L'utilisation du jugement humain associé à des systèmes de notation transforment les opinions qualitatives en moyens quantitatifs pour les prévisions.
-	\subsubsection{L'extension de la tendance via séries chronologiques pour la prévision}
 	Une méthode couramment utilisée pour la prévision est l'analyse des données historiques pour discerner l'évolution de la croissance de la demande et de l'étendre à l'avenir pour prévoir la demande. Si les données de plusieurs années de ventes d'engrais sont disponibles et la tendance est relativement stable, il est possible de lire les données antérieures de la "vitesse" actuelle de la croissance de la demande et la mesure dans laquelle la vitesse augmente ou diminue.\par
 	L'extension de tendance est effectuée comme suit:
 	\begin{itemize}
@@ -101,7 +100,7 @@ Ces études mettent en avant deux concepts importants dans les prévisions agric
 	\subsection{Cadrage technique du projet}
 	\subsubsection{Architecture globale de notre solution}
 	La solution que nous proposons à la problématique que nous nous sommes fixée en section \ref{problematik} intègre les réalisations suivantes:\begin{itemize}
-	\item Un noyau de prévisions générant des modèles causaux et chronologiques stockable en des procédures automatisables.
+	\item Un noyau de prévisions générant des modèles causaux stockable en des procédures automatisables.
 	\item Un noyau de Parsing asservi au noyau de prévisions, servant à structurer les données nécessaires à l'établissement des modèles de prévision.
 	\item Un système de fichiers indexant les données avant et après leur structuration, ainsi que les procédures automatisables produites par le noyau de prévisions.
 	\end{itemize}

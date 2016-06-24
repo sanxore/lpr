@@ -1,4 +1,4 @@
-\chapter{Modélisation des données et Évaluation}
+\chapter{Analyse causale}
 \epigraph{Economists and agronomists are locked in debate about likely
 future yields. Since the method of the economists is to predict
 future outcomes from past performance, economists expect
@@ -9,11 +9,7 @@ a disagreement about the pace of technical change.}{Robert
 Socolow}
 \cleardoublepage
 
-	\section{Analyse causale}
-		\shorthandoff{!}
-		\lstset{language=R}
-		\shorthandon{!}
-	\subsection{Introduction à la régression en composantes principales}
+	\section{Introduction à la régression en composantes principales}
 	Les méthodes de régression multivariée comme la RCP\footnote{Régression en composantes principales} jouissent d'une large popularité dans divers domaines d'études, y compris les sciences naturelles. La raison principale de ce succès étant qu'elle ont été conçues dans l'optique de faire face à des situations où on dispose de plusieurs variables exogènes, généralement hautement corrélées, et relativement peu d'échantillons. Une situation qui est justement notre problématique. Ainsi une forme de réduction de dimensions dans l'espace des exogènes peut grandement simplifier le problème de régression.L'analyse en composantes principales est une technique de réduction de dimensions où une combinaison linéaire de \textit{p} variables indépendantes/orthogonales des paramètres intrants $X_1,X_2,...X_p$ sont créées de façon à ce que la première combinaison linéaire $Z_{1}$ (composante principale) capture autant de la variance totale des données d'origine. La $2^{de}$ $Z_{2}$ capture autant que possible du reste de la variance sous la réserve que celle-ci soit orthogonale(i.e. non corrélée) à la première. En général toutes les variables intrantes sont standardisées de façon à posséder une moyenne nulle et une variance unitaire que l'on notera $X_{j}^{*}$. Ainsi la variance totale des \textit{p} intrants standardisés est donnée par :
 	\begin{equation*}
 	\sum_{j=1}^{p} V(X_{j}^{*}) = p = \sum_{j=1}^{p}V(Z_{j})
@@ -32,7 +28,7 @@ Socolow}
 		Y=\beta_0 + \sum_{\j=1}^{k} \beta_jZ_j + \epsilon 
 		\end{equation*}
 	Dans ce qui suit nous mettons en œuvre une RCP sur nos données élaguées obtenus après le traitement du chapitre précédent. Le script en langage \textbf{R}, avec lequel la RCP est automatisée, est disponible dans le dossier \textit{Source} de notre dépôt PFE \textbf{GitHub}\cite{this}.
-	\subsection{Mise en œuvre: corrélations croisées des variables exogènes}
+	\section{Mise en œuvre: corrélations croisées des variables exogènes}
 	Nous commençons d'abord par charger les données quantitatives des pays. Il s'agit de l'élagage des données externes présentées à la section \ref{exoList}. Ces données représentent, de la totalité des 39 variables initiales, les 12 variables retenues en sortie de la procédure introduite par les forets aléatoires en section \ref{faout} avant de créer deux matrices:\begin{itemize}
 	\item DF.actifs = Cette matrice accueillera les 12 variables retenues dans la figure \ref{fig:laggedvars}.
 	\item DF.illus = Cette matrice-vecteur accueillera notre variable de sortie qui est la \textbf{Consommation de kilogrammes de fertilisants phosphatés par hectare de terre arable} 
@@ -66,7 +62,7 @@ Socolow}
 				\item \textbf{Des indicateurs de pressions écologiques:} Les \textit{surface arables par personne} est un rapport essentiel dans notre analyse. Il est évident que pour un pays disposant de peu de terres pour subvenir aux besoins alimentaires d'une grande population, une utilisation intensive d'engrais est à prévoir. L'arbre intermédiaire de niveau 2 du dendrogramme de la figure \ref{fig:heatmap} qui fait intervenir \textit{le taux de chômage} nous incite à nous poser la question de la capacité du consommateur à payer les frais d'une utilisation massive d'engrais pour sa nourriture.
 				\end{itemize}
 	Ces hypothèses ne sont pas forcément significatives, mais nous aurons dépoussiéré des pistes de réflexions pour élucider éventuellement les contributions de chaque variable au sein des CP en section \ref{fig:ZZ} que nous calculerons dans le paragraphe suivant : 
-	\subsection{Mise en œuvre: calcul des composantes principales des données élaguées}
+	\section{Mise en œuvre: calcul des composantes principales des données élaguées}
 	Nous commençons par effectuer une décomposition spectrale de la matrice de corrélation. La figure \ref{fig:valpropres} ci-dessous liste les valeurs propres résultant de cette décomposition. Alors que la figure \ref{fig:scree} résume leur Scree-plot.
 				\begin{figure}[H]
 					    		\centering
@@ -131,12 +127,12 @@ Socolow}
 					\label{fig:inter3}
 					\end{figure}
 			
-	\subsection{Mise en œuvre: régression en composantes principales}
+	\section{Mise en œuvre: régression en composantes principales}
 	Nous créons une nouvelle matrice des données composée de la variable endogène, \textbf{Consommation de kilogrammes de fertilisants phosphatés par hectare de terre arable} et des composantes principales.
 	La figure \ref{fig:scatter2} ci-après présente la sortie de la matrice des corrélations croisée mais cette fois-ci entre la variable endogène et les CP.
 				\begin{figure}[H]
 					    		\centering
-					    		\fbox{\includegraphics[width=.8\linewidth]{ch4-images/scatter2}}
+					    		\fbox{\includegraphics[width=.6\linewidth]{ch4-images/scatter2}}
 					    		\caption{Diagrammes des dispersions croisées, courbes splines et corrélations des CPs}
 					    		\label{fig:scatter2}
 				\end{figure}
@@ -161,71 +157,4 @@ Socolow}
 								    		\caption{Validation du modèle et calcul du RMSE}
 								    		\label{fig:residuals}
 							\end{figure}
-	\section{Analyse en séries chronologiques et projections}
-	Étude de la série "Demande en fertilisant du brésil "
-	\begin{figure}[H]
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{ch4-images/serie}}
-		\caption{Demande en kilo-tonne de fertilisant "Brésil"}
-		\label{fig:dem}
-	\end{figure}
-	\subsection{Décomposition de la série}
-	\begin{figure}[H]
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{ch4-images/decomp}}
-		\caption{Le tracé de la décomposition "Tendance + saisonnalité + résidu"}
-		\label{fig:dec}
-	\end{figure}
-
-	\subsection{Lissage et prévision par la méthode de Holt-Winters}
-	\begin{figure}[H]
-		\centering
-		\fbox{\includegraphics[width=0.5\textwidth]{ch4-images/hw_param}}
-		\caption{Paramètre de lissage et coefficients de saisonnalité}
-		\label{fig:hw_param}
-	\end{figure}
-
-	\begin{figure}[H]
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{ch4-images/hw_for}}
-		\caption{Courbe estimé par la méthode Holt-Winters.}
-		\label{fig:hw_for}
-	\end{figure}
-
-	\begin{figure}[H]
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{ch4-images/forcast}}
-		\caption{Prédiction pour les quatre ans à venir:}
-		\label{fig:forecast}
-	\end{figure}
-	
-	\begin{figure}[H]
-		\centering
-		\fbox{\includegraphics[width=.5\textwidth]{ch4-images/Ljung-Box}}
-		\caption{Test de Ljung-Box}
-		\label{fig:Q-test}
-	\end{figure}
-	
-	\begin{figure}[H]
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{ch4-images/correlogram}}
-		\caption{correlogram}
-		\label{fig:correlogram}
-	\end{figure}
-	
-
-\begin{figure}[H]
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{ch4-images/plot-resi}}
-		\caption{Le tracé des résidu}
-		\label{fig:plot-resi}
-	\end{figure}
-	
-	\begin{figure}[H]
-		\centering
-		\fbox{\includegraphics[width=\textwidth]{ch4-images/hist-resi}}
-		\caption{Histogramme des résidu}
-		\label{fig:hist-resi}
-	\end{figure}
-	
 	
